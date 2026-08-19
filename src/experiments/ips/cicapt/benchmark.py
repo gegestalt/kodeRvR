@@ -5,7 +5,7 @@ from __future__ import annotations
 import json
 import pandas as pd
 
-from ips.analysis.cicapt import benchmark_detectors
+from ips.analysis.cicapt import benchmark_detectors, detector_mistakes
 from ips.workspace import ProjectPaths
 
 
@@ -16,6 +16,7 @@ def run() -> dict[str, object]:
     metrics, families = benchmark_detectors(events, manifest["feature_columns"])
     metrics.to_csv(output / "detector_temporal_metrics.csv", index=False)
     families.to_csv(output / "detector_tactic_recall.csv", index=False)
+    detector_mistakes(events, manifest["feature_columns"]).to_csv(output / "detector_top_mistakes.csv", index=False)
     status = {"train_day":"2023-12-01","validation_day":"2023-12-02","development_test_day":"2023-12-03",
               "locked_final_holdout_day":"2023-12-04","locked_rows_scored":0,
               "models":sorted(metrics.detector.unique()),"primary_metric":"PR-AUC plus tactic recall",

@@ -135,36 +135,21 @@ nested parallelism.
 
 The single end-to-end notebook is
 [`notebooks/06_adaptive_ips_full_project_lab.ipynb`](notebooks/06_adaptive_ips_full_project_lab.ipynb).
-Its 79 numbered sections dynamically inventory the codebase, explain model
-status and metric formulas, display current source implementations, run tests,
-and compare IPS policies. The advanced sections add the timestamped real-data
-adapter, attack-family and action-distribution reports, reward/noise stress
-tests, the complete 3x3 DQN interaction grid, five-seed finalist confidence
-intervals, LinUCB, masked and constrained PPO, and native resource profiling.
-The final diagnostic suite adds five-seed reliability for every policy family,
-bootstrap winner/tie decisions, matched-control outlier explanations,
-exploratory permutation importance, expected-versus-observed checks, expanded
-sensitivity and interaction analyses, repeated resource trials, and a dynamic
-requirements-coverage dashboard.
+Its 22-part main story behaves like an interactive textbook: traffic and data
+first; campaign and health; chronology; the simplest detector ladder; failure
+diagnosis; network/provenance fusion; hidden-state belief; IPS actions; rules,
+bandits and RL; fair policy comparison; safety, OOD, calibration and robustness;
+a grounded optional LLM analyst; one final scoreboard; and a standalone
+"what did we prove?" page. Every experiment states its question, operational
+purpose, expected behavior, observed result, judgement, and next question.
 
-Sections 47–56 add the scientific claim-control layer: policy observations are
-detector-history belief estimates rather than hidden attack truth; dataset
-eligibility, feature semantics, provenance identifiability, LODO/LOAFO gates,
-temporal calibration, operational burden, safe abstention, and distribution
-shift are audited explicitly. Prevention is formulated as a constrained MDP
-with intervention blast radius, collateral damage, and operational cost kept
-separate from security benefit. The dashboard labels counterfactual simulator
-evidence separately from observed intervention evidence and leaves causal and
-cyber-range claims blocked until the required logs and infrastructure exist.
-
-Sections 57–60 assign CICAPT-IIoT2024 the sequential APT/POMDP role while
-retaining CSE-CIC-IDS2018 for enterprise temporal detector evidence. The tested
-CICAPT adapter preserves network traffic, provenance graphs, and Caldera attack
-metadata as separate modalities; hashes source artifacts, validates graph
-references, normalizes the hidden campaign timeline, and declares chronological
-campaign/technique-held-out protocols. Official CICAPT acquisition requires the
-UNB download form, so the notebook reports readiness and blocked status rather
-than fabricated model metrics until those files are supplied.
+The prior 79-section development notebook is preserved as a 162-cell
+**Historical and Diagnostic Appendix**. It retains source audits, synthetic and
+real-data controls, parameter grids, multi-seed statistics, OPE limitations,
+resource profiles and detailed CICAPT diagnostics without forcing a new reader
+to traverse the project chronologically. The main scoreboard never mixes
+incompatible flow-row, one-minute-window, passive-observation, or counterfactual
+policy evidence.
 
 The IPS package structure and dataset responsibilities are documented in
 [`docs/IPS_ARCHITECTURE.md`](docs/IPS_ARCHITECTURE.md). Use the unified command
@@ -193,7 +178,7 @@ test, and keeps December 4 locked. Dataset-supplied feature-extraction scripts
 are statically audited and used as schema/formula provenance; unsafe shell and
 file-deletion orchestration is not executed by the project.
 
-Sections 61–78 form the CICAPT Data Intelligence layer. They add an auditable
+The CICAPT Data Intelligence evidence layer adds an auditable
 dataset card and attrition funnel; feature health, missingness, imbalance,
 tactic/technique coverage, campaign and cross-modal timelines; PSI/KS/JSD/
 Wasserstein drift, attack separation, correlation redundancy, independent
@@ -222,11 +207,12 @@ hidden failure.
   --ExecutePreprocessor.timeout=300
 ```
 
-Inside the first code cell, leave `RUN_HEAVY = False` for a fast demonstration
-or set it to `True` for longer DQN/PPO training and broader evaluation. If
-`data/ips_events/events.parquet` is absent, the notebook uses an
-explicitly labelled synthetic contract fixture; those outputs prove plumbing,
-not dataset or cyber-range effectiveness.
+The main teaching path reads deterministic saved evidence and executes quickly;
+the historical appendix reruns the complete diagnostic suite. The optional
+`EvidenceAnalyst` needs no API key and falls back to deterministic Markdown.
+An external analyst callable is permitted only as an explanatory component and
+is rejected if it introduces numerical claims absent from its structured
+evidence object.
 
 To build the parquet file with group-disjoint out-of-fold detector scores, see
 [`docs/datasets/ips_events.md`](docs/datasets/ips_events.md).

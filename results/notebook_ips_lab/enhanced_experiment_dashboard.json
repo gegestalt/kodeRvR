@@ -10,7 +10,7 @@
   "missing_target_families":"none",
   "most_common_dqn_action":"TEMP_BLOCK_SOURCE",
   "most_reward_sensitive_term":"contained_attack",
-  "lowest_p95_latency_policy":"Constrained_PPO",
+  "lowest_p95_latency_policy":"Masked_PPO",
   "most_robust_policy":"DQN",
   "test_episodes":21,
   "test_attack_episodes":19

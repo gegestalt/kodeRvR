@@ -12,11 +12,11 @@ saved evidence and calls small public APIs; reusable behavior belongs under
 | Environments | `src/ips/environment.py`, `dataset_environment.py` | Simulator and dataset replay transitions |
 | Policies | `src/ips/dqn.py`, `advanced_policies.py`, `policies.py` | DQN, LinUCB, PPO and deterministic baselines |
 | Dataset adapters | `src/ips/adapters/` | Dataset-specific parsing, chronology and leakage gates |
-| Analysis | `src/ips/analysis/` | Evidence tables, diagnostics, calibration, provenance, holdout and claim gates |
+| Analysis | `src/ips/analysis/` | Evidence tables, diagnostics, calibration, provenance, grounded analyst, holdout and claim gates |
 | Workspace | `src/ips/workspace.py` | Central paths and non-destructive dataset discovery |
 | Experiment runners | `src/experiments/ips/` | Dataset-specific orchestration and saved evidence only |
 | Interface | `src/ips_cli.py` | One command surface for status, audit and experiment runs |
-| Presentation | `notebooks/06_adaptive_ips_full_project_lab.ipynb` | Tables, plots, interpretations and decisions |
+| Presentation | `notebooks/06_adaptive_ips_full_project_lab.ipynb` | 22-part teaching flow plus reproducible historical/diagnostic appendix |
 
 ## Dataset responsibilities
 

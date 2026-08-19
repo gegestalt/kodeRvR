@@ -1,0 +1,11 @@
+timestamp,error_type,true_attack,threat_probability,tactic,technique,unusual_features,evaluation_unit
+1701591523.227755,false_negative,True,2.1900954482282647e-05,persistence,create a new user in linux,"Std, Radius, Max",flow_row
+1701591523.233039,false_negative,True,2.1901015617843484e-05,persistence,create a new user in linux,"Std, Radius, Max",flow_row
+1701591523.230417,false_negative,True,2.1901015617843484e-05,persistence,create a new user in linux,"Std, Radius, Max",flow_row
+1701591523.228436,false_negative,True,2.1901015617843484e-05,persistence,create a new user in linux,"Std, Radius, Max",flow_row
+1701591523.224728,false_negative,True,2.190111957729334e-05,persistence,create a new user in linux,"Min, AVG, Max",flow_row
+1701591523.222747,false_negative,True,2.190111957729334e-05,persistence,create a new user in linux,"Min, AVG, Max",flow_row
+1701591522.893193,false_negative,True,2.1901138093715143e-05,persistence,create a new user in linux,"Max, Tot size, Std",flow_row
+1701591522.899076,false_negative,True,2.1901143787149666e-05,persistence,create a new user in linux,"Max, Std, Radius",flow_row
+1701591523.222372,false_negative,True,2.1901143787149666e-05,persistence,create a new user in linux,"IAT, flow_idle_time, Max",flow_row
+1701591523.22528,false_negative,True,2.1901188919736147e-05,persistence,create a new user in linux,"Std, Radius, Max",flow_row

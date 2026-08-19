@@ -1,5 +1,5 @@
 expectation,parameter,outcome,observed,status,next_action
 Larger hidden width increases checkpoint memory,hidden_dim,checkpoint_mb,Spearman rho=1.000,supported,retain as measured engineering expectation
 Larger hidden width increases training runtime,hidden_dim,runtime_s,Spearman rho=0.158,inconclusive,repeat with more seeds/configurations
-Larger batches improve step throughput,batch_size,throughput_steps_s,Spearman rho=0.685,supported,retain as measured engineering expectation
+Larger batches improve step throughput,batch_size,throughput_steps_s,Spearman rho=0.738,supported,retain as measured engineering expectation
 Larger batches increase Python peak memory,batch_size,peak_python_memory_mb,Spearman rho=-0.632,contradicted,investigate confounding and measurement noise

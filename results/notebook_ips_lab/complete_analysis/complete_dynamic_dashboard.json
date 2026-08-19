@@ -11,8 +11,8 @@
     "LinUCB",
     "Masked PPO"
   ],
-  "detected_outliers": 1,
-  "matched_outlier_explanations": 1,
+  "detected_outliers": 3,
+  "matched_outlier_explanations": 3,
   "most_influential_exploratory_parameter": "hidden_dim",
   "strongest_interaction": "policy \u00d7 corruption",
   "statistically_unresolved_pairs": 5,

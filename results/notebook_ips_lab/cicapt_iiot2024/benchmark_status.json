@@ -7,7 +7,8 @@
   "models": [
     "benign_isolation_forest",
     "hist_gradient_boosting",
-    "logistic"
+    "logistic",
+    "random_forest"
   ],
   "primary_metric": "PR-AUC plus tactic recall",
   "policy_training": "BLOCKED until detector finalist is selected on validation/development evidence"
