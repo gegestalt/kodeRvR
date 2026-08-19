@@ -1,7 +1,0 @@
-canonical_feature,mapping_status,rule
-flow_duration,EXACT,use when units and timeout match
-packet_rate,DERIVED_EQUIVALENT,record derivation and time unit
-iat_mean,APPROXIMATE,sensitivity analysis; extractor-dependent
-tcp_flags,MISSING,use semantic intersection or presence mask; never silent zero-fill
-src_ip,FORBIDDEN,identity/provenance leakage candidate
-capture_filename,FORBIDDEN,dataset identity shortcut

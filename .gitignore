@@ -1,15 +1,13 @@
 # --- data (downloaded programmatically; do not commit) ---
 data/*
 !data/.gitkeep
-# keep provenance (source URLs + hashes) for every dataset, ignore the bulk data
+# Keep corpus documentation/provenance; ignore bulk source-code corpora.
 !data/**/
 data/**/*.txt
 data/**/*.csv
 data/**/*.parquet
 !data/**/SOURCE.md
-# Browser downloads may initially land here; never stage multi-GB raw CICAPT data.
-CICAPT-IIoT2024/
-data/cicapt_iiot2024/raw/
+data/code_provenance/corpus/
 
 # --- virtualenv ---
 .venv/
@@ -41,7 +39,7 @@ ipython_config.py
 .vscode/
 *.swp
 
-# --- models / large artifacts (keep results/ figures + metrics, ignore heavy checkpoints) ---
+# --- models / large artifacts ---
 *.pt
 *.pth
 models/

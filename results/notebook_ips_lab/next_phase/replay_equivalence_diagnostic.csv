@@ -1,2 +1,0 @@
-uniform_containment,per_containment,absolute_difference,interpretation,decision
-0.93,0.93,0.0,No observed policy-level benefit from PER; inspect sampled-index/TD-error telemetry before tuning,RL complexity not justified while optimal stopping has better containment

@@ -1,8 +1,0 @@
-attack_tactic,development_test,train,validation,locked_final_holdout,seen_in_train
-collection,38,50,372,LOCKED,True
-command and control,14,0,42,LOCKED,False
-credential access,58,0,0,LOCKED,False
-discovery,138,0,0,LOCKED,False
-exfiltration,0,0,42,LOCKED,False
-lateral movement,14,0,0,LOCKED,False
-persistence,44,0,0,LOCKED,False

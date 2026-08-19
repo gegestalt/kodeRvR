@@ -1,2 +1,0 @@
-dataset,decision_rule,false_blocks_per_hour,false_blocks_per_million_flows,missed_attacks_per_hour,flows_per_hour_observed
-CSE-CIC-IDS2018,p_attack>=0.70 diagnostic,0.0,0.0,251.2122410064414,1506.8716136083528

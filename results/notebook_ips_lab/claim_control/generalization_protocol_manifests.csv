@@ -1,6 +1,0 @@
-protocol,holdout,train_rows,test_rows,status,reason
-leave_one_source_dataset_out,CSE-CIC-IDS2018,3000,3000,MANIFEST_ONLY_DIAGNOSTIC,NSL has ordered-row proxy timing and only policy-evidence features are harmonized
-leave_one_source_dataset_out,NSL-KDD,3000,3000,MANIFEST_ONLY_DIAGNOSTIC,NSL has ordered-row proxy timing and only policy-evidence features are harmonized
-leave_one_attack_family_out,BruteForce,80000,10000,BLOCKED_DETECTOR_RETRAIN_REQUIRED,OOF detector currently saw held-out family labels during detector development
-leave_one_attack_family_out,DoS,70000,20000,BLOCKED_DETECTOR_RETRAIN_REQUIRED,OOF detector currently saw held-out family labels during detector development
-leave_one_attack_family_out,normal,30000,60000,BLOCKED_DETECTOR_RETRAIN_REQUIRED,OOF detector currently saw held-out family labels during detector development

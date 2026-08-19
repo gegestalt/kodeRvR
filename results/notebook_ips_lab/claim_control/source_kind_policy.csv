@@ -1,8 +1,0 @@
-source_kind,allowed_use,claim_level
-official/raw,primary after deterministic parser and leakage audit,raw-backed evidence
-official/processed,only after feature provenance and leakage audit,processed evidence; raw equivalence not assumed
-raw capture re-derived,preferred after parser/hash/split manifest,raw-backed behavioral evidence
-Hugging Face mirror,development after hash/provenance verification,mirror-specific until verified
-Kaggle derivative,sensitivity only,derivative-only evidence
-known/reported-tainted derivative,negative control / leakage demonstration only,no detector-performance claim
-survey,method and hypothesis discovery,no local empirical claim

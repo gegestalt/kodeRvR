@@ -1,6 +1,0 @@
-interaction,range,metric
-policy × corruption,1.7003579952267303,mean_return
-policy × calibration,1.415513126491646,mean_return
-policy × reward term,1.3923627684964186,mean_return
-width × batch,0.25,safety_quality
-policy × attack family,0.14814814814814814,containment_rate

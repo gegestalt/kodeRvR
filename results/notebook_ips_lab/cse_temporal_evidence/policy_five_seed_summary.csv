@@ -1,4 +1,0 @@
-method,seeds,containment_mean,containment_std,compromise_mean,compromise_std,return_mean,return_std,false_preventions_mean,training_wall_mean_s
-Optimal-stopping threshold,5,0.974,0.011401754250991384,0.0,0.0,4.114285714285714,0.1367901143921157,0.0,0.029842191800707952
-Prioritized replay Double-DQN,5,0.93,0.0,0.0,0.0,5.940535714285714,0.02921021408930217,0.0,4.410166666600707
-Uniform masked Double-DQN,5,0.93,0.0,0.0,0.0,5.940535714285714,0.02921021408930217,0.0,4.4882153918006225

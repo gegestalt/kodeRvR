@@ -1,11 +1,9 @@
-# NSL-KDD Intrusion Detection — pinned dependencies
+# AI Code Provenance & Security Intelligence — pinned dependencies
 # Python 3.14. Install into a venv:  python3 -m venv .venv && .venv/bin/pip install -r requirements.txt
-# macOS note: XGBoost/LightGBM need the OpenMP runtime ->  brew install libomp
 
 # --- core scientific stack ---
 numpy==2.4.6
 pandas==3.0.3
-pyarrow==25.0.1
 scipy==1.18.0
 scikit-learn==1.9.0
 
@@ -13,18 +11,8 @@ scikit-learn==1.9.0
 matplotlib==3.11.0
 seaborn==0.13.2
 
-# --- gradient-boosted baselines (research arsenal) ---
-xgboost==3.3.0
-lightgbm==4.6.0
-
-# --- imbalance handling (SMOTE, cost-sensitive experiments) ---
-imbalanced-learn==0.14.2
-
 # --- model explainability ---
 shap==0.52.0
-
-# --- deep learning (MLP); installs with Apple-Silicon MPS support ---
-torch==2.13.0
 
 # --- data download ---
 requests==2.34.2
@@ -36,5 +24,4 @@ pytest==9.1.1
 jupyter==1.1.1
 jupyterlab==4.6.1
 notebook==7.6.0
-nbconvert==7.17.1
 ipykernel==7.3.0
