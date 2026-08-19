@@ -41,6 +41,7 @@ def build_entries() -> list[DatasetEntry]:
     root = D.REPO_ROOT / "data"
     ciciot_csv = has_files(root / "ciciot2023" / "CSV", "*.csv")
     ciciot_dev = has_files(root / "ciciot2023", "*.parquet")
+    cse_available = has_files(root / "cse_cic_ids2018", "**/*.csv")
     return [
         DatasetEntry(
             name="NSL-KDD",
@@ -88,9 +89,17 @@ def build_entries() -> list[DatasetEntry]:
             source_url="https://www.unb.ca/cic/datasets/ids-2018.html",
             local_dir=root / "cse_cic_ids2018",
             expected_glob="**/*.csv",
-            current_status="available" if has_files(root / "cse_cic_ids2018", "**/*.csv") else "blocked_missing_local_files",
-            first_audit="Inventory days/files, strip leakage columns, define chronological split.",
-            blocked_claim="No enterprise/day-based drift result is valid yet.",
+            current_status="available" if cse_available else "blocked_missing_local_files",
+            first_audit=(
+                "Complete for the initial 14–16 February subset; see data/cse_cic_ids2018/SOURCE.md."
+                if cse_available else
+                "Inventory days/files, strip leakage columns, define chronological split."
+            ),
+            blocked_claim=(
+                "Only the audited three-day subset is supported; full ten-day and causal IPS claims remain blocked."
+                if cse_available else
+                "No enterprise/day-based drift result is valid yet."
+            ),
         ),
         DatasetEntry(
             name="Common NetFlow schema",

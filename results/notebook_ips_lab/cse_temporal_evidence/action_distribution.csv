@@ -1,0 +1,106 @@
+action,count,fraction,method,seed
+ALLOW,1035,0.8992180712423979,Uniform masked Double-DQN,42
+MONITOR,0,0.0,Uniform masked Double-DQN,42
+RATE_LIMIT,0,0.0,Uniform masked Double-DQN,42
+DROP_FLOW,0,0.0,Uniform masked Double-DQN,42
+TEMP_BLOCK_SOURCE,0,0.0,Uniform masked Double-DQN,42
+BLOCK_DESTINATION_PORT,116,0.10078192875760209,Uniform masked Double-DQN,42
+ISOLATE_HOST,0,0.0,Uniform masked Double-DQN,42
+ALLOW,1035,0.8992180712423979,Prioritized replay Double-DQN,42
+MONITOR,0,0.0,Prioritized replay Double-DQN,42
+RATE_LIMIT,0,0.0,Prioritized replay Double-DQN,42
+DROP_FLOW,0,0.0,Prioritized replay Double-DQN,42
+TEMP_BLOCK_SOURCE,0,0.0,Prioritized replay Double-DQN,42
+BLOCK_DESTINATION_PORT,116,0.10078192875760209,Prioritized replay Double-DQN,42
+ISOLATE_HOST,0,0.0,Prioritized replay Double-DQN,42
+ALLOW,0,0.0,Optimal-stopping threshold,42
+MONITOR,2291,0.98707453683757,Optimal-stopping threshold,42
+RATE_LIMIT,0,0.0,Optimal-stopping threshold,42
+DROP_FLOW,0,0.0,Optimal-stopping threshold,42
+TEMP_BLOCK_SOURCE,0,0.0,Optimal-stopping threshold,42
+BLOCK_DESTINATION_PORT,30,0.012925463162429988,Optimal-stopping threshold,42
+ISOLATE_HOST,0,0.0,Optimal-stopping threshold,42
+ALLOW,1035,0.8884120171673819,Uniform masked Double-DQN,43
+MONITOR,0,0.0,Uniform masked Double-DQN,43
+RATE_LIMIT,0,0.0,Uniform masked Double-DQN,43
+DROP_FLOW,0,0.0,Uniform masked Double-DQN,43
+TEMP_BLOCK_SOURCE,130,0.11158798283261803,Uniform masked Double-DQN,43
+BLOCK_DESTINATION_PORT,0,0.0,Uniform masked Double-DQN,43
+ISOLATE_HOST,0,0.0,Uniform masked Double-DQN,43
+ALLOW,1035,0.8884120171673819,Prioritized replay Double-DQN,43
+MONITOR,0,0.0,Prioritized replay Double-DQN,43
+RATE_LIMIT,0,0.0,Prioritized replay Double-DQN,43
+DROP_FLOW,0,0.0,Prioritized replay Double-DQN,43
+TEMP_BLOCK_SOURCE,130,0.11158798283261803,Prioritized replay Double-DQN,43
+BLOCK_DESTINATION_PORT,0,0.0,Prioritized replay Double-DQN,43
+ISOLATE_HOST,0,0.0,Prioritized replay Double-DQN,43
+ALLOW,0,0.0,Optimal-stopping threshold,43
+MONITOR,2291,0.9862247094274645,Optimal-stopping threshold,43
+RATE_LIMIT,0,0.0,Optimal-stopping threshold,43
+DROP_FLOW,0,0.0,Optimal-stopping threshold,43
+TEMP_BLOCK_SOURCE,0,0.0,Optimal-stopping threshold,43
+BLOCK_DESTINATION_PORT,32,0.013775290572535515,Optimal-stopping threshold,43
+ISOLATE_HOST,0,0.0,Optimal-stopping threshold,43
+ALLOW,1035,0.8984375,Uniform masked Double-DQN,44
+MONITOR,0,0.0,Uniform masked Double-DQN,44
+RATE_LIMIT,0,0.0,Uniform masked Double-DQN,44
+DROP_FLOW,0,0.0,Uniform masked Double-DQN,44
+TEMP_BLOCK_SOURCE,0,0.0,Uniform masked Double-DQN,44
+BLOCK_DESTINATION_PORT,117,0.1015625,Uniform masked Double-DQN,44
+ISOLATE_HOST,0,0.0,Uniform masked Double-DQN,44
+ALLOW,1035,0.8984375,Prioritized replay Double-DQN,44
+MONITOR,0,0.0,Prioritized replay Double-DQN,44
+RATE_LIMIT,0,0.0,Prioritized replay Double-DQN,44
+DROP_FLOW,0,0.0,Prioritized replay Double-DQN,44
+TEMP_BLOCK_SOURCE,0,0.0,Prioritized replay Double-DQN,44
+BLOCK_DESTINATION_PORT,117,0.1015625,Prioritized replay Double-DQN,44
+ISOLATE_HOST,0,0.0,Prioritized replay Double-DQN,44
+ALLOW,0,0.0,Optimal-stopping threshold,44
+MONITOR,2234,0.9854433171592413,Optimal-stopping threshold,44
+RATE_LIMIT,0,0.0,Optimal-stopping threshold,44
+DROP_FLOW,0,0.0,Optimal-stopping threshold,44
+TEMP_BLOCK_SOURCE,0,0.0,Optimal-stopping threshold,44
+BLOCK_DESTINATION_PORT,33,0.014556682840758712,Optimal-stopping threshold,44
+ISOLATE_HOST,0,0.0,Optimal-stopping threshold,44
+ALLOW,785,0.8607456140350878,Uniform masked Double-DQN,45
+MONITOR,0,0.0,Uniform masked Double-DQN,45
+RATE_LIMIT,0,0.0,Uniform masked Double-DQN,45
+DROP_FLOW,10,0.010964912280701754,Uniform masked Double-DQN,45
+TEMP_BLOCK_SOURCE,0,0.0,Uniform masked Double-DQN,45
+BLOCK_DESTINATION_PORT,117,0.12828947368421054,Uniform masked Double-DQN,45
+ISOLATE_HOST,0,0.0,Uniform masked Double-DQN,45
+ALLOW,785,0.8607456140350878,Prioritized replay Double-DQN,45
+MONITOR,0,0.0,Prioritized replay Double-DQN,45
+RATE_LIMIT,0,0.0,Prioritized replay Double-DQN,45
+DROP_FLOW,10,0.010964912280701754,Prioritized replay Double-DQN,45
+TEMP_BLOCK_SOURCE,0,0.0,Prioritized replay Double-DQN,45
+BLOCK_DESTINATION_PORT,117,0.12828947368421054,Prioritized replay Double-DQN,45
+ISOLATE_HOST,0,0.0,Prioritized replay Double-DQN,45
+ALLOW,0,0.0,Optimal-stopping threshold,45
+MONITOR,2254,0.9847094801223242,Optimal-stopping threshold,45
+RATE_LIMIT,0,0.0,Optimal-stopping threshold,45
+DROP_FLOW,0,0.0,Optimal-stopping threshold,45
+TEMP_BLOCK_SOURCE,0,0.0,Optimal-stopping threshold,45
+BLOCK_DESTINATION_PORT,34,0.014853647881170816,Optimal-stopping threshold,45
+ISOLATE_HOST,1,0.00043687199650502403,Optimal-stopping threshold,45
+ALLOW,886,0.8295880149812734,Uniform masked Double-DQN,46
+MONITOR,66,0.06179775280898876,Uniform masked Double-DQN,46
+RATE_LIMIT,0,0.0,Uniform masked Double-DQN,46
+DROP_FLOW,0,0.0,Uniform masked Double-DQN,46
+TEMP_BLOCK_SOURCE,0,0.0,Uniform masked Double-DQN,46
+BLOCK_DESTINATION_PORT,116,0.10861423220973783,Uniform masked Double-DQN,46
+ISOLATE_HOST,0,0.0,Uniform masked Double-DQN,46
+ALLOW,886,0.8295880149812734,Prioritized replay Double-DQN,46
+MONITOR,66,0.06179775280898876,Prioritized replay Double-DQN,46
+RATE_LIMIT,0,0.0,Prioritized replay Double-DQN,46
+DROP_FLOW,0,0.0,Prioritized replay Double-DQN,46
+TEMP_BLOCK_SOURCE,0,0.0,Prioritized replay Double-DQN,46
+BLOCK_DESTINATION_PORT,116,0.10861423220973783,Prioritized replay Double-DQN,46
+ISOLATE_HOST,0,0.0,Prioritized replay Double-DQN,46
+ALLOW,0,0.0,Optimal-stopping threshold,46
+MONITOR,2227,0.9853982300884956,Optimal-stopping threshold,46
+RATE_LIMIT,0,0.0,Optimal-stopping threshold,46
+DROP_FLOW,0,0.0,Optimal-stopping threshold,46
+TEMP_BLOCK_SOURCE,0,0.0,Optimal-stopping threshold,46
+BLOCK_DESTINATION_PORT,32,0.01415929203539823,Optimal-stopping threshold,46
+ISOLATE_HOST,1,0.0004424778761061947,Optimal-stopping threshold,46
