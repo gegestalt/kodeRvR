@@ -131,6 +131,32 @@ deterministic under `RANDOM_STATE = 42`. On macOS, `src/train_baselines.py`
 also pins native OpenMP thread counts to avoid LightGBM/libomp crashes from
 nested parallelism.
 
+## Full interactive project lab
+
+The single end-to-end notebook is
+[`notebooks/06_adaptive_ips_full_project_lab.ipynb`](notebooks/06_adaptive_ips_full_project_lab.ipynb).
+It dynamically inventories the codebase, explains model status and metric
+formulas, displays current source implementations, runs tests, compares IPS
+policies, trains masked Double DQN, constructs campaign-safe dataset episodes,
+and runs multi-seed validation/final-test experiments.
+
+```bash
+# Start Jupyter and open notebook 06
+.venv/bin/jupyter lab
+
+# Or execute its quick path non-interactively
+.venv/bin/jupyter nbconvert --to notebook --execute \
+  notebooks/06_adaptive_ips_full_project_lab.ipynb \
+  --output results/notebook_ips_lab/executed.ipynb \
+  --ExecutePreprocessor.timeout=300
+```
+
+Inside the first code cell, leave `RUN_HEAVY = False` for a fast demonstration
+or set it to `True` for the full test suite, longer DQN training, and five-seed
+evaluation. If `data/ips_events/events.parquet` is absent, the notebook uses an
+explicitly labelled synthetic contract fixture; those outputs prove plumbing,
+not dataset or cyber-range effectiveness.
+
 ## Limitations (read these)
 
 - **NSL-KDD is old and synthetic** (derived from 1998 simulated traffic).

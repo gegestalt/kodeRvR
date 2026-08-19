@@ -1,0 +1,364 @@
+{
+  "artifact_counts": {
+    "csv_results": 26,
+    "figures": 43,
+    "markdown_results": 19,
+    "test_files": 18
+  },
+  "datasets": [
+    {
+      "dataset": "NSL-KDD",
+      "limitation": "None for current NSL-KDD baseline; temporal claims remain invalid.",
+      "role": "Controlled baseline for every new method.",
+      "status": "missing"
+    },
+    {
+      "dataset": "CICIoT2023 dev parquet",
+      "limitation": "Do not treat dev-sample results as full official raw-release results.",
+      "role": "Fast modern IoT dev sample for quality checks and pilot modelling.",
+      "status": "missing"
+    },
+    {
+      "dataset": "CICIoT2023 raw CSV",
+      "limitation": "No full raw CSV modelling or quality claim until CSV files are present.",
+      "role": "Primary modern IoT supervised dataset: binary, 8-category, fine-label.",
+      "status": "blocked_missing_local_files"
+    },
+    {
+      "dataset": "TON_IoT",
+      "limitation": "No multimodal fusion, host telemetry, or TON_IoT score is valid yet.",
+      "role": "Multimodal SOC/EDR-style track: network, IoT telemetry, Windows/Linux traces.",
+      "status": "blocked_missing_local_files"
+    },
+    {
+      "dataset": "CSE-CIC-IDS2018",
+      "limitation": "No enterprise/day-based drift result is valid yet.",
+      "role": "Enterprise-scale/day-based drift and chronological evaluation.",
+      "status": "blocked_missing_local_files"
+    },
+    {
+      "dataset": "Common NetFlow schema",
+      "limitation": "No cross-dataset score is valid without a common feature schema.",
+      "role": "Cross-dataset generalization using shared NetFlow-style features.",
+      "status": "blocked_missing_local_files"
+    }
+  ],
+  "dependencies": {
+    "lightgbm": "4.6.0",
+    "numpy": "2.4.6",
+    "pandas": "3.0.3",
+    "python": "3.14.6",
+    "scikit-learn": "1.9.0",
+    "torch": "2.13.0"
+  },
+  "dqn_smoke": {
+    "best_validation": {
+      "attack_episodes": 20,
+      "benign_episodes": 30,
+      "compromise_rate": 0.0,
+      "containment_rate": 1.0,
+      "disruptive_actions_per_episode": 0.64,
+      "episodes": 50,
+      "false_preventions_per_episode": 0.0,
+      "masked_actions_per_episode": 0.0,
+      "mean_return": 3.08,
+      "mean_steps": 30.64,
+      "return_std": 3.7793650260328127
+    },
+    "checkpoint": "/Users/hexenmeister/Library/Mobile Documents/com~apple~CloudDocs/Desktop/don't delete update/codes/network-intrusion-detection-ml/results/project_benchmark/dqn_smoke/dqn_best.pt",
+    "status": "smoke_only",
+    "total_steps": 2113,
+    "updates": 2050
+  },
+  "features": [
+    {
+      "details": "3 categorical + 38 numeric; difficulty excluded",
+      "features": 41,
+      "representation": "NSL-KDD raw flow"
+    },
+    {
+      "details": "threat probability, anomaly, attack stage, compromise, criticality, attack rate, response budget",
+      "features": 7,
+      "representation": "Adaptive IPS state"
+    },
+    {
+      "details": "published expected model features; local parquet absent",
+      "features": 46,
+      "representation": "CICIoT2023"
+    }
+  ],
+  "ips_baselines": [
+    {
+      "attack_episodes": 56,
+      "benign_episodes": 44,
+      "compromise_rate": 1.0,
+      "containment_rate": 0.0,
+      "disruptive_actions_per_episode": 0.0,
+      "episodes": 100,
+      "false_preventions_per_episode": 0.0,
+      "masked_actions_per_episode": 0.0,
+      "mean_return": -15.12,
+      "mean_steps": 24.8,
+      "policy": "allow_only",
+      "return_std": 13.419038713708222
+    },
+    {
+      "attack_episodes": 56,
+      "benign_episodes": 44,
+      "compromise_rate": 0.017857142857142856,
+      "containment_rate": 0.9821428571428571,
+      "disruptive_actions_per_episode": 1.13,
+      "episodes": 100,
+      "false_preventions_per_episode": 0.0,
+      "masked_actions_per_episode": 0.0,
+      "mean_return": 3.4584999999999995,
+      "mean_steps": 23.22,
+      "policy": "rule_based",
+      "return_std": 5.099671827676758
+    },
+    {
+      "attack_episodes": 56,
+      "benign_episodes": 44,
+      "compromise_rate": 0.0,
+      "containment_rate": 1.0,
+      "disruptive_actions_per_episode": 9.62,
+      "episodes": 100,
+      "false_preventions_per_episode": 8.8,
+      "masked_actions_per_episode": 0.0,
+      "mean_return": -30.85,
+      "mean_steps": 9.62,
+      "policy": "aggressive",
+      "return_std": 43.56767723898074
+    }
+  ],
+  "metric_definitions": [
+    {
+      "calculation": "correct predictions / all predictions",
+      "metric": "accuracy",
+      "use": "secondary under imbalance"
+    },
+    {
+      "calculation": "TP / (TP + FN) for that class",
+      "metric": "per-class recall",
+      "use": "how many attacks of each family are caught"
+    },
+    {
+      "calculation": "unweighted mean of each class F1; F1=2PR/(P+R)",
+      "metric": "macro-F1",
+      "use": "primary classifier comparison"
+    },
+    {
+      "calculation": "class F1 weighted by class support",
+      "metric": "weighted-F1",
+      "use": "overall volume-weighted quality"
+    },
+    {
+      "calculation": "area under TPR versus FPR across thresholds",
+      "metric": "ROC-AUC",
+      "use": "binary ranking; can flatter imbalance"
+    },
+    {
+      "calculation": "area under precision versus recall",
+      "metric": "PR-AUC",
+      "use": "preferred binary ranking under imbalance"
+    },
+    {
+      "calculation": "contained attack episodes / attack episodes",
+      "metric": "containment rate",
+      "use": "IPS prevention outcome"
+    },
+    {
+      "calculation": "compromised attack episodes / attack episodes",
+      "metric": "compromise rate",
+      "use": "lower is better; first checkpoint criterion"
+    },
+    {
+      "calculation": "disruptive actions in benign episodes / episodes",
+      "metric": "false prevention",
+      "use": "availability/safety cost"
+    },
+    {
+      "calculation": "mean sum of transition rewards per episode",
+      "metric": "mean return",
+      "use": "RL objective; never interpreted alone"
+    }
+  ],
+  "model_training": [
+    {
+      "dataset_task": "NSL-KDD binary + 5-class",
+      "evaluation": "official KDDTest+; macro-F1 + per-class recall",
+      "fit_selection": "official train; class balancing; train-only validation/CV",
+      "models": "Dummy, LogReg, RF, ExtraTrees, HistGB, LightGBM",
+      "run": ".venv/bin/python src/reference_track.py",
+      "status": "TRAINED / SAVED"
+    },
+    {
+      "dataset_task": "NSL-KDD binary + 5-class",
+      "evaluation": "official KDDTest+; macro-F1 and rare-family recall",
+      "fit_selection": "official train; internal early-stopping validation",
+      "models": "MLP unweighted + class-weighted",
+      "run": ".venv/bin/python src/train_mlp.py",
+      "status": "TRAINED / 5-SEED"
+    },
+    {
+      "dataset_task": "NSL-KDD anomaly",
+      "evaluation": "official KDDTest+ attack/family recall",
+      "fit_selection": "normal training rows only; train-normal quantile threshold",
+      "models": "IsolationForest, LOF, KMeans distance",
+      "run": ".venv/bin/python src/anomaly_detection.py",
+      "status": "TRAINED / SAVED"
+    },
+    {
+      "dataset_task": "CICIoT2023 dev binary + category",
+      "evaluation": "full dev test partition; not raw/temporal evidence",
+      "fit_selection": "stratified 200k train sample; random dev partition",
+      "models": "Dummy, LogReg, RF, HistGB, LightGBM",
+      "run": ".venv/bin/python src/ciciot2023_baselines.py",
+      "status": "TRAINED / DEV ONLY"
+    },
+    {
+      "dataset_task": "Adaptive IPS simulated episodes",
+      "evaluation": "containment, compromise, disruption, false prevention, return",
+      "fit_selection": "no fitting; identical seeded scenarios",
+      "models": "Allow-only, rule-based, aggressive",
+      "run": ".venv/bin/python src/project_benchmark.py",
+      "status": "RUN LIVE IN THIS REPORT"
+    },
+    {
+      "dataset_task": "Adaptive IPS simulated episodes",
+      "evaluation": "safety-first checkpoint ordering; simulator evidence only",
+      "fit_selection": "training seed range; disjoint validation seed range",
+      "models": "Masked Double DQN",
+      "run": ".venv/bin/python src/project_benchmark.py --full",
+      "status": "IMPLEMENTED / SMOKE WITH --full"
+    }
+  ],
+  "saved_benchmarks": [
+    {
+      "artifact": "results/reference_track.csv",
+      "best_macro_f1": null,
+      "best_method": null,
+      "status": "missing",
+      "track": "NSL-KDD reference"
+    },
+    {
+      "artifact": "results/ciciot2023_baselines.csv",
+      "best_macro_f1": 0.8562669499461574,
+      "best_method": "RandomForest (balanced)",
+      "status": "available",
+      "track": "CICIoT2023 dev"
+    },
+    {
+      "artifact": "results/threshold_ablation.csv",
+      "best_macro_f1": 0.8230311813599127,
+      "best_method": "HistGB_balanced",
+      "status": "available",
+      "track": "Threshold ablation"
+    },
+    {
+      "artifact": "results/anomaly_detection.csv",
+      "best_macro_f1": 0.8413435861624956,
+      "best_method": "KMeans_distance",
+      "status": "available",
+      "track": "Anomaly detection"
+    },
+    {
+      "artifact": "results/semi_supervised.csv",
+      "best_macro_f1": 0.7542438200273012,
+      "best_method": "labelled_only_logreg",
+      "status": "available",
+      "track": "Semi-supervised"
+    },
+    {
+      "artifact": "results/online_learning.csv",
+      "best_macro_f1": 0.7641803694331959,
+      "best_method": "SGD_log_loss_balanced",
+      "status": "available",
+      "track": "Online proxy"
+    },
+    {
+      "artifact": "results/neural_ablation.csv",
+      "best_macro_f1": 0.7759299432028082,
+      "best_method": null,
+      "status": "available",
+      "track": "Neural ablation"
+    }
+  ],
+  "tests": {
+    "output": "..s..................sssss......sssss................................... [ 64%]\n........................sssss..........                                  [100%]\n95 passed, 16 skipped in 2.15s",
+    "passed": true,
+    "returncode": 0
+  },
+  "tracks": [
+    {
+      "evidence": "src/preprocess.py + tests",
+      "status": "PROVEN",
+      "track": "Leakage-safe preprocessing"
+    },
+    {
+      "evidence": "results/reference_track.csv",
+      "status": "PROVEN",
+      "track": "Supervised reference models"
+    },
+    {
+      "evidence": "results/metrics.md",
+      "status": "PROVEN",
+      "track": "RF/LightGBM official split"
+    },
+    {
+      "evidence": "results/stability.md",
+      "status": "PROVEN",
+      "track": "Weighted/unweighted MLP"
+    },
+    {
+      "evidence": "results/threshold_ablation.csv",
+      "status": "PROVEN",
+      "track": "Threshold tuning"
+    },
+    {
+      "evidence": "results/anomaly_detection.csv",
+      "status": "PROVEN",
+      "track": "Normal-only anomaly detection"
+    },
+    {
+      "evidence": "results/semi_supervised.csv",
+      "status": "PROVEN",
+      "track": "Semi-supervised learning"
+    },
+    {
+      "evidence": "not chronological drift",
+      "status": "PARTIAL",
+      "track": "Online partial-fit proxy"
+    },
+    {
+      "evidence": "random dev split, not full raw CSV",
+      "status": "PARTIAL",
+      "track": "CICIoT2023 supervised dev"
+    },
+    {
+      "evidence": "src/ips + safety tests",
+      "status": "PROVEN",
+      "track": "Adaptive IPS environment"
+    },
+    {
+      "evidence": "src/ips/train_dqn.py",
+      "status": "IMPLEMENTED",
+      "track": "Masked Double DQN"
+    },
+    {
+      "evidence": "timestamped local data required",
+      "status": "BLOCKED",
+      "track": "True temporal drift"
+    },
+    {
+      "evidence": "shared-schema data required",
+      "status": "BLOCKED",
+      "track": "Cross-dataset NetFlow transfer"
+    },
+    {
+      "evidence": "contained testbed required",
+      "status": "PLANNED",
+      "track": "Cyber-range IPS validation"
+    }
+  ]
+}

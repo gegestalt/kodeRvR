@@ -1,0 +1,4 @@
+seed,episodes,attack_episodes,containment_rate,compromise_rate,false_preventions_per_episode,disruptive_actions_per_episode,mean_return,return_std
+42,2,1,1.0,0.0,0.0,0.5,4.0,4.0
+43,2,1,1.0,0.0,0.0,0.5,4.0,4.0
+44,2,1,1.0,0.0,0.0,0.5,4.0,4.0

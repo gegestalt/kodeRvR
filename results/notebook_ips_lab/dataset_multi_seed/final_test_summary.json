@@ -1,0 +1,43 @@
+{
+  "final_test": {
+    "attack_episodes": {
+      "mean": 1.0,
+      "std": 0.0
+    },
+    "compromise_rate": {
+      "mean": 0.0,
+      "std": 0.0
+    },
+    "containment_rate": {
+      "mean": 1.0,
+      "std": 0.0
+    },
+    "disruptive_actions_per_episode": {
+      "mean": 0.5,
+      "std": 0.0
+    },
+    "episodes": {
+      "mean": 2.0,
+      "std": 0.0
+    },
+    "false_preventions_per_episode": {
+      "mean": 0.0,
+      "std": 0.0
+    },
+    "mean_return": {
+      "mean": 4.0,
+      "std": 0.0
+    },
+    "return_std": {
+      "mean": 4.0,
+      "std": 0.0
+    }
+  },
+  "limitation": "observations are dataset-backed; action outcomes remain counterfactual",
+  "protocol": "group-disjoint train/validation/test; validation selects each checkpoint; final test evaluated once per seed",
+  "seeds": [
+    42,
+    43,
+    44
+  ]
+}
