@@ -1,7 +1,7 @@
 {
   "final_test": {
     "attack_episodes": {
-      "mean": 1.0,
+      "mean": 19.0,
       "std": 0.0
     },
     "compromise_rate": {
@@ -13,24 +13,24 @@
       "std": 0.0
     },
     "disruptive_actions_per_episode": {
-      "mean": 0.5,
-      "std": 0.0
+      "mean": 1.396825396825397,
+      "std": 0.29182184620397206
     },
     "episodes": {
-      "mean": 2.0,
+      "mean": 21.0,
       "std": 0.0
     },
     "false_preventions_per_episode": {
-      "mean": 0.0,
-      "std": 0.0
+      "mean": 0.19047619047619047,
+      "std": 0.2693740118805895
     },
     "mean_return": {
-      "mean": 4.0,
-      "std": 0.0
+      "mean": 6.2936507936507935,
+      "std": 1.0669807738573853
     },
     "return_std": {
-      "mean": 4.0,
-      "std": 0.0
+      "mean": 4.653828259757823,
+      "std": 3.3169450407275454
     }
   },
   "limitation": "observations are dataset-backed; action outcomes remain counterfactual",

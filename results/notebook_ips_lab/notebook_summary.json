@@ -1,23 +1,23 @@
 {
   "dataset_multi_seed_mean": {
-    "attack_episodes": 1.0,
+    "attack_episodes": 19.0,
     "compromise_rate": 0.0,
     "containment_rate": 1.0,
-    "disruptive_actions_per_episode": 0.5,
-    "episodes": 2.0,
-    "false_preventions_per_episode": 0.0,
-    "mean_return": 4.0,
-    "return_std": 4.0
+    "disruptive_actions_per_episode": 1.396825396825397,
+    "episodes": 21.0,
+    "false_preventions_per_episode": 0.19047619047619047,
+    "mean_return": 6.2936507936507935,
+    "return_std": 4.653828259757823
   },
   "dataset_multi_seed_std": {
     "attack_episodes": 0.0,
     "compromise_rate": 0.0,
     "containment_rate": 0.0,
-    "disruptive_actions_per_episode": 0.0,
+    "disruptive_actions_per_episode": 0.29182184620397206,
     "episodes": 0.0,
-    "false_preventions_per_episode": 0.0,
-    "mean_return": 0.0,
-    "return_std": 0.0
+    "false_preventions_per_episode": 0.2693740118805895,
+    "mean_return": 1.0669807738573853,
+    "return_std": 3.3169450407275454
   },
   "evidence_kind": "SYNTHETIC CONTRACT FIXTURE \u2014 NOT DATASET EVIDENCE",
   "simulator_dqn": {
