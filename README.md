@@ -135,10 +135,12 @@ nested parallelism.
 
 The single end-to-end notebook is
 [`notebooks/06_adaptive_ips_full_project_lab.ipynb`](notebooks/06_adaptive_ips_full_project_lab.ipynb).
-It dynamically inventories the codebase, explains model status and metric
-formulas, displays current source implementations, runs tests, compares IPS
-policies, trains masked Double DQN, constructs campaign-safe dataset episodes,
-and runs multi-seed validation/final-test experiments.
+Its 25 numbered sections dynamically inventory the codebase, explain model
+status and metric formulas, display current source implementations, run tests,
+and compare IPS policies. The advanced sections add the timestamped real-data
+adapter, attack-family and action-distribution reports, reward/noise stress
+tests, the complete 3x3 DQN interaction grid, five-seed finalist confidence
+intervals, LinUCB, masked and constrained PPO, and native resource profiling.
 
 ```bash
 # Start Jupyter and open notebook 06
@@ -152,10 +154,13 @@ and runs multi-seed validation/final-test experiments.
 ```
 
 Inside the first code cell, leave `RUN_HEAVY = False` for a fast demonstration
-or set it to `True` for the full test suite, longer DQN training, and five-seed
-evaluation. If `data/ips_events/events.parquet` is absent, the notebook uses an
+or set it to `True` for longer DQN/PPO training and broader evaluation. If
+`data/ips_events/events.parquet` is absent, the notebook uses an
 explicitly labelled synthetic contract fixture; those outputs prove plumbing,
 not dataset or cyber-range effectiveness.
+
+To build the parquet file with group-disjoint out-of-fold detector scores, see
+[`docs/datasets/ips_events.md`](docs/datasets/ips_events.md).
 
 ## Limitations (read these)
 

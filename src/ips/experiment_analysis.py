@@ -36,6 +36,15 @@ DEFAULT_CANDIDATES = (
 )
 
 
+def factorial_candidates(episodes: int = 60) -> tuple[Candidate, ...]:
+    """Complete 3×3 hidden-width × batch-size interaction grid."""
+    return tuple(
+        Candidate(f"DQN-h{hidden}-b{batch}", hidden, 0.99, 1e-3, batch, 75, episodes)
+        for hidden in (16, 32, 64)
+        for batch in (16, 32, 64)
+    )
+
+
 THEORETICAL_CANDIDATES = (
     {
         "model": "Masked PPO",
@@ -100,11 +109,14 @@ def benchmark_candidates(
                 validation_interval=max(10, candidate.episodes // 3),
             ),
             output_dir=output_dir / candidate.name,
+            evaluate_test=False,
         )
         runtime = time.perf_counter() - started
         _, peak_memory = tracemalloc.get_traced_memory()
         tracemalloc.stop()
-        metrics = run["final_test"]
+        # Candidate discovery is validation-only. The final test is reserved for
+        # the selected finalists in benchmark_finalists_multi_seed().
+        metrics = run["validation"]
         rows.append(
             {
                 **asdict(candidate),
@@ -117,6 +129,7 @@ def benchmark_candidates(
                 "training_steps": run["steps"],
                 "updates": run["updates"],
                 "throughput_steps_s": run["steps"] / runtime,
+                "evaluation_split": "validation",
                 **metrics,
             }
         )
@@ -127,6 +140,57 @@ def benchmark_candidates(
         - 0.05 * frame["false_preventions_per_episode"]
     )
     return frame
+
+
+def benchmark_finalists_multi_seed(
+    splits: EpisodeSplits,
+    finalists: tuple[Candidate, ...],
+    *,
+    seeds: tuple[int, ...] = (42, 43, 44, 45, 46),
+    output_dir: Path,
+) -> pd.DataFrame:
+    """Repeat validation-selected finalists and evaluate final test once/seed."""
+    if len(seeds) < 5:
+        raise ValueError("finalist comparison requires at least five seeds")
+    rows = []
+    for candidate in finalists:
+        for seed in seeds:
+            dqn = DqnConfig(
+                hidden_dim=candidate.hidden_dim,
+                gamma=candidate.gamma,
+                learning_rate=candidate.learning_rate,
+                batch_size=candidate.batch_size,
+                replay_capacity=max(2_000, candidate.batch_size * 10),
+                warmup_steps=candidate.batch_size * 2,
+                target_update_steps=candidate.target_update_steps,
+                epsilon_decay_steps=max(500, candidate.episodes * 10),
+            )
+            run = train_one_seed(
+                splits,
+                seed=seed,
+                dqn=dqn,
+                training=DatasetTrainConfig(
+                    episodes=candidate.episodes,
+                    validation_interval=max(10, candidate.episodes // 3),
+                ),
+                output_dir=output_dir / candidate.name / f"seed_{seed}",
+            )
+            metrics = run["final_test"]
+            rows.append(
+                {
+                    "name": candidate.name,
+                    "seed": seed,
+                    "parameters": parameter_count(candidate),
+                    **metrics,
+                    "safety_quality": metrics["containment_rate"]
+                    - metrics["compromise_rate"]
+                    - 0.05 * metrics["false_preventions_per_episode"],
+                }
+            )
+    output = pd.DataFrame(rows)
+    output_dir.mkdir(parents=True, exist_ok=True)
+    output.to_csv(output_dir / "finalists_five_seed.csv", index=False)
+    return output
 
 
 def pareto_mask(

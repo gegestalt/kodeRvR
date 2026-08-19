@@ -107,6 +107,7 @@ def train_one_seed(
     dqn: DqnConfig,
     training: DatasetTrainConfig,
     output_dir: Path,
+    evaluate_test: bool = True,
 ) -> dict[str, object]:
     """Train on train episodes, select on validation, test the winner once."""
     assert_group_disjoint(splits)
@@ -186,13 +187,16 @@ def train_one_seed(
         raise RuntimeError("no validation checkpoint was created")
     saved = torch.load(checkpoint, map_location="cpu")
     online.load_state_dict(saved["model_state_dict"])
-    final_test = evaluate_on_episodes(online, splits.test, seed=seed + 2_000_000)
+    final_test = (
+        evaluate_on_episodes(online, splits.test, seed=seed + 2_000_000)
+        if evaluate_test else None
+    )
     return {
         "seed": seed,
         "steps": total_steps,
         "updates": updates,
         "validation": best_validation.to_dict(),
-        "final_test": final_test.to_dict(),
+        "final_test": final_test.to_dict() if final_test is not None else None,
         "checkpoint": str(checkpoint),
     }
 
