@@ -135,12 +135,17 @@ nested parallelism.
 
 The single end-to-end notebook is
 [`notebooks/06_adaptive_ips_full_project_lab.ipynb`](notebooks/06_adaptive_ips_full_project_lab.ipynb).
-Its 25 numbered sections dynamically inventory the codebase, explain model
+Its 35 numbered sections dynamically inventory the codebase, explain model
 status and metric formulas, display current source implementations, run tests,
 and compare IPS policies. The advanced sections add the timestamped real-data
 adapter, attack-family and action-distribution reports, reward/noise stress
 tests, the complete 3x3 DQN interaction grid, five-seed finalist confidence
 intervals, LinUCB, masked and constrained PPO, and native resource profiling.
+The final diagnostic suite adds five-seed reliability for every policy family,
+bootstrap winner/tie decisions, matched-control outlier explanations,
+exploratory permutation importance, expected-versus-observed checks, expanded
+sensitivity and interaction analyses, repeated resource trials, and a dynamic
+requirements-coverage dashboard.
 
 ```bash
 # Start Jupyter and open notebook 06

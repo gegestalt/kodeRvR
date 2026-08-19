@@ -1,0 +1,32 @@
+{
+  "experiments_executed": 35,
+  "models_compared": 4,
+  "configurations_tested": 9,
+  "best_quality_policy": "LinUCB",
+  "fastest_policy": "Constrained PPO",
+  "lowest_memory_policy": "LinUCB",
+  "best_overall_configuration": "LinUCB",
+  "pareto_candidates": [
+    "DQN",
+    "LinUCB",
+    "Masked PPO",
+    "Constrained PPO"
+  ],
+  "detected_outliers": 3,
+  "matched_outlier_explanations": 3,
+  "most_influential_exploratory_parameter": "hidden_dim",
+  "strongest_interaction": "policy \u00d7 corruption",
+  "statistically_unresolved_pairs": 2,
+  "contradicted_expectations": 1,
+  "least_stable_policy": "DQN",
+  "repeated_resource_trials_per_policy": 7,
+  "memory_attribution": "exact model bytes; process RSS shared and not attributed",
+  "all_hard_constraints_passed": false,
+  "evidence_grade": "real NSL detector observations; proxy sequences; counterfactual IPS outcomes",
+  "recommended_next_experiments": [
+    "Increase policy seeds for 2 tied/inconclusive pairwise comparisons",
+    "Repeat the grid to investigate 1 contradicted engineering expectations",
+    "Retune or reject policies violating false-prevention constraints",
+    "Replace NSL ordered-row proxies with timestamped group-disjoint NetFlow episodes and observed cyber-range interventions"
+  ]
+}

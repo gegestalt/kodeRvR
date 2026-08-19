@@ -1,0 +1,15 @@
+requirement,implemented_artifact,status
+Beyond Spearman,Spearman + standardized range + permutation evidence,complete
+Matched outlier controls,nearest normal run with quantified metric deltas,complete
+All-policy reliability,five seeds for DQN/LinUCB/PPO/constrained PPO,complete
+Pairwise uncertainty,bootstrap winner/tie/inconclusive decisions,complete
+Expected vs observed,directional checks and contradiction flags,complete
+Expanded sensitivity,duration/calibration/policy/dataset size,complete
+Consolidated comparison,quality/error/stability/runtime/memory/latency/constraints/recommendation,complete
+Importance evidence labels,exploratory and non-causal labels,complete
+Interaction atlas,calibration/family/corruption/reward plus width×batch,complete
+Real-data recommendations,derived from NSL policy evidence,complete
+Analyst narrative,result/interpretation/expectation/implication/action,complete
+Complete dashboard,stability/ties/contradictions/interaction/resources,complete
+Repeated resources,seven timing trials per policy,complete
+Memory attribution,exact model bytes + explicitly shared RSS,complete

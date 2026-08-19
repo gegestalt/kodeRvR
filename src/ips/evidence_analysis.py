@@ -236,4 +236,34 @@ def profile_policy(
         "process_cpu_s": cpu,
         "cpu_utilization_one_core_pct": 100 * cpu / wall,
         "max_rss_mb": float(rss_mb),
+        "rss_scope": "shared_process_peak_not_policy_attributable",
     }
+
+
+def profile_policy_trials(
+    policy: Policy,
+    states: np.ndarray,
+    masks: np.ndarray,
+    *,
+    trials: int = 5,
+    repeats_per_trial: int = 20,
+) -> tuple[pd.DataFrame, dict[str, float]]:
+    """Repeat profiling to expose timing variability instead of one measurement."""
+    if trials < 2:
+        raise ValueError("trials must be at least two")
+    rows = [
+        {"trial": trial + 1, **profile_policy(policy, states, masks, repeats=repeats_per_trial)}
+        for trial in range(trials)
+    ]
+    frame = pd.DataFrame(rows)
+    summary = {
+        "profile_trials": float(trials),
+        "latency_p50_mean_ms": float(frame.latency_p50_ms.mean()),
+        "latency_p50_std_ms": float(frame.latency_p50_ms.std(ddof=1)),
+        "latency_p95_mean_ms": float(frame.latency_p95_ms.mean()),
+        "latency_p95_std_ms": float(frame.latency_p95_ms.std(ddof=1)),
+        "throughput_mean_decisions_s": float(frame.throughput_decisions_s.mean()),
+        "throughput_std_decisions_s": float(frame.throughput_decisions_s.std(ddof=1)),
+        "shared_process_peak_rss_mb": float(frame.max_rss_mb.max()),
+    }
+    return frame, summary

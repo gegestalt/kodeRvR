@@ -3,7 +3,7 @@
   "models_compared":9,
   "configurations_tested":9,
   "best_quality":"DQN-h16-b16 (1.000)",
-  "fastest":"DQN-h16-b64 (0.023s)",
+  "fastest":"DQN-h16-b64 (0.024s)",
   "lowest_memory":"DQN-h16-b16 (0.005 MB)",
   "best_overall":"DQN-h16-b64",
   "detected_outliers":3,

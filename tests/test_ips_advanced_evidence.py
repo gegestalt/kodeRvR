@@ -116,3 +116,18 @@ def test_resource_profile_reports_latency_and_rss():
     )
     assert profile["latency_p95_ms"] >= 0
     assert profile["max_rss_mb"] > 0
+    assert profile["rss_scope"] == "shared_process_peak_not_policy_attributable"
+
+
+def test_repeated_resource_profile_reports_variability():
+    from ips.evidence_analysis import profile_policy_trials
+
+    states = np.zeros((2, 7), dtype=np.float32)
+    masks = np.ones((2, 7), dtype=bool)
+    policy = lambda state, mask: IpsAction.ALLOW
+    trials, summary = profile_policy_trials(
+        policy, states, masks, trials=3, repeats_per_trial=2
+    )
+    assert len(trials) == 3
+    assert summary["profile_trials"] == 3
+    assert summary["latency_p95_std_ms"] >= 0
