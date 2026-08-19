@@ -1,0 +1,6 @@
+interface:
+  display_name: "Grill Me"
+  short_description: "Resolve a design tree one decision at a time"
+  default_prompt: "Use $grill-me to stress-test this plan before implementation."
+policy:
+  allow_implicit_invocation: true

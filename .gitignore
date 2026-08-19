@@ -29,8 +29,12 @@ ipython_config.py
 .jupyter/
 .matplotlib-cache/
 
-# --- agent / tooling scratch ---
-.agents/
+# --- project skill + agent/tooling scratch ---
+.agents/*
+!.agents/skills/
+.agents/skills/*
+!.agents/skills/grill-me/
+!.agents/skills/grill-me/**
 .jupyter-config/
 
 # --- os / editor ---

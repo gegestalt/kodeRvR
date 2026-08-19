@@ -86,6 +86,13 @@ The complete design and leakage controls are documented in
 The interactive walkthrough is
 [`notebooks/07_ai_code_provenance_security_lab.ipynb`](notebooks/07_ai_code_provenance_security_lab.ipynb).
 
+## Project skill
+
+Invoke `$grill-me` (or ask to be grilled) before a major architecture or research
+decision. The project-scoped skill inspects the repository first, maps the design
+tree, and asks one decision question at a time with a recommended answer. It does
+not implement anything until shared understanding is explicitly confirmed.
+
 ## Current limitation
 
 The architecture and tested modelling contracts are implemented, but no
