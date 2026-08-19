@@ -1,4 +1,4 @@
 target_policy,wis_immediate_reward,effective_sample_size,ess_fraction,max_weight,validity
-DQN,3.7173651237863883,29.507957558341115,0.07546792214409492,28.749999999999996,diagnostic only: one-step rewards and synthetic propensities
-LinUCB,3.5687826669297054,20.719975920518397,0.052992265781376974,33.49999999999999,diagnostic only: one-step rewards and synthetic propensities
-Optimal stopping,3.068724744947005,345.0721639970805,0.8825375038288504,1.1551724137931032,diagnostic only: one-step rewards and synthetic propensities
+DQN,3.2321259025981943,34.54059291444463,0.098970180270615,33.49999999999999,diagnostic only: one-step rewards and synthetic propensities
+LinUCB,2.913158659734877,16.041332943041,0.04596370470785387,33.49999999999999,diagnostic only: one-step rewards and synthetic propensities
+Optimal stopping,2.835331717292093,310.2808219195237,0.8890567963310134,1.1551724137931032,diagnostic only: one-step rewards and synthetic propensities

@@ -3,21 +3,21 @@
     "attack_episodes": 19.0,
     "compromise_rate": 0.0,
     "containment_rate": 1.0,
-    "disruptive_actions_per_episode": 1.396825396825397,
+    "disruptive_actions_per_episode": 1.365079365079365,
     "episodes": 21.0,
     "false_preventions_per_episode": 0.19047619047619047,
-    "mean_return": 6.2936507936507935,
-    "return_std": 4.653828259757823
+    "mean_return": 6.234920634920634,
+    "return_std": 4.828531548506185
   },
   "dataset_multi_seed_std": {
     "attack_episodes": 0.0,
     "compromise_rate": 0.0,
     "containment_rate": 0.0,
-    "disruptive_actions_per_episode": 0.29182184620397206,
+    "disruptive_actions_per_episode": 0.3166656721152381,
     "episodes": 0.0,
     "false_preventions_per_episode": 0.2693740118805895,
-    "mean_return": 1.0669807738573853,
-    "return_std": 3.3169450407275454
+    "mean_return": 1.0252764192907398,
+    "return_std": 3.201080992013663
   },
   "evidence_kind": "SYNTHETIC CONTRACT FIXTURE \u2014 NOT DATASET EVIDENCE",
   "simulator_dqn": {
@@ -25,13 +25,13 @@
     "benign_episodes": 30,
     "compromise_rate": 0.0,
     "containment_rate": 1.0,
-    "disruptive_actions_per_episode": 0.62,
+    "disruptive_actions_per_episode": 0.6,
     "episodes": 50,
     "false_preventions_per_episode": 0.0,
     "masked_actions_per_episode": 0.0,
-    "mean_return": 3.08,
-    "mean_steps": 30.64,
-    "return_std": 3.7793650260328127
+    "mean_return": 3.0669999999999997,
+    "mean_steps": 30.66,
+    "return_std": 3.7666644395273647
   },
   "tests_passed": true
 }

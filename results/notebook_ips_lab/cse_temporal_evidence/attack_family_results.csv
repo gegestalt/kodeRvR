@@ -8,9 +8,9 @@ DoS,100,97,0,0.97,0.0,Optimal-stopping threshold,43
 DoS,100,93,0,0.93,0.0,Uniform masked Double-DQN,44
 DoS,100,93,0,0.93,0.0,Prioritized replay Double-DQN,44
 DoS,100,97,0,0.97,0.0,Optimal-stopping threshold,44
-DoS,100,100,0,1.0,0.0,Uniform masked Double-DQN,45
-DoS,100,100,0,1.0,0.0,Prioritized replay Double-DQN,45
+DoS,100,93,0,0.93,0.0,Uniform masked Double-DQN,45
+DoS,100,93,0,0.93,0.0,Prioritized replay Double-DQN,45
 DoS,100,98,0,0.98,0.0,Optimal-stopping threshold,45
-DoS,100,99,0,0.99,0.0,Uniform masked Double-DQN,46
-DoS,100,99,0,0.99,0.0,Prioritized replay Double-DQN,46
+DoS,100,93,0,0.93,0.0,Uniform masked Double-DQN,46
+DoS,100,93,0,0.93,0.0,Prioritized replay Double-DQN,46
 DoS,100,99,0,0.99,0.0,Optimal-stopping threshold,46

@@ -9,6 +9,7 @@ from __future__ import annotations
 import numpy as np
 
 from ips.actions import IpsAction, enforce_action_mask, valid_action_mask
+from ips.belief import observable_belief
 from ips.dataset import IpsEpisode
 from ips.environment import AdaptiveIpsEnv, IpsObservation, StepResult
 from ips.reward import RewardConfig, calculate_reward
@@ -37,6 +38,7 @@ class DatasetBackedIpsEnv:
         self._index = 0
         self._budget = initial_budget
         self._finished = False
+        self._score_history: list[float] = []
 
     def reset(self, *, seed: int | None = None) -> tuple[IpsObservation, dict[str, object]]:
         if seed is not None:
@@ -45,14 +47,18 @@ class DatasetBackedIpsEnv:
         self._index = 0
         self._budget = self.initial_budget
         self._finished = False
+        self._score_history = [self.episode.events[0].threat_probability]
         return self._observation(), self._info()
 
     def action_mask(self) -> np.ndarray:
         event = self.episode.events[self._index]
+        _, compromise, _ = observable_belief(
+            event.threat_probability, event.anomaly_score, self._score_history
+        )
         return valid_action_mask(
             event.threat_probability,
             event.critical_service,
-            event.attack_stage,
+            compromise,
         )
 
     def step(self, proposed_action: int | IpsAction) -> StepResult:
@@ -85,6 +91,7 @@ class DatasetBackedIpsEnv:
         at_end = self._index == len(self.episode.events) - 1
         if not at_end and not contained and not compromised and self._budget > 0:
             self._index += 1
+            self._score_history.append(self.episode.events[self._index].threat_probability)
         self._finished = contained or compromised or at_end or self._budget == 0
         info = self._info()
         info.update(
@@ -111,13 +118,16 @@ class DatasetBackedIpsEnv:
 
     def _observation(self) -> IpsObservation:
         event = self.episode.events[self._index]
+        stage, compromise, recent = observable_belief(
+            event.threat_probability, event.anomaly_score, self._score_history
+        )
         return IpsObservation(
             threat_probability=event.threat_probability,
             anomaly_score=event.anomaly_score,
-            attack_stage=event.attack_stage,
-            host_compromise=event.attack_stage,
+            attack_stage=stage,
+            host_compromise=compromise,
             critical_service=float(event.critical_service),
-            recent_attack_rate=float(event.attack_present),
+            recent_attack_rate=recent,
             response_budget=self._budget / self.initial_budget,
         )
 

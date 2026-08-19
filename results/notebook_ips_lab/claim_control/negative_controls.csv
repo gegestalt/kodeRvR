@@ -1,0 +1,7 @@
+negative_control,expected_behavior,purpose
+random_label,performance must collapse to chance,detect split/preprocessing leakage
+dataset_identity_only,must not predict attack reliably,detect source shortcut
+forbidden_identifier_only,must fail eligibility gate,feature leakage sentinel
+shuffled_time,must not outperform true future holdout,temporal leakage sentinel
+allow_only_policy,zero prevention benefit,policy necessity baseline
+contextual_bandit,tie implies sequential RL not justified,delayed-credit baseline

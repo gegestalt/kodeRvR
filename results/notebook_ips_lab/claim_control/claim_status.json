@@ -1,0 +1,11 @@
+{
+  "research_frame": "Safe Adaptive Intrusion Prevention Under Distribution Shift",
+  "rq1_generalization": "PARTIAL: CSE future-day evidence; full raw-feature LODO blocked",
+  "rq2_sequential_control": "PARTIAL: simulator/counterfactual outcomes only",
+  "rq3_safe_uncertainty": "IMPLEMENTED CONTRACTS: abstention, shield, blast radius; external OOD validation pending",
+  "rq4_causal_prevention": "BLOCKED: no observed intervention transitions",
+  "pomdp_observability": "IMPLEMENTED: policy receives detector-history beliefs, hidden labels remain reward-only",
+  "constrained_mdp": "CONTRACT IMPLEMENTED; empirical audit blocked until per-transition collateral/outage logs exist",
+  "realisable_traffic_evasion": "BLOCKED: packet mutation + re-extraction pipeline not yet available",
+  "cyber_range": "BLOCKED: target network/enforcement/telemetry infrastructure not configured"
+}

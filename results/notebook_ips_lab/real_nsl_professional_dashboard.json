@@ -4,9 +4,9 @@
   "detector_scoring": "OOF train; train-only official test",
   "best_calibration": "raw",
   "score_PSI": 0.1818406475876694,
-  "best_return_policy": "LinUCB",
+  "best_return_policy": "DQN",
   "least_aggressive_policy": "LinUCB",
-  "fastest_policy": "Constrained PPO",
+  "fastest_policy": "Masked PPO",
   "all_constraints_passed": false,
   "human_review_rate": 0.0336,
   "next_realism_gate": "timestamped CICIoT/CSE/TON traffic plus observed cyber-range interventions"

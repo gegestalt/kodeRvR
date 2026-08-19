@@ -1,0 +1,14 @@
+variable,status,policy_visible,source_or_rule
+threat_probability,model_estimated,True,OOF/calibrated detector output
+anomaly_score,model_estimated,True,benign-only anomaly model
+estimated_attack_stage,model_estimated,True,derived from observable score history
+estimated_host_compromise,model_estimated,True,belief estimate; never ground truth
+critical_service,configuration_known,True,asset inventory
+recent_score_rate,sensor_observable,True,history of detector scores
+response_budget,configuration_known,True,policy budget
+previous_action,configuration_known,False,future recurrent-state extension
+attack_present,hidden_ground_truth,False,reward/evaluation only
+attack_family,hidden_ground_truth,False,stratified reporting only
+true_attack_stage,hidden_ground_truth,False,transition/reward only
+true_host_compromise,hidden_ground_truth,False,transition/reward only
+future_outcome,future_information,False,never available at decision time

@@ -12,12 +12,17 @@ from dataclasses import dataclass
 import numpy as np
 
 from ips.actions import IpsAction, enforce_action_mask, valid_action_mask
+from ips.belief import observable_belief
 from ips.reward import RewardConfig, calculate_reward
 
 
 @dataclass(frozen=True)
 class IpsObservation:
-    """Policy-visible state at one defensive decision point."""
+    """Policy-visible belief state at one defensive decision point.
+
+    ``attack_stage`` and ``host_compromise`` retain their stable API names but
+    are detector-history estimates, never environment ground truth.
+    """
 
     threat_probability: float
     anomaly_score: float
@@ -75,6 +80,7 @@ class AdaptiveIpsEnv:
         self._critical = False
         self._threat_probability = 0.0
         self._anomaly_score = 0.0
+        self._score_history: list[float] = []
 
     def reset(
         self,
@@ -96,13 +102,17 @@ class AdaptiveIpsEnv:
         )
         self._stage = 1 if self._attack_present else 0
         self._refresh_detector_scores()
+        self._score_history = [self._threat_probability]
         return self._observation(), {"action_mask": self.action_mask()}
 
     def action_mask(self) -> np.ndarray:
+        _, compromise, _ = observable_belief(
+            self._threat_probability, self._anomaly_score, self._score_history
+        )
         return valid_action_mask(
             self._threat_probability,
             self._critical,
-            self._stage / 4.0,
+            compromise,
         )
 
     def step(self, proposed_action: int | IpsAction) -> StepResult:
@@ -139,6 +149,7 @@ class AdaptiveIpsEnv:
         )
         self._step += 1
         self._refresh_detector_scores()
+        self._score_history.append(self._threat_probability)
         terminated = compromised
         truncated = self._step >= self.max_steps or self._budget == 0
         info = {
@@ -159,12 +170,15 @@ class AdaptiveIpsEnv:
         )
 
     def _observation(self) -> IpsObservation:
+        stage, compromise, recent = observable_belief(
+            self._threat_probability, self._anomaly_score, self._score_history
+        )
         return IpsObservation(
             threat_probability=self._threat_probability,
             anomaly_score=self._anomaly_score,
-            attack_stage=self._stage / 4.0,
-            host_compromise=self._stage / 4.0,
+            attack_stage=stage,
+            host_compromise=compromise,
             critical_service=float(self._critical),
-            recent_attack_rate=float(self._attack_present),
+            recent_attack_rate=recent,
             response_budget=self._budget / self.initial_budget,
         )

@@ -4,17 +4,17 @@
     "benign_episodes": 30,
     "compromise_rate": 0.0,
     "containment_rate": 1.0,
-    "disruptive_actions_per_episode": 0.62,
+    "disruptive_actions_per_episode": 0.6,
     "episodes": 50,
     "false_preventions_per_episode": 0.0,
     "masked_actions_per_episode": 0.0,
-    "mean_return": 3.08,
-    "mean_steps": 30.64,
-    "return_std": 3.7793650260328127
+    "mean_return": 3.0669999999999997,
+    "mean_steps": 30.66,
+    "return_std": 3.7666644395273647
   },
   "checkpoint": "/Users/hexenmeister/Library/Mobile Documents/com~apple~CloudDocs/Desktop/don't delete update/codes/network-intrusion-detection-ml/results/notebook_ips_lab/simulator_dqn/dqn_best.pt",
   "limitation": "Validation uses simulated IPS transitions; reserve a separate test seed range and cyber-range evaluation for final claims.",
   "seed": 42,
-  "total_steps": 2207,
-  "updates": 2080
+  "total_steps": 2593,
+  "updates": 2466
 }

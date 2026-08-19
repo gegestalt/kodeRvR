@@ -135,7 +135,7 @@ nested parallelism.
 
 The single end-to-end notebook is
 [`notebooks/06_adaptive_ips_full_project_lab.ipynb`](notebooks/06_adaptive_ips_full_project_lab.ipynb).
-Its 47 numbered sections dynamically inventory the codebase, explain model
+Its 57 numbered sections dynamically inventory the codebase, explain model
 status and metric formulas, display current source implementations, run tests,
 and compare IPS policies. The advanced sections add the timestamped real-data
 adapter, attack-family and action-distribution reports, reward/noise stress
@@ -146,6 +146,16 @@ bootstrap winner/tie decisions, matched-control outlier explanations,
 exploratory permutation importance, expected-versus-observed checks, expanded
 sensitivity and interaction analyses, repeated resource trials, and a dynamic
 requirements-coverage dashboard.
+
+Sections 47–56 add the scientific claim-control layer: policy observations are
+detector-history belief estimates rather than hidden attack truth; dataset
+eligibility, feature semantics, provenance identifiability, LODO/LOAFO gates,
+temporal calibration, operational burden, safe abstention, and distribution
+shift are audited explicitly. Prevention is formulated as a constrained MDP
+with intervention blast radius, collateral damage, and operational cost kept
+separate from security benefit. The dashboard labels counterfactual simulator
+evidence separately from observed intervention evidence and leaves causal and
+cyber-range claims blocked until the required logs and infrastructure exist.
 
 ```bash
 # Start Jupyter and open notebook 06

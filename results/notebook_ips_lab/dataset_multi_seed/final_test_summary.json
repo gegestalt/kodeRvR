@@ -13,8 +13,8 @@
       "std": 0.0
     },
     "disruptive_actions_per_episode": {
-      "mean": 1.396825396825397,
-      "std": 0.29182184620397206
+      "mean": 1.365079365079365,
+      "std": 0.3166656721152381
     },
     "episodes": {
       "mean": 21.0,
@@ -25,12 +25,12 @@
       "std": 0.2693740118805895
     },
     "mean_return": {
-      "mean": 6.2936507936507935,
-      "std": 1.0669807738573853
+      "mean": 6.234920634920634,
+      "std": 1.0252764192907398
     },
     "return_std": {
-      "mean": 4.653828259757823,
-      "std": 3.3169450407275454
+      "mean": 4.828531548506185,
+      "std": 3.201080992013663
     }
   },
   "limitation": "observations are dataset-backed; action outcomes remain counterfactual",
