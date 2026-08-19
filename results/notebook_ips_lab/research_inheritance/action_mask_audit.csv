@@ -1,0 +1,3 @@
+policy,states,proposed_invalid_rate
+DQN,100,0.35
+Masked PPO,100,0.20999999999999996

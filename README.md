@@ -135,7 +135,7 @@ nested parallelism.
 
 The single end-to-end notebook is
 [`notebooks/06_adaptive_ips_full_project_lab.ipynb`](notebooks/06_adaptive_ips_full_project_lab.ipynb).
-Its 35 numbered sections dynamically inventory the codebase, explain model
+Its 42 numbered sections dynamically inventory the codebase, explain model
 status and metric formulas, display current source implementations, run tests,
 and compare IPS policies. The advanced sections add the timestamped real-data
 adapter, attack-family and action-distribution reports, reward/noise stress

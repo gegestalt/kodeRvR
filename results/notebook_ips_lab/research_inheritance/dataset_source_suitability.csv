@@ -1,0 +1,6 @@
+source,datasets,temporal_value,rare_class_integrity,license/provenance,role
+UNB official CIC catalog,"CICIoT2023, CICIDS2017, CSE-CIC-IDS2018",highest when raw timestamps/days retained,official labels retained,official citation required,PRIMARY EVIDENCE
+Hugging Face CIC-IoT-2023-full,38.5M-row Parquet mirror,random_3way split is not temporal evidence,inspect against official counts,CC BY 4.0 card; verify hashes,DEVELOPMENT MIRROR
+Kaggle CIC-IDS Collection,"CIC17/18, DoS17, DDoS19 harmonized",depends on retained source/day fields,inspect cleanup decisions,CC BY-NC-SA 4.0 derivative,CROSS-DATASET SENSITIVITY
+Kaggle cleaned CICIDS2017,"717MB, 53 columns",preprocessing may erase chronology,Heartbleed/Infiltration removed,derivative notebook/repository,NOT PRIMARY EVIDENCE
+Local official NSL-KDD,"125,973 train / 22,544 test",none—ordered-row proxy only,R2L/U2R retained,verified hashes in SOURCE.md,CURRENT REAL DETECTOR EVIDENCE
