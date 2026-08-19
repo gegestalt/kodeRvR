@@ -214,6 +214,13 @@ An external analyst callable is permitted only as an explanatory component and
 is rejected if it introduces numerical claims absent from its structured
 evidence object.
 
+The detector chapter now uses a published supervised / unsupervised /
+semi-supervised taxonomy as a teaching scaffold and links it to the project's
+actual Random Forest, boosting, Isolation Forest, LOF, K-means-distance and
+self-training experiments. The inheritance boundaries and source critique are
+documented in
+[`docs/research/ml_paradigm_inheritance.md`](docs/research/ml_paradigm_inheritance.md).
+
 To build the parquet file with group-disjoint out-of-fold detector scores, see
 [`docs/datasets/ips_events.md`](docs/datasets/ips_events.md).
 

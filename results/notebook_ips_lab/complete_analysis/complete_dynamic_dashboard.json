@@ -3,13 +3,14 @@
   "models_compared": 4,
   "configurations_tested": 9,
   "best_quality_policy": "DQN",
-  "fastest_policy": "Masked PPO",
+  "fastest_policy": "Constrained PPO",
   "lowest_memory_policy": "LinUCB",
   "best_overall_configuration": "LinUCB",
   "pareto_candidates": [
     "DQN",
     "LinUCB",
-    "Masked PPO"
+    "Masked PPO",
+    "Constrained PPO"
   ],
   "detected_outliers": 3,
   "matched_outlier_explanations": 3,
