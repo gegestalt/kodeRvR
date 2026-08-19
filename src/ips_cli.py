@@ -18,6 +18,7 @@ def main() -> None:
     sub.add_parser("cicapt-benchmark", help="run chronological CICAPT detector benchmark")
     sub.add_parser("cicapt-source-audit", help="statically audit downloaded reference Python files")
     sub.add_parser("cicapt-fusion", help="compare network/provenance/fusion and build tactic beliefs")
+    sub.add_parser("cicapt-data-intelligence", help="build CICAPT health, drift, alignment, OOD and graph diagnostics")
     sub.add_parser("cse-build", help="build chronological CSE detector events")
     sub.add_parser("cse-benchmark", help="run the five-seed CSE policy benchmark")
     sub.add_parser("claim-control", help="build scientific claim-control artifacts")
@@ -48,6 +49,9 @@ def main() -> None:
         print(json.dumps(run(), indent=2))
     elif args.command == "cicapt-fusion":
         from experiments.ips.cicapt.fusion import run
+        print(json.dumps(run(), indent=2))
+    elif args.command == "cicapt-data-intelligence":
+        from experiments.ips.cicapt.data_intelligence import run
         print(json.dumps(run(), indent=2))
     elif args.command == "cse-benchmark":
         from experiments.ips.cse.benchmark import run

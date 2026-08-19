@@ -1,0 +1,7 @@
+tolerance_seconds,campaign_steps,network_matched_steps,provenance_matched_steps,both_matched_steps,neither_matched_steps,labelled_windows,ambiguous_multi_step_windows,development_attack_windows,development_pr_auc
+30,45,45,36,36,0,44,1,18,0.19102538832954055
+60,45,45,39,39,0,91,1,36,0.051326303933114034
+120,45,45,43,43,0,179,3,72,0.11066795913883101
+300,45,45,44,44,0,443,9,180,0.12097535318887587
+600,45,45,45,45,0,883,19,360,0.23425747575633663
+900,45,45,45,45,0,1320,27,543,0.3770833333333333

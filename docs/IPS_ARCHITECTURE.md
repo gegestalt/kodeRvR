@@ -44,6 +44,7 @@ source-identifiability audit.
 .venv/bin/python src/ips_cli.py cicapt-benchmark
 .venv/bin/python src/ips_cli.py cicapt-source-audit
 .venv/bin/python src/ips_cli.py cicapt-fusion
+.venv/bin/python src/ips_cli.py cicapt-data-intelligence
 
 # CSE chronological evidence and policy benchmark
 .venv/bin/python src/ips_cli.py cse-build

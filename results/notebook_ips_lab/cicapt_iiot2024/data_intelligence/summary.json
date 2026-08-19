@@ -1,0 +1,38 @@
+{
+  "dataset_card": {
+    "phase1_network_rows": 12062396,
+    "phase2_network_rows": 9536823,
+    "phase2_benign_rows": 9535819,
+    "phase2_attack_rows": 1004,
+    "attack_prevalence": 0.00010527614909074017,
+    "benign_to_attack_ratio": 9497.827689243028,
+    "campaign_days": 4,
+    "campaign_steps": 58,
+    "tactics": 8,
+    "network_label_techniques": 25,
+    "campaign_technique_names": 27,
+    "rows": 196735,
+    "process_nodes": 24839,
+    "artifact_nodes": 28447,
+    "edges": 143449,
+    "dangling_edges": 0
+  },
+  "reference_benign_rows": 13117,
+  "sampled_visible_benign_rows": 65409,
+  "features_audited": 37,
+  "redundant_pairs": 8,
+  "locked_final_rows_scored": 0,
+  "status": {
+    "file_integrity": "PASS",
+    "schema_consistency": "PASS",
+    "provenance_graph_integrity": "PASS",
+    "timestamp_validity": "PASS",
+    "class_balance": "FAIL",
+    "temporal_stationarity": "FAIL",
+    "closed_set_tactic_coverage": "FAIL",
+    "leakage_controls": "PASS",
+    "final_holdout_untouched": "PASS",
+    "belief_calibration": "FAIL",
+    "policy_training": "BLOCKED"
+  }
+}

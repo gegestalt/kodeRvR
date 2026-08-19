@@ -1,0 +1,9 @@
+feature_a,feature_b,spearman_rho
+flow_duration,flow_active_time,1.0
+Rate,Srate,1.0
+rst_flag_number,fin_count,0.999999995262882
+max_duration,min_duration,0.9998665354083348
+max_duration,average_duration,0.9999719297016414
+min_duration,average_duration,0.9999468603088703
+AVG,Magnitue,0.9996751007643621
+Std,Radius,0.9994099235665883

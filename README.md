@@ -135,7 +135,7 @@ nested parallelism.
 
 The single end-to-end notebook is
 [`notebooks/06_adaptive_ips_full_project_lab.ipynb`](notebooks/06_adaptive_ips_full_project_lab.ipynb).
-Its 69 numbered sections dynamically inventory the codebase, explain model
+Its 79 numbered sections dynamically inventory the codebase, explain model
 status and metric formulas, display current source implementations, run tests,
 and compare IPS policies. The advanced sections add the timestamped real-data
 adapter, attack-family and action-distribution reports, reward/noise stress
@@ -178,6 +178,7 @@ surface instead of remembering individual scripts:
 .venv/bin/python src/ips_cli.py cicapt-benchmark
 .venv/bin/python src/ips_cli.py cicapt-source-audit
 .venv/bin/python src/ips_cli.py cicapt-fusion
+.venv/bin/python src/ips_cli.py cicapt-data-intelligence
 .venv/bin/python src/ips_cli.py cse-build
 .venv/bin/python src/ips_cli.py cse-benchmark
 .venv/bin/python src/ips_cli.py claim-control
@@ -192,11 +193,15 @@ test, and keeps December 4 locked. Dataset-supplied feature-extraction scripts
 are statically audited and used as schema/formula provenance; unsafe shell and
 file-deletion orchestration is not executed by the project.
 
-Sections 61–68 use the locally acquired CICAPT artifacts: they audit and
-stream-profile the full network/provenance sources, preserve the ordered attack
-timeline, compare chronological network-only, provenance-only, and late-fusion
-detectors, and build a calibrated tactic-belief state without exposing hidden
-truth to the policy. December 4 remains an untouched locked holdout.
+Sections 61–78 form the CICAPT Data Intelligence layer. They add an auditable
+dataset card and attrition funnel; feature health, missingness, imbalance,
+tactic/technique coverage, campaign and cross-modal timelines; PSI/KS/JSD/
+Wasserstein drift, attack separation, correlation redundancy, independent
+benign-sampling fidelity, clock-alignment and join-tolerance sensitivity;
+provenance graph dynamics, unit-labelled detector/fusion results, threshold
+curves, explicit UNKNOWN/OOD behavior, attack-only confusion, confidence and
+risk-coverage diagnostics, and an independent policy-readiness gate. December 4
+remains an untouched locked holdout.
 
 Late fusion currently improves development PR-AUC over either individual
 modality, but absolute attack recall and tactic macro-F1 remain weak.

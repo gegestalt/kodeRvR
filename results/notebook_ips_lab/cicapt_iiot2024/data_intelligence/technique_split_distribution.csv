@@ -1,0 +1,26 @@
+attack_tactic,attack_technique,development_test,train,validation,locked_final_holdout,seen_in_train
+collection,add or copy content to clipboard,14,0,0,LOCKED,False
+collection,advanced file search and stager,0,0,42,LOCKED,False
+collection,capture linux desktop,24,0,0,LOCKED,False
+collection,create staging directory,0,4,0,LOCKED,True
+collection,find files,0,46,210,LOCKED,True
+collection,stage sensitive files,0,0,120,LOCKED,False
+command and control,add command,0,0,14,LOCKED,False
+command and control,download sandcat and lazagne,14,0,0,LOCKED,False
+command and control,linux download file and run,0,0,28,LOCKED,False
+credential access,dump credentials from firefox browser,30,0,0,LOCKED,False
+credential access,dump history,14,0,0,LOCKED,False
+credential access,extract password with grep,14,0,0,LOCKED,False
+discovery,check python,14,0,0,LOCKED,False
+discovery,collect arp details,14,0,0,LOCKED,False
+discovery,find local users,14,0,0,LOCKED,False
+discovery,list directory,14,0,0,LOCKED,False
+discovery,list os information,14,0,0,LOCKED,False
+discovery,network interface configuration,14,0,0,LOCKED,False
+discovery,permission groups discovery,14,0,0,LOCKED,False
+discovery,scan wifi networks,26,0,0,LOCKED,False
+discovery,system owner/user discovery,14,0,0,LOCKED,False
+exfiltration,compress staged directory,0,0,28,LOCKED,False
+exfiltration,exfil staged directory,0,0,14,LOCKED,False
+lateral movement,start sandcat,14,0,0,LOCKED,False
+persistence,create a new user in linux,44,0,0,LOCKED,False

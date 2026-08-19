@@ -39,6 +39,7 @@ def build_multimodal_windows(
     aggregations={feature:["mean","std","max"] for feature in network_features}
     net_features=net.groupby("window").agg(aggregations)
     net_features.columns=[f"net_{feature}_{stat}" for feature,stat in net_features.columns]
+    net_features["net_sampled_flow_rows"] = net.groupby("window").size()
     net_truth=net.groupby("window").agg(attack_present=("attack_present","max"),
         attack_tactic=("attack_tactic",lambda values: next((_normalize_tactic(v) for v in values if _normalize_tactic(v)!="normal"),"normal")),
         split_role=("split_role","first"))
