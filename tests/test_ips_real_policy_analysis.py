@@ -4,7 +4,7 @@ from __future__ import annotations
 
 import numpy as np
 
-from ips.real_policy_analysis import (
+from ips.analysis.real_policy import (
     expected_calibration_error,
     fit_probability_calibrator,
     population_stability_index,

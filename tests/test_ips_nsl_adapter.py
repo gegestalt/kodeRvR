@@ -5,7 +5,7 @@ from __future__ import annotations
 import pandas as pd
 
 from data import COLUMN_NAMES
-from ips.nsl_adapter import NslIpsConfig, build_nsl_ips_evidence
+from ips.adapters.nsl_kdd import NslIpsConfig, build_nsl_ips_evidence
 
 
 def _frame(rows: int, prefix: str) -> pd.DataFrame:

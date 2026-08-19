@@ -7,7 +7,7 @@ import pandas as pd
 import pytest
 
 from ips.actions import IpsAction
-from ips.temporal_evidence import (
+from ips.adapters.cse_temporal import (
     TemporalDetectorConfig,
     build_temporal_detector_events,
     log_shadow_decision,
@@ -87,7 +87,7 @@ def test_official_repeated_header_rows_are_removed(tmp_path):
         "14/02/2018 11:00:00,FTP-BruteForce,2\n",
         encoding="utf-8",
     )
-    from ips.temporal_evidence import read_cse_day_sample
+    from ips.adapters.cse_temporal import read_cse_day_sample
 
     sampled = read_cse_day_sample(source, benign_rows=1, attack_rows_per_family=1, chunksize=2)
     assert len(sampled) == 2

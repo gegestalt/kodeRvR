@@ -9,7 +9,7 @@ import pytest
 from ips.actions import IpsAction
 from ips.dataset import IpsEpisode, IpsEvent
 from ips.dataset_environment import DatasetBackedIpsEnv
-from ips.experimental_controls import (  # pyright: ignore[reportMissingImports]
+from ips.analysis.controls import (  # pyright: ignore[reportMissingImports]
     ConstraintBudget,
     InterventionContext,
     abstaining_response,

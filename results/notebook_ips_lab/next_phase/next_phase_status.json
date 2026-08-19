@@ -1,0 +1,8 @@
+{
+  "feb16_role": "DEVELOPMENT_TEST",
+  "locked_holdout": "LOCKED_UNINSPECTED",
+  "policy_evidence": "counterfactual dataset replay",
+  "observed_interventions": 0,
+  "primary_decision": "fix detector evidence before policy optimization",
+  "rl_necessity": "NOT DEMONSTRATED"
+}

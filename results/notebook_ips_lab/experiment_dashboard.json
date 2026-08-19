@@ -3,12 +3,12 @@
   "models_compared":9,
   "configurations_tested":9,
   "best_quality":"DQN-h16-b16 (1.000)",
-  "fastest":"DQN-h64-b64 (0.053s)",
+  "fastest":"DQN-h16-b64 (0.051s)",
   "lowest_memory":"DQN-h16-b16 (0.005 MB)",
   "best_overall":"DQN-h16-b64",
-  "detected_outliers":3,
+  "detected_outliers":2,
   "most_influential_parameter":"hidden_dim",
   "interaction_coverage":"9\/9",
-  "pareto_candidates":"DQN-h16-b64, DQN-h64-b64",
+  "pareto_candidates":"DQN-h16-b64",
   "recommended_next_experiment":"Model-family gap: benchmark a contextual bandit and masked PPO only after the DQN reward-sensitivity check."
 }

@@ -5,7 +5,7 @@ from __future__ import annotations
 import numpy as np
 import pandas as pd
 
-from ips.experiment_diagnostics import (
+from ips.analysis.diagnostics import (
     expected_vs_observed,
     matched_outlier_diagnostics,
     parameter_importance,

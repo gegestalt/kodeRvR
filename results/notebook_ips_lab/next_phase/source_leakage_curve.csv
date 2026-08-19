@@ -1,0 +1,14 @@
+representation,view,feature,n_features,balanced_accuracy
+policy_belief,all,all,6,0.9996
+policy_belief,leave_one_feature_out,estimated_stage,5,0.9998
+policy_belief,leave_one_feature_out,threat_probability,5,0.9996
+policy_belief,leave_one_feature_out,estimated_compromise,5,0.9996
+policy_belief,leave_one_feature_out,recent_score_rate,5,0.9996
+policy_belief,leave_one_feature_out,critical_service,5,0.9996
+policy_belief,leave_one_feature_out,anomaly_score,5,0.9982
+policy_belief,single_feature,threat_probability,1,0.9581999999999999
+policy_belief,single_feature,recent_score_rate,1,0.9581999999999999
+policy_belief,single_feature,estimated_compromise,1,0.9268
+policy_belief,single_feature,estimated_stage,1,0.9168000000000001
+policy_belief,single_feature,anomaly_score,1,0.8577999999999999
+policy_belief,single_feature,critical_service,1,0.7384

@@ -7,6 +7,9 @@ data/**/*.txt
 data/**/*.csv
 data/**/*.parquet
 !data/**/SOURCE.md
+# Browser downloads may initially land here; never stage multi-GB raw CICAPT data.
+CICAPT-IIoT2024/
+data/cicapt_iiot2024/raw/
 
 # --- virtualenv ---
 .venv/

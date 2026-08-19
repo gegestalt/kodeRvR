@@ -30,7 +30,7 @@ Example `data/ips_events/source_config.json`:
 Or run directly:
 
 ```bash
-.venv/bin/python -m ips.real_data_adapter \
+.venv/bin/python -m ips.adapters.real_events \
   data/cse_cic_ids2018/Wednesday.csv \
   --timestamp-col Timestamp \
   --label-col Label \

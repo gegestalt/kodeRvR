@@ -2,7 +2,7 @@
 
 import pandas as pd
 
-from ips.experiment_analysis import add_objective_scores, detect_outliers, pareto_mask
+from ips.analysis.experiments import add_objective_scores, detect_outliers, pareto_mask
 
 
 def sample_frame():

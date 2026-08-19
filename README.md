@@ -135,7 +135,7 @@ nested parallelism.
 
 The single end-to-end notebook is
 [`notebooks/06_adaptive_ips_full_project_lab.ipynb`](notebooks/06_adaptive_ips_full_project_lab.ipynb).
-Its 57 numbered sections dynamically inventory the codebase, explain model
+Its 69 numbered sections dynamically inventory the codebase, explain model
 status and metric formulas, display current source implementations, run tests,
 and compare IPS policies. The advanced sections add the timestamped real-data
 adapter, attack-family and action-distribution reports, reward/noise stress
@@ -156,6 +156,55 @@ with intervention blast radius, collateral damage, and operational cost kept
 separate from security benefit. The dashboard labels counterfactual simulator
 evidence separately from observed intervention evidence and leaves causal and
 cyber-range claims blocked until the required logs and infrastructure exist.
+
+Sections 57–60 assign CICAPT-IIoT2024 the sequential APT/POMDP role while
+retaining CSE-CIC-IDS2018 for enterprise temporal detector evidence. The tested
+CICAPT adapter preserves network traffic, provenance graphs, and Caldera attack
+metadata as separate modalities; hashes source artifacts, validates graph
+references, normalizes the hidden campaign timeline, and declares chronological
+campaign/technique-held-out protocols. Official CICAPT acquisition requires the
+UNB download form, so the notebook reports readiness and blocked status rather
+than fabricated model metrics until those files are supplied.
+
+The IPS package structure and dataset responsibilities are documented in
+[`docs/IPS_ARCHITECTURE.md`](docs/IPS_ARCHITECTURE.md). Use the unified command
+surface instead of remembering individual scripts:
+
+```bash
+.venv/bin/python src/ips_cli.py status
+.venv/bin/python src/ips_cli.py cicapt-audit
+.venv/bin/python src/ips_cli.py cicapt-profile
+.venv/bin/python src/ips_cli.py cicapt-build
+.venv/bin/python src/ips_cli.py cicapt-benchmark
+.venv/bin/python src/ips_cli.py cicapt-source-audit
+.venv/bin/python src/ips_cli.py cicapt-fusion
+.venv/bin/python src/ips_cli.py cse-build
+.venv/bin/python src/ips_cli.py cse-benchmark
+.venv/bin/python src/ips_cli.py claim-control
+.venv/bin/python src/ips_cli.py next-phase
+```
+
+The real CICAPT acquisition is now integrated. Phase 1 contains 12,062,396
+benign network rows; phase 2 contains 9,536,823 rows with 1,004 labelled attack
+rows across eight tactics. The attack-preserving chronological benchmark uses
+December 1 for training, December 2 for validation, December 3 as a development
+test, and keeps December 4 locked. Dataset-supplied feature-extraction scripts
+are statically audited and used as schema/formula provenance; unsafe shell and
+file-deletion orchestration is not executed by the project.
+
+Sections 61–68 use the locally acquired CICAPT artifacts: they audit and
+stream-profile the full network/provenance sources, preserve the ordered attack
+timeline, compare chronological network-only, provenance-only, and late-fusion
+detectors, and build a calibrated tactic-belief state without exposing hidden
+truth to the policy. December 4 remains an untouched locked holdout.
+
+Late fusion currently improves development PR-AUC over either individual
+modality, but absolute attack recall and tactic macro-F1 remain weak.
+Calibration improves Brier/ECE while collapsing recall at a naive 0.5
+threshold, and the tactic belief is overconfident on attack windows. The
+notebook therefore blocks RL/policy claims until temporal calibration and
+belief quality pass the declared gates; this is a scientific result, not a
+hidden failure.
 
 ```bash
 # Start Jupyter and open notebook 06

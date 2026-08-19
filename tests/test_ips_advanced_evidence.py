@@ -8,14 +8,14 @@ import pandas as pd
 from ips.actions import IpsAction
 from ips.advanced_policies import PpoConfig, actor_policy, train_bandit, train_ppo
 from ips.dataset import build_episodes
-from ips.evidence_analysis import (
+from ips.analysis.evidence import (
     adversarial_noise_sweep,
     evaluate_detailed,
     profile_policy,
     reward_sensitivity,
 )
-from ips.experiment_analysis import factorial_candidates
-from ips.real_data_adapter import AdapterConfig, build_real_events
+from ips.analysis.experiments import factorial_candidates
+from ips.adapters.real_events import AdapterConfig, build_real_events
 
 
 def raw_frame(groups: int = 6) -> pd.DataFrame:
@@ -120,7 +120,7 @@ def test_resource_profile_reports_latency_and_rss():
 
 
 def test_repeated_resource_profile_reports_variability():
-    from ips.evidence_analysis import profile_policy_trials
+    from ips.analysis.evidence import profile_policy_trials
 
     states = np.zeros((2, 7), dtype=np.float32)
     masks = np.ones((2, 7), dtype=bool)

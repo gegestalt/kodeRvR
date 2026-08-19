@@ -1,0 +1,2 @@
+finding,status,reason,required_fix
+uncontained attacks with zero compromise,ENVIRONMENT CONSEQUENCE GAP,counterfactual episode windows may truncate before delayed compromise,log terminal cause and calibrate transition hazards from observed intervention/cyber-range data
