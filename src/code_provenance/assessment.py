@@ -11,8 +11,7 @@ from __future__ import annotations
 from dataclasses import dataclass, field
 from enum import StrEnum
 from pathlib import Path
-from typing import Iterable
-
+from code_provenance.architecture import analyze_python_architecture
 from code_provenance.repository import working_tree_samples
 from code_provenance.security import scan_code
 
@@ -221,6 +220,14 @@ class PatchHealthAssessor:
         security_refs = tuple(
             f"{path}:{signal.line}:{signal.rule_id}" for path, signal in security_hits
         ) or ("static-scan:no-findings",)
+        architecture = analyze_python_architecture(root)
+        architecture_status = EvidenceStatus(architecture.status.value)
+        architecture_refs = tuple(
+            f"{signal.path}:{signal.rule_id}" for signal in architecture.signals
+        ) or (
+            f"architecture:{architecture.modules_analyzed}-modules:"
+            f"{architecture.dependency_edges}-edges:no-cycles",
+        )
 
         intent_status = EvidenceStatus.PASS if intent and intent.strip() else EvidenceStatus.UNKNOWN
         test_status = (
@@ -272,11 +279,15 @@ class PatchHealthAssessor:
             ),
             EvidenceFinding(
                 TrustDimension.ARCHITECTURAL_COMPATIBILITY,
-                EvidenceStatus.UNKNOWN,
-                0.0,
-                "medium",
-                "Architecture compatibility analyzer is not yet configured.",
-                ("architecture:missing",),
+                architecture_status,
+                architecture.confidence,
+                "high" if architecture_status is EvidenceStatus.FAIL
+                else "medium" if architecture_status is EvidenceStatus.UNKNOWN
+                else "info",
+                f"Dependency analysis inspected {architecture.modules_analyzed} module(s), "
+                f"{architecture.dependency_edges} edge(s), and found "
+                f"{len(architecture.cycles)} cycle(s).",
+                architecture_refs,
             ),
             EvidenceFinding(
                 TrustDimension.SECURITY_RISK,

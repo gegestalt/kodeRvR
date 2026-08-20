@@ -48,6 +48,7 @@ near-duplicate clusters must remain disjoint across splits.
 | Component | Purpose |
 |---|---|
 | `assessment.py` | Deep patch-level health assessment and explainable review routing |
+| `architecture.py` | Conservative Python dependency-cycle and parse-integrity evidence |
 | `repository.py` | Read-only tracked-file and commit extraction |
 | `features.py` | Interpretable lexical, AST and Git features |
 | `reuse.py` | Local token-shingle public-reuse index |

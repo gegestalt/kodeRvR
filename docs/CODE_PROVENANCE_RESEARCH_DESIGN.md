@@ -28,6 +28,12 @@ whether a patch is safe.
 engine. An adaptive model must improve risk-adjusted reviewer utility while
 respecting hard safety and abstention constraints.
 
+Architecture evidence initially covers local Python dependency cycles and parse
+integrity. These are traceable facts, not a claim that an acyclic repository has
+good design. Test-only source is excluded from the production dependency graph,
+and both absolute and relative imports are resolved without importing or
+executing repository code.
+
 ## Labels and admissible evidence
 
 Primary labels are `human`, `ai`, `hybrid`, and `unknown`. Training labels must
