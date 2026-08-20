@@ -91,7 +91,7 @@ def test_pytest_producer_records_observed_snapshot_bound_results(tmp_path: Path)
     assert evidence.passed == 1
     assert evidence.failed == 0
     assert evidence.exit_code == 0
-    assert len(evidence.output_hash) == 64
+    assert len(evidence.report_hash) == 64
     assert evidence.repository_changed is False
 
 
@@ -134,8 +134,13 @@ def test_zero_collected_tests_cannot_pass_functional_gate():
     root = Path(__file__).resolve().parents[1]
     snapshot = capture_code_snapshot(root)
     evidence = PytestEvidence(
-        snapshot.snapshot_id, snapshot.head_sha, ("pytest",), "pytest", "fixture",
-        0, 0, 0, 0, 0, 0.1, 0, "d" * 64, True, False, AttestationLevel.OBSERVED,
+        snapshot_id=snapshot.snapshot_id, target_sha=snapshot.head_sha,
+        command=("pytest",), framework="pytest", framework_version="fixture",
+        discovered=0, selected=0, deselected=0, passed=0, failed=0, errors=0,
+        skipped=0, xfailed=0, xpassed=0, collection_errors=0,
+        interrupted=False, duration_seconds=0.1, exit_code=0,
+        report_hash="d" * 64, complete=True, repository_changed=False,
+        attestation=AttestationLevel.OBSERVED,
     )
 
     result = PatchHealthAssessor().assess_repository(root, test_evidence=evidence)
