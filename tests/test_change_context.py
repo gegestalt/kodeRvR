@@ -97,3 +97,6 @@ def test_repository_report_exposes_typed_change_context(tmp_path: Path):
     assert report["feature_space"]["model_feature_count"] >= 50
     assert report["feature_space"]["change"]["change_files"] == 1
     assert report["feature_space"]["repository"]["repository_files"] == 1
+    symbols = report["symbol_context"]
+    assert symbols["target"] == context["target"]
+    assert symbols["changes"] == ()
