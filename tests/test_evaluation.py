@@ -8,9 +8,12 @@ import pytest
 from code_provenance.evaluation import (
     audit_near_duplicate_leakage,
     evaluate_predictions,
+    fit_and_evaluate_split_plan,
     validate_group_disjoint,
 )
-from code_provenance.schema import AuthorshipLabel, CodeSample, EvidenceSource
+from code_provenance.dataset import SplitPlan, build_split_plan
+from code_provenance.model import ModelConfig
+from code_provenance.schema import AuthorshipLabel, CodeSample, DatasetRole, EvidenceSource
 
 
 def samples() -> list[CodeSample]:
@@ -61,3 +64,40 @@ def test_near_duplicate_audit_identifies_cross_group_overlap():
 def test_group_disjoint_validation_rejects_leakage():
     with pytest.raises(ValueError, match="group leakage"):
         validate_group_disjoint(samples()[:2], samples()[:1])
+
+
+def test_fit_and_evaluate_requires_audited_split_plan():
+    fixture = samples()
+    plan = SplitPlan(tuple(fixture[:1]), tuple(fixture[1:2]), tuple(fixture[2:]), {
+        "duplicate_cluster_count": 4,
+        "disjoint_dimensions": ("repository_id",),
+    })
+    with pytest.raises(ValueError, match="split audit"):
+        fit_and_evaluate_split_plan(plan, config=ModelConfig(folds=2, trees=5))
+
+
+def test_fit_and_evaluate_split_plan_produces_audited_metrics():
+    records = []
+    labels = (AuthorshipLabel.HUMAN, AuthorshipLabel.AI, AuthorshipLabel.HYBRID)
+    for language in ("go", "python", "rust"):
+        for index in range(12):
+            records.append(CodeSample(
+                sample_id=f"{language}-{index}", repository_id=f"repo-{language}-{index}",
+                group_id=f"group-{language}-{index}", author_group_id=f"author-{language}-{index}",
+                language=language,
+                code=f"def {language}_{index}(value): return value + {index} unique_{language}_{index}",
+                label=labels[index % len(labels)], label_source=EvidenceSource.CONTROLLED_GENERATION,
+                generator_family=f"generator-{language}-{index}", dataset_id=f"dataset-{language}-{index}",
+                dataset_role=DatasetRole.TRAIN,
+            ))
+    report = fit_and_evaluate_split_plan(
+        build_split_plan(records, seed=11),
+        config=ModelConfig(folds=3, trees=10, confidence_threshold=0.0, ood_threshold=1.0),
+    )
+
+    assert report["sample_count"] == 12
+    assert report["split_audit"]["duplicate_cluster_count"] == 36
+    assert report["train_sample_ids"]
+    assert report["test_sample_ids"]
+    assert len(report["per_language"]) == 1
+    assert set(report["per_language"]) <= {"go", "python", "rust"}

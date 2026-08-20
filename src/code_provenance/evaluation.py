@@ -17,6 +17,8 @@ from sklearn.metrics import (
 
 from code_provenance.reuse import token_shingles
 from code_provenance.schema import AuthorshipLabel, CodeSample
+from code_provenance.dataset import SplitPlan
+from code_provenance.model import ModelConfig, ProvenanceClassifier
 
 
 def validate_group_disjoint(train: Sequence[CodeSample], test: Sequence[CodeSample]) -> None:
@@ -111,4 +113,42 @@ def evaluate_predictions(
         report["ood_auroc"] = float(roc_auc_score(ood_truth, ood_scores)) if len(set(ood_truth)) == 2 else None
     else:
         report["ood_auroc"] = None
+    return report
+
+
+def fit_and_evaluate_split_plan(
+    plan: SplitPlan,
+    *,
+    config: ModelConfig | None = None,
+    public_reuse_fractions: Sequence[float] = (),
+) -> dict[str, object]:
+    """Fit only on an audited train partition and evaluate only on its test partition."""
+    required = {"repository_id", "author_group_id", "dataset_id", "generator_family", "language", "near_duplicate_cluster"}
+    audited = set(plan.audit.get("disjoint_dimensions", ()))
+    if plan.audit.get("duplicate_cluster_count") is None or not required <= audited:
+        raise ValueError("split audit is incomplete; refusing model evaluation")
+    validate_group_disjoint(plan.train, plan.test)
+    classifier = ProvenanceClassifier(config)
+    fit_metrics = classifier.fit(list(plan.train))
+    if classifier.classes_ is None:
+        raise RuntimeError("classifier did not expose fitted classes")
+    class_names = tuple(str(item) for item in classifier.classes_)
+    estimates = [classifier.predict(sample) for sample in plan.test]
+    probabilities = np.asarray([
+        [estimate.probabilities.get(name, 0.0) for name in class_names]
+        for estimate in estimates
+    ])
+    report = evaluate_predictions(
+        plan.test,
+        predicted_labels=tuple(estimate.predicted_label for estimate in estimates),
+        probabilities=probabilities,
+        class_names=class_names,
+        abstained=tuple(estimate.abstained for estimate in estimates),
+        ood_scores=tuple(estimate.ood_score for estimate in estimates),
+        public_reuse_fractions=public_reuse_fractions,
+    )
+    report["fit_metrics"] = fit_metrics
+    report["split_audit"] = plan.audit
+    report["train_sample_ids"] = [item.sample_id for item in plan.train]
+    report["test_sample_ids"] = [item.sample_id for item in plan.test]
     return report
