@@ -50,6 +50,7 @@ near-duplicate clusters must remain disjoint across splits.
 | `assessment.py` | Deep patch-level health assessment and explainable review routing |
 | `architecture.py` | Conservative Python dependency-cycle and parse-integrity evidence |
 | `efficiency.py` | Repeated baseline-versus-candidate runtime, RSS, and throughput evidence |
+| `evidence_quality.py` | Named OOD detector, context coverage, schema, and integrity gate |
 | `repository.py` | Read-only tracked-file and commit extraction |
 | `features.py` | Interpretable lexical, AST and Git features |
 | `reuse.py` | Local token-shingle public-reuse index |
@@ -70,7 +71,8 @@ python src/provenance_cli.py scan /path/to/repository
 python src/provenance_cli.py scan . \
   --intent "Implement dependency-aware patch health review" \
   --tests-passed \
-  --efficiency-evidence examples/efficiency_evidence.json
+  --efficiency-evidence examples/efficiency_evidence.json \
+  --evidence-quality examples/evidence_quality.json
 pytest
 jupyter lab notebooks/07_ai_code_provenance_security_lab.ipynb
 ```

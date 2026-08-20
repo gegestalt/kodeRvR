@@ -40,6 +40,11 @@ versionable JSON artifact rather than executing untrusted code. Fewer than three
 repeats, missing comparable metrics, or invalid measurements produce `unknown`
 instead of false precision.
 
+OOD status is accepted only from a named detector artifact that also declares
+repository-context coverage, schema support, and evidence integrity. High OOD
+blocks automation. Unsupported, partial, or unverifiable evidence produces
+`unknown`; absence of an OOD artifact never implies in-distribution input.
+
 ## Labels and admissible evidence
 
 Primary labels are `human`, `ai`, `hybrid`, and `unknown`. Training labels must

@@ -1,0 +1,7 @@
+{
+  "detector_id": "code-embedding-ood:v1",
+  "ood_score": 0.2,
+  "context_coverage": 0.95,
+  "schema_supported": true,
+  "integrity_verified": true
+}

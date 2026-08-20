@@ -13,6 +13,7 @@ from enum import StrEnum
 from pathlib import Path
 from code_provenance.architecture import analyze_python_architecture
 from code_provenance.efficiency import EfficiencyMeasurement, compare_efficiency
+from code_provenance.evidence_quality import EvidenceQualityInput, evaluate_evidence_quality
 from code_provenance.repository import working_tree_samples
 from code_provenance.security import scan_code
 
@@ -195,6 +196,7 @@ class PatchHealthAssessor:
         tests_passed: bool | None = None,
         efficiency_baseline: EfficiencyMeasurement | None = None,
         efficiency_candidate: EfficiencyMeasurement | None = None,
+        evidence_quality: EvidenceQualityInput | None = None,
     ) -> PatchHealthAssessment:
         """Assess a working tree without executing repository code or inferring authorship."""
         root = root.resolve()
@@ -247,6 +249,8 @@ class PatchHealthAssessor:
             ) or ("efficiency:no-comparable-metrics",)
             if efficiency is not None else ("efficiency:missing",)
         )
+        quality = evaluate_evidence_quality(evidence_quality) if evidence_quality is not None else None
+        quality_status = EvidenceStatus(quality.status.value) if quality is not None else EvidenceStatus.UNKNOWN
 
         intent_status = EvidenceStatus.PASS if intent and intent.strip() else EvidenceStatus.UNKNOWN
         test_status = (
@@ -332,6 +336,25 @@ class PatchHealthAssessor:
                     else "Efficiency measurements were missing or statistically insufficient."
                 ),
                 efficiency_refs,
+            ),
+            EvidenceFinding(
+                TrustDimension.OOD_EVIDENCE_QUALITY,
+                quality_status,
+                quality.confidence if quality is not None else 0.0,
+                "high" if quality_status is EvidenceStatus.FAIL
+                else "medium" if quality_status is EvidenceStatus.UNKNOWN
+                else "info",
+                (
+                    f"Detector {quality.detector_id} reported OOD={quality.ood_score:.3f} "
+                    f"with context coverage={quality.context_coverage:.3f}."
+                    if quality is not None
+                    else "No named OOD and evidence-integrity artifact was supplied."
+                ),
+                (
+                    (f"ood:{quality.detector_id}:{quality.ood_score:.4f}",)
+                    if quality is not None else ("ood:missing",)
+                ),
+                quality.tags if quality is not None else frozenset(),
             ),
         )
         return self.assess(AssessmentRequest(

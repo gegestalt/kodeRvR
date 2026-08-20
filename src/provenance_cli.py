@@ -7,6 +7,7 @@ import json
 from pathlib import Path
 
 from code_provenance.efficiency import load_efficiency_evidence
+from code_provenance.evidence_quality import load_evidence_quality
 from code_provenance.report import descriptive_repository_report
 
 
@@ -24,12 +25,21 @@ def main() -> None:
         type=Path,
         help="JSON file containing repeated baseline and candidate resource measurements",
     )
+    scan.add_argument(
+        "--evidence-quality",
+        type=Path,
+        help="JSON artifact from a named OOD detector with context and integrity evidence",
+    )
     args = parser.parse_args()
     if args.command == "scan":
         tests_passed = True if args.tests_passed else False if args.tests_failed else None
         efficiency = (
             load_efficiency_evidence(args.efficiency_evidence)
             if args.efficiency_evidence else (None, None)
+        )
+        evidence_quality = (
+            load_evidence_quality(args.evidence_quality)
+            if args.evidence_quality else None
         )
         print(json.dumps(
             descriptive_repository_report(
@@ -38,6 +48,7 @@ def main() -> None:
                 tests_passed=tests_passed,
                 efficiency_baseline=efficiency[0],
                 efficiency_candidate=efficiency[1],
+                evidence_quality=evidence_quality,
             ),
             indent=2,
             sort_keys=True,
