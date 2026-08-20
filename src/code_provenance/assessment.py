@@ -17,6 +17,8 @@ from code_provenance.evidence import EvidenceLedger
 from code_provenance.evidence_quality import EvidenceQualityInput, evaluate_evidence_quality
 from code_provenance.repository import working_tree_samples
 from code_provenance.security import scan_code
+from code_provenance.snapshot import capture_code_snapshot
+from code_provenance.test_evidence import TestEvidence
 
 
 class TrustDimension(StrEnum):
@@ -123,8 +125,8 @@ class PatchHealthAssessment:
 
 
 _DEPENDENCY_ORDER = (
-    TrustDimension.EVIDENCE_SUFFICIENCY,
     TrustDimension.EVIDENCE_INTEGRITY,
+    TrustDimension.EVIDENCE_SUFFICIENCY,
     TrustDimension.PROVENANCE,
     TrustDimension.INTENT_ALIGNMENT,
     TrustDimension.FUNCTIONAL_EVIDENCE,
@@ -163,6 +165,10 @@ class PatchHealthAssessor:
             and (
                 dimension not in by_dimension
                 or by_dimension[dimension].status is EvidenceStatus.UNKNOWN
+                or (
+                    dimension is TrustDimension.FUNCTIONAL_EVIDENCE
+                    and "TEST_RESULT_UNVERIFIED" in by_dimension[dimension].tags
+                )
             )
         )
         if TrustDimension.FUNCTIONAL_EVIDENCE.value in missing:
@@ -202,9 +208,11 @@ class PatchHealthAssessor:
         efficiency_candidate: EfficiencyMeasurement | None = None,
         evidence_quality: EvidenceQualityInput | None = None,
         evidence_ledger: EvidenceLedger | None = None,
+        test_evidence: TestEvidence | None = None,
     ) -> PatchHealthAssessment:
         """Assess a working tree without executing repository code or inferring authorship."""
         root = root.resolve()
+        snapshot = capture_code_snapshot(root)
         samples = working_tree_samples(root)
         security_hits = [
             (sample.path, signal)
@@ -257,14 +265,65 @@ class PatchHealthAssessor:
         quality = evaluate_evidence_quality(evidence_quality) if evidence_quality is not None else None
         quality_status = EvidenceStatus(quality.status.value) if quality is not None else EvidenceStatus.UNKNOWN
         integrity = evidence_ledger.audit_integrity() if evidence_ledger is not None else None
+        ledger_snapshot_mismatch = (
+            evidence_ledger is not None
+            and evidence_ledger.target_commit not in {snapshot.snapshot_id, snapshot.head_sha}
+        )
         integrity_status = EvidenceStatus(integrity.status.value) if integrity is not None else EvidenceStatus.UNKNOWN
+        if ledger_snapshot_mismatch:
+            integrity_status = EvidenceStatus.FAIL
 
         intent_status = EvidenceStatus.PASS if intent and intent.strip() else EvidenceStatus.UNKNOWN
-        test_status = (
-            EvidenceStatus.PASS if tests_passed is True
-            else EvidenceStatus.FAIL if tests_passed is False
-            else EvidenceStatus.UNKNOWN
+        test_snapshot_matches = (
+            test_evidence is not None
+            and test_evidence.snapshot_id == snapshot.snapshot_id
+            and test_evidence.target_sha == snapshot.head_sha
         )
+        if test_evidence is not None and not test_snapshot_matches:
+            test_status, test_confidence = EvidenceStatus.FAIL, 1.0
+            test_summary = "Observed test artifact does not match the assessed code snapshot."
+            test_refs = (f"tests:snapshot-mismatch:{test_evidence.snapshot_id}",)
+            test_tags = frozenset({"TEST_SNAPSHOT_MISMATCH"})
+        elif test_evidence is not None and not test_evidence.complete:
+            test_status, test_confidence = EvidenceStatus.UNKNOWN, 0.0
+            test_summary = "Observed pytest execution was incomplete."
+            test_refs = (f"tests:{test_evidence.output_hash}:incomplete",)
+            test_tags = frozenset({"TEST_RUN_INCOMPLETE"})
+        elif test_evidence is not None and test_evidence.tests_collected == 0:
+            test_status, test_confidence = EvidenceStatus.UNKNOWN, 0.0
+            test_summary = "Observed pytest execution collected no tests."
+            test_refs = (f"tests:{test_evidence.output_hash}:empty",)
+            test_tags = frozenset({"TEST_SUITE_EMPTY"})
+        elif test_evidence is not None and test_evidence.exit_code == 0 and test_evidence.failed == 0 and test_evidence.errors == 0:
+            test_status, test_confidence = EvidenceStatus.PASS, 0.9
+            test_summary = (
+                f"Observed pytest {test_evidence.framework_version}: {test_evidence.passed} passed, "
+                f"{test_evidence.failed} failed in {test_evidence.duration_seconds:.3f}s."
+            )
+            test_refs = (f"tests:{test_evidence.output_hash}:observed",)
+            test_tags = frozenset({"TEST_EVIDENCE_OBSERVED"})
+        elif test_evidence is not None:
+            test_status, test_confidence = EvidenceStatus.FAIL, 0.9
+            test_summary = (
+                f"Observed pytest failed: {test_evidence.failed} failed, "
+                f"{test_evidence.errors} errors, exit {test_evidence.exit_code}."
+            )
+            test_refs = (f"tests:{test_evidence.output_hash}:failed",)
+            test_tags = frozenset({"TEST_EVIDENCE_OBSERVED"})
+        elif tests_passed is not None:
+            test_status, test_confidence = EvidenceStatus.WARN, 0.35
+            test_summary = (
+                "Test success was asserted by the caller without a snapshot-bound artifact."
+                if tests_passed else
+                "Test failure was asserted by the caller without a snapshot-bound artifact."
+            )
+            test_refs = ("tests:caller-asserted",)
+            test_tags = frozenset({"TEST_RESULT_UNVERIFIED"})
+        else:
+            test_status, test_confidence = EvidenceStatus.UNKNOWN, 0.0
+            test_summary = "No test execution evidence was supplied."
+            test_refs = ("tests:missing",)
+            test_tags = frozenset({"TEST_EVIDENCE_MISSING"})
         findings = (
             EvidenceFinding(
                 TrustDimension.EVIDENCE_SUFFICIENCY,
@@ -283,12 +342,16 @@ class PatchHealthAssessor:
                 else "medium" if integrity_status is EvidenceStatus.UNKNOWN
                 else "info",
                 (
-                    f"Ledger integrity audit found {len(integrity.failed_artifacts)} failed artifact(s)."
+                    "Evidence ledger targets a different code snapshot."
+                    if ledger_snapshot_mismatch
+                    else f"Ledger integrity audit found {len(integrity.failed_artifacts)} failed artifact(s)."
                     if integrity is not None
                     else "No commit-bound evidence ledger was supplied."
                 ),
                 (
-                    tuple(f"artifact:{item}" for item in integrity.failed_artifacts)
+                    (f"ledger:snapshot-mismatch:{evidence_ledger.target_commit}",)
+                    if ledger_snapshot_mismatch
+                    else tuple(f"artifact:{item}" for item in integrity.failed_artifacts)
                     or (f"ledger:{evidence_ledger.target_commit}:verified",)
                     if integrity is not None
                     else ("ledger:missing",)
@@ -317,15 +380,13 @@ class PatchHealthAssessor:
             EvidenceFinding(
                 TrustDimension.FUNCTIONAL_EVIDENCE,
                 test_status,
-                1.0 if tests_passed is not None else 0.0,
-                "info" if test_status is EvidenceStatus.PASS else "high" if test_status is EvidenceStatus.FAIL else "medium",
-                "Reported test suite passed." if test_status is EvidenceStatus.PASS
-                else "Reported test suite failed." if test_status is EvidenceStatus.FAIL
-                else "No test execution evidence was supplied.",
-                ("tests:passed",) if test_status is EvidenceStatus.PASS
-                else ("tests:failed",) if test_status is EvidenceStatus.FAIL
-                else ("tests:missing",),
-                frozenset({"TEST_EVIDENCE_PRESENT"}) if tests_passed is not None else frozenset({"TEST_EVIDENCE_MISSING"}),
+                test_confidence,
+                "info" if test_status is EvidenceStatus.PASS
+                else "high" if test_status is EvidenceStatus.FAIL
+                else "medium",
+                test_summary,
+                test_refs,
+                test_tags,
             ),
             EvidenceFinding(
                 TrustDimension.ARCHITECTURAL_COMPATIBILITY,
@@ -402,7 +463,7 @@ class PatchHealthAssessor:
             return (
                 ReviewAction.BLOCK_PENDING_EVIDENCE,
                 "Evidence integrity failure prevents trustworthy automation.",
-                (TrustDimension.EVIDENCE_SUFFICIENCY, TrustDimension.EVIDENCE_INTEGRITY),
+                (TrustDimension.EVIDENCE_INTEGRITY, TrustDimension.EVIDENCE_SUFFICIENCY),
             )
 
         ood = findings.get(TrustDimension.OOD_EVIDENCE_QUALITY)

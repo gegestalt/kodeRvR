@@ -18,6 +18,13 @@ class VerificationStatus(StrEnum):
     UNVERIFIABLE = "unverifiable"
 
 
+class AttestationLevel(StrEnum):
+    ASSERTED = "asserted"
+    OBSERVED = "observed"
+    VERIFIED = "verified"
+    DEMONSTRATION = "demonstration"
+
+
 class IntegrityStatus(StrEnum):
     PASS = "pass"
     FAIL = "fail"

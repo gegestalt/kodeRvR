@@ -71,7 +71,7 @@ pip install -r requirements.txt
 python src/provenance_cli.py scan /path/to/repository
 python src/provenance_cli.py scan . \
   --intent "Implement dependency-aware patch health review" \
-  --tests-passed \
+  --run-tests \
   --efficiency-evidence examples/efficiency_evidence.json \
   --evidence-quality examples/evidence_quality.json \
   --evidence-ledger examples/evidence_ledger.json
@@ -88,6 +88,13 @@ It evaluates dependent evidence and returns an explainable review action.
 Unknown provenance does not escalate an otherwise healthy patch. Missing intent,
 tests, architecture, efficiency, repository context, or OOD evidence lowers
 confidence and remains visible in the decision path.
+
+`--run-tests` captures a deterministic identity for the current Git commit and
+working-tree content before invoking pytest. The report records the command,
+pytest version, counts, duration, exit code, output hash, snapshot identity, and
+an `observed` attestation. The compatibility flags `--tests-passed` and
+`--tests-failed` are only caller assertions: they are reported as unverified and
+cannot satisfy the mandatory functional-evidence gate.
 
 ## Engineering contract
 

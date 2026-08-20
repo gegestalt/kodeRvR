@@ -6,12 +6,15 @@ from datetime import UTC, datetime
 from code_provenance.assessment import EvidenceStatus, PatchHealthAssessor, ReviewAction, TrustDimension
 from code_provenance.efficiency import EfficiencyMeasurement
 from code_provenance.evidence import EvidenceArtifact, EvidenceLedger
+from code_provenance.evidence import AttestationLevel
 from code_provenance.evidence_quality import (
     EvidenceQualityInput,
     EvidenceQualityStatus,
     evaluate_evidence_quality,
     load_evidence_quality,
 )
+from code_provenance.snapshot import capture_code_snapshot
+from code_provenance.test_evidence import TestEvidence as PytestEvidence
 
 
 def quality(ood_score: float) -> EvidenceQualityInput:
@@ -68,14 +71,14 @@ def test_quality_json_contract_is_reproducible(tmp_path: Path):
     assert loaded == EvidenceQualityInput("detector:v1", 0.2, 0.9, True)
 
 
-def verified_ledger() -> EvidenceLedger:
-    ledger = EvidenceLedger(target_commit="working-tree")
+def verified_ledger(target_commit: str) -> EvidenceLedger:
+    ledger = EvidenceLedger(target_commit=target_commit)
     ledger.add_artifact(EvidenceArtifact(
         artifact_id="ci:test",
         kind="test_report",
         producer="ci",
         producer_version="1.0",
-        target_commit="working-tree",
+        target_commit=target_commit,
         content_hash="b" * 64,
         integrity_verified=True,
         created_at=datetime(2026, 8, 20, tzinfo=UTC),
@@ -83,15 +86,36 @@ def verified_ledger() -> EvidenceLedger:
     return ledger
 
 
+def observed_tests(snapshot_id: str, target_sha: str) -> PytestEvidence:
+    return PytestEvidence(
+        snapshot_id=snapshot_id,
+        target_sha=target_sha,
+        command=("python", "-m", "pytest", "-q"),
+        framework="pytest",
+        framework_version="fixture",
+        tests_collected=1,
+        passed=1,
+        failed=0,
+        skipped=0,
+        errors=0,
+        duration_seconds=0.1,
+        exit_code=0,
+        output_hash="c" * 64,
+        complete=True,
+        attestation=AttestationLevel.OBSERVED,
+    )
+
+
 def test_assessor_blocks_ood_and_accepts_in_distribution_evidence():
     root = Path(__file__).resolve().parents[1]
+    snapshot = capture_code_snapshot(root)
     shared = dict(
         root=root,
         intent="Add explicit OOD evidence quality.",
-        tests_passed=True,
+        test_evidence=observed_tests(snapshot.snapshot_id, snapshot.head_sha),
         efficiency_baseline=efficiency(),
         efficiency_candidate=efficiency(),
-        evidence_ledger=verified_ledger(),
+        evidence_ledger=verified_ledger(snapshot.snapshot_id),
     )
 
     accepted = PatchHealthAssessor().assess_repository(

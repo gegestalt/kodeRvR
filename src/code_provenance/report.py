@@ -13,6 +13,7 @@ from code_provenance.evidence import EvidenceLedger
 from code_provenance.evidence_quality import EvidenceQualityInput
 from code_provenance.features import extract_features
 from code_provenance.repository import recent_commit_metadata, working_tree_samples
+from code_provenance.test_evidence import TestEvidence
 
 
 def descriptive_repository_report(
@@ -24,6 +25,7 @@ def descriptive_repository_report(
     efficiency_candidate: EfficiencyMeasurement | None = None,
     evidence_quality: EvidenceQualityInput | None = None,
     evidence_ledger: EvidenceLedger | None = None,
+    test_evidence: TestEvidence | None = None,
 ) -> dict[str, object]:
     samples = working_tree_samples(root)
     commits = recent_commit_metadata(root)
@@ -36,6 +38,7 @@ def descriptive_repository_report(
         efficiency_candidate=efficiency_candidate,
         evidence_quality=evidence_quality,
         evidence_ledger=evidence_ledger,
+        test_evidence=test_evidence,
     )
     return {
         "repository": str(root.resolve()),
@@ -51,6 +54,14 @@ def descriptive_repository_report(
             evidence_ledger.to_dict()
             if evidence_ledger is not None
             else {"status": "UNAVAILABLE", "reason": "no commit-bound evidence ledger supplied"}
+        ),
+        "test_execution": (
+            {
+                **test_evidence.__dict__,
+                "command": list(test_evidence.command),
+                "attestation": test_evidence.attestation.value,
+            }
+            if test_evidence is not None else None
         ),
         "authorship_estimate": "UNAVAILABLE_UNTIL_A_LABELLED_GROUP_DISJOINT_MODEL_IS_FITTED",
         "claim_boundary": "Git metadata, style, or reuse alone cannot prove human or AI authorship",

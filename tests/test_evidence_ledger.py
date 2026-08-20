@@ -121,8 +121,8 @@ def test_integrity_failure_blocks_patch_assessment():
 
     assert result.action is ReviewAction.BLOCK_PENDING_EVIDENCE
     assert result.decision_path == (
-        TrustDimension.EVIDENCE_SUFFICIENCY,
         TrustDimension.EVIDENCE_INTEGRITY,
+        TrustDimension.EVIDENCE_SUFFICIENCY,
     )
 
 
