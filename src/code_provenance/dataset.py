@@ -57,11 +57,14 @@ def _duplicate_clusters(samples: list[CodeSample], width: int) -> list[tuple[Cod
 
 
 def build_split_plan(
-    samples: list[CodeSample], *, seed: int = 42, duplicate_width: int = 7
+    samples: list[CodeSample], *, seed: int = 42, duplicate_width: int = 7,
+    mode: str = "language_holdout",
 ) -> SplitPlan:
     """Build deterministic train/validation/test partitions without known leakage."""
     if duplicate_width < 2:
         raise ValueError("duplicate_width must be at least two")
+    if mode not in {"language_holdout", "language_stratified"}:
+        raise ValueError(f"unsupported language split mode: {mode}")
     if any(item.dataset_role in {DatasetRole.OOD, DatasetRole.STRUCTURAL_ONLY} for item in samples):
         raise ValueError("OOD and structural_only records cannot enter training partitions")
     if any(item.label is AuthorshipLabel.UNKNOWN for item in samples):
@@ -83,7 +86,10 @@ def build_split_plan(
         }
         candidates = []
         for partition_index in range(3):
-            if any(language_owners.get(language, partition_index) != partition_index for language in cluster_languages):
+            if mode == "language_holdout" and any(
+                language_owners.get(language, partition_index) != partition_index
+                for language in cluster_languages
+            ):
                 continue
             if used[partition_index] & cluster_keys:
                 continue
@@ -93,8 +99,9 @@ def build_split_plan(
         target = min(candidates, key=lambda index: (len(partitions[index]), index))
         partitions[target].extend(cluster)
         used[target].update(cluster_keys)
-        for language in cluster_languages:
-            language_owners[language] = target
+        if mode == "language_holdout":
+            for language in cluster_languages:
+                language_owners[language] = target
     return SplitPlan(
         tuple(sorted(partitions[0], key=lambda item: item.sample_id)),
         tuple(sorted(partitions[1], key=lambda item: item.sample_id)),
@@ -102,8 +109,10 @@ def build_split_plan(
         {
             "duplicate_cluster_count": len(clusters),
             "duplicate_width": duplicate_width,
+            "language_protocol": mode,
             "language_owners": {language: index for language, index in sorted(language_owners.items())},
-            "disjoint_dimensions": (*dimensions, "language", "near_duplicate_cluster"),
+            "disjoint_dimensions": (*dimensions, "language", "near_duplicate_cluster")
+            if mode == "language_holdout" else (*dimensions, "near_duplicate_cluster"),
             "seed": seed,
         },
     )

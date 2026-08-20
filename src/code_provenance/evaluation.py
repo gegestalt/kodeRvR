@@ -123,8 +123,10 @@ def fit_and_evaluate_split_plan(
     public_reuse_fractions: Sequence[float] = (),
 ) -> dict[str, object]:
     """Fit only on an audited train partition and evaluate only on its test partition."""
-    required = {"repository_id", "author_group_id", "dataset_id", "generator_family", "language", "near_duplicate_cluster"}
+    required = {"repository_id", "author_group_id", "dataset_id", "generator_family", "near_duplicate_cluster"}
     audited = set(plan.audit.get("disjoint_dimensions", ()))
+    if plan.audit.get("language_protocol") not in {"language_holdout", "language_stratified"}:
+        raise ValueError("split audit has no supported language protocol")
     if plan.audit.get("duplicate_cluster_count") is None or not required <= audited:
         raise ValueError("split audit is incomplete; refusing model evaluation")
     validate_group_disjoint(plan.train, plan.test)

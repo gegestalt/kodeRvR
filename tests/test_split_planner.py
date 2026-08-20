@@ -70,3 +70,17 @@ def test_structural_only_and_ood_records_are_rejected():
 def test_language_holdout_requires_three_distinct_language_groups():
     with pytest.raises(ValueError, match="three language groups"):
         build_split_plan(corpus()[:2], seed=1)
+
+
+def test_language_stratified_mode_keeps_each_language_in_each_partition():
+    plan = build_split_plan(corpus(), seed=7, mode="language_stratified")
+
+    for partition in (plan.train, plan.validation, plan.test):
+        assert {item.language for item in partition} == {"go", "python", "rust"}
+    assert plan.audit["language_protocol"] == "language_stratified"
+    assert "language" not in plan.audit["disjoint_dimensions"]
+
+
+def test_unknown_language_split_mode_is_rejected():
+    with pytest.raises(ValueError, match="unsupported language split mode"):
+        build_split_plan(corpus(), mode="random")

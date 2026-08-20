@@ -23,3 +23,9 @@ near-duplicates first and keeps repository, author, dataset, generator, and
 language groups disjoint across train, validation, and test partitions. Its
 audit payload records the duplicate-shingle width, language assignment, and
 disjoint dimensions for reproducibility.
+
+The planner supports two language protocols. `language_holdout` assigns each
+language to one partition and measures unseen-language generalization.
+`language_stratified` allows every language in train, validation, and test so
+per-language comparison is possible. Both protocols retain repository, author,
+dataset, generator, and near-duplicate separation.
