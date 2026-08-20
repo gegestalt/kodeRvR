@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+from dataclasses import asdict
 from collections import Counter
 from pathlib import Path
 
@@ -57,7 +58,7 @@ def descriptive_repository_report(
         ),
         "test_execution": (
             {
-                **test_evidence.__dict__,
+                **asdict(test_evidence),
                 "command": list(test_evidence.command),
                 "attestation": test_evidence.attestation.value,
             }

@@ -10,7 +10,7 @@ from code_provenance.assessment import (
     ReviewAction,
     TrustDimension,
 )
-from code_provenance.evidence import AttestationLevel
+from code_provenance.evidence import AttestationLevel, EvidenceTarget
 from code_provenance.snapshot import capture_code_snapshot
 from code_provenance.test_evidence import run_pytest_evidence
 from code_provenance.test_evidence import TestEvidence as PytestEvidence
@@ -134,11 +134,12 @@ def test_zero_collected_tests_cannot_pass_functional_gate():
     root = Path(__file__).resolve().parents[1]
     snapshot = capture_code_snapshot(root)
     evidence = PytestEvidence(
-        snapshot_id=snapshot.snapshot_id, target_sha=snapshot.head_sha,
+        target=EvidenceTarget(snapshot.repository_id, snapshot.snapshot_id, snapshot.head_sha),
         command=("pytest",), framework="pytest", framework_version="fixture",
-        discovered=0, selected=0, deselected=0, passed=0, failed=0, errors=0,
+        discovered=0, selected=0, deselected=0, passed=0, failed=0, runtime_errors=0,
         skipped=0, xfailed=0, xpassed=0, collection_errors=0,
-        interrupted=False, duration_seconds=0.1, exit_code=0,
+        interrupted=False, timed_out=False, duration_seconds=0.1, exit_code=0,
+        output_hash="e" * 64,
         report_hash="d" * 64, complete=True, repository_changed=False,
         attestation=AttestationLevel.OBSERVED,
     )

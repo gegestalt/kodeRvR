@@ -4,6 +4,7 @@ from pathlib import Path
 import subprocess
 import sys
 
+from code_provenance.assessment import EvidenceStatus, PatchHealthAssessor, ReviewAction, TrustDimension
 from code_provenance.snapshot import capture_code_snapshot
 from code_provenance.test_evidence import run_pytest_evidence
 
@@ -53,10 +54,16 @@ def test_structured_report_preserves_selection_and_outcome_states(tmp_path: Path
 
 
 def test_failure_is_complete_but_not_passing(tmp_path: Path):
-    evidence = run(repo(tmp_path, "def test_no(): assert False\n"))
+    root = repo(tmp_path, "def test_no(): assert False\n")
+    evidence = run(root)
     assert evidence.failed == 1
     assert evidence.exit_code == 1
     assert evidence.complete is True
+    assessment = PatchHealthAssessor().assess_repository(
+        root, intent="Exercise failure routing", test_evidence=evidence
+    )
+    assert assessment.dimension(TrustDimension.FUNCTIONAL_EVIDENCE).status is EvidenceStatus.FAIL
+    assert assessment.action is not ReviewAction.ALLOW_STANDARD_REVIEW
 
 
 def test_collection_error_is_incomplete(tmp_path: Path):
@@ -72,6 +79,20 @@ def test_timeout_is_interrupted_and_incomplete(tmp_path: Path):
     )
     assert evidence.exit_code == 124
     assert evidence.interrupted is True
+    assert evidence.timed_out is True
+    assert evidence.complete is False
+
+
+def test_keyboard_interrupt_is_incomplete(tmp_path: Path):
+    evidence = run(
+        repo(
+            tmp_path,
+            "import os, signal\n"
+            "def test_interrupt(): os.kill(os.getpid(), signal.SIGINT)\n",
+        )
+    )
+    assert evidence.interrupted is True
+    assert evidence.timed_out is False
     assert evidence.complete is False
 
 

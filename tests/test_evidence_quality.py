@@ -96,10 +96,9 @@ def verified_ledger(snapshot) -> EvidenceLedger:
     return ledger
 
 
-def observed_tests(snapshot_id: str, target_sha: str) -> PytestEvidence:
+def observed_tests(snapshot) -> PytestEvidence:
     return PytestEvidence(
-        snapshot_id=snapshot_id,
-        target_sha=target_sha,
+        target=EvidenceTarget(snapshot.repository_id, snapshot.snapshot_id, snapshot.head_sha),
         command=("python", "-m", "pytest", "-q"),
         framework="pytest",
         framework_version="fixture",
@@ -109,13 +108,15 @@ def observed_tests(snapshot_id: str, target_sha: str) -> PytestEvidence:
         passed=1,
         failed=0,
         skipped=0,
-        errors=0,
+        runtime_errors=0,
         xfailed=0,
         xpassed=0,
         collection_errors=0,
         interrupted=False,
+        timed_out=False,
         duration_seconds=0.1,
         exit_code=0,
+        output_hash="b" * 64,
         report_hash="c" * 64,
         complete=True,
         repository_changed=False,
@@ -129,7 +130,7 @@ def test_assessor_blocks_ood_and_accepts_in_distribution_evidence():
     shared = dict(
         root=root,
         intent="Add explicit OOD evidence quality.",
-        test_evidence=observed_tests(snapshot.snapshot_id, snapshot.head_sha),
+        test_evidence=observed_tests(snapshot),
         efficiency_baseline=efficiency(),
         efficiency_candidate=efficiency(),
         evidence_ledger=verified_ledger(snapshot),
