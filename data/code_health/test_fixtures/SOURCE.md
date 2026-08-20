@@ -4,6 +4,7 @@ Run:
 
 ```bash
 PYTHONPATH=src .venv/bin/python scripts/fetch_test_fixtures.py --limit 3
+PYTHONPATH=src .venv/bin/python scripts/fetch_test_fixtures.py --verify-only
 ```
 
 The generated `raw/` directory is local and ignored by Git. Every fetched item
@@ -26,3 +27,14 @@ is hashed and catalogued with an immutable upstream revision.
 DevGPT currently has no machine-readable repository license assertion. Its
 download is retained only in the ignored local cache and categorized as
 metadata-only research input pending license review.
+
+## Test and trust tiers
+
+- `pytest`: deterministic unit and local integration tests; network disabled.
+- `pytest -m evaluation`: reviewed baseline plus a verified cache when present.
+- `pytest -m live_data`: explicit bounded upstream acquisition and verification.
+
+`fetched` does not imply `verified`; `verified` does not imply a known oracle;
+and an oracle fixture is executable only when separately classified as trusted.
+No downloaded repository code is executed in this layer. Expected upstream truth
+and observed analyzer behavior are retained as separate fields.

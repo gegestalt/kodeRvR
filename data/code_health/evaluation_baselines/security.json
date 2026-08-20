@@ -1,0 +1,11 @@
+{
+  "dataset": "codeql-python-tests",
+  "revision": "87c77cc26ccd1d2d9791b8563be6d425ccdf0874",
+  "fixtures": 3,
+  "supported": 3,
+  "detected": 0,
+  "missed": 2,
+  "clean_controls": 1,
+  "true_negatives": 1,
+  "notes": "Measured 2026-08-20. Current CWE-089 misses remain visible; changes require review and never occur automatically."
+}

@@ -9,6 +9,7 @@ data/**/*.parquet
 !data/**/SOURCE.md
 data/code_provenance/corpus/
 data/code_health/test_fixtures/raw/
+.cache/code_health/
 
 # --- virtualenv ---
 .venv/
