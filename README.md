@@ -132,6 +132,7 @@ evidence.
 | Component | Purpose |
 |---|---|
 | `assessment.py` | Dependency-aware assessment and deterministic routing |
+| `change_context.py` | Snapshot-bound changed-file, hunk, intent, and repository context |
 | `snapshot.py` | Deterministic clean/dirty Git code-state identity |
 | `pytest_reporter.py` | Hook-generated authoritative pytest outcome report |
 | `test_evidence.py` | Snapshot-bound structured pytest evidence and artifact producer |
@@ -193,6 +194,16 @@ the report identifies what is missing. A low-confidence
 `allow_standard_review` means no mandatory escalation was found in incomplete
 context; it does not mean bug-free, secure, efficient, or human-authored.
 Confidence represents evidence quality and context completeness.
+
+## Change context
+
+Every report now includes a typed `change_context` describing the exact
+repository snapshot, checked-out HEAD, optional base revision, changed files,
+zero-context hunks, supplied intent, repository metadata, completeness, and
+missing fields. Working-tree scans intentionally report a missing `base_sha`;
+commit-range contexts validate both revisions and require the requested head to
+match the checked-out snapshot. Symbol, ownership, dependency, and relevant-test
+context are deliberately reserved for separate reviewable increments.
 
 ## Security scope
 
@@ -256,8 +267,9 @@ interactive [notebook](notebooks/07_ai_code_provenance_security_lab.ipynb).
    and artifact hashes.
 2. Add adapters for CodeQL, Semgrep, secret scanning, dependency audits, and
    language-native test and coverage reports.
-3. Compare base and candidate snapshots at PR, commit, file, function, and hunk
-   levels while retaining PR/commit as the primary decision unit.
+3. Extend the ChangeContext core with changed-symbol, ownership, dependency,
+   relevant-test, and blast-radius indexes while retaining PR/commit as the
+   primary decision unit.
 4. Add an AI investigator that explains evidence, retrieves context, and
    proposes checks without controlling the safety kernel.
 5. Learn an adaptive policy for analyzer selection, context retrieval,

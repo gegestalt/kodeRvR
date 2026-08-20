@@ -9,6 +9,7 @@ from pathlib import Path
 import numpy as np
 
 from code_provenance.assessment import PatchHealthAssessor
+from code_provenance.change_context import ChangeIntent, build_change_context
 from code_provenance.efficiency import EfficiencyMeasurement
 from code_provenance.evidence import EvidenceLedger
 from code_provenance.evidence_quality import EvidenceQualityInput
@@ -30,6 +31,10 @@ def descriptive_repository_report(
 ) -> dict[str, object]:
     samples = working_tree_samples(root)
     commits = recent_commit_metadata(root)
+    change_context = build_change_context(
+        root,
+        intent=ChangeIntent(intent, "cli") if intent and intent.strip() else None,
+    )
     features = [extract_features(sample) for sample in samples]
     health = PatchHealthAssessor().assess_repository(
         root,
@@ -43,6 +48,10 @@ def descriptive_repository_report(
     )
     return {
         "repository": str(root.resolve()),
+        "change_context": {
+            **asdict(change_context),
+            "missing_context": sorted(change_context.missing_context),
+        },
         "files_analyzed": len(samples),
         "commits_analyzed": len(commits),
         "languages": dict(Counter(sample.language for sample in samples)),
