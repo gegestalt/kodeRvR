@@ -13,6 +13,7 @@ from enum import StrEnum
 from pathlib import Path
 from code_provenance.architecture import analyze_python_architecture
 from code_provenance.efficiency import EfficiencyMeasurement, compare_efficiency
+from code_provenance.evidence import EvidenceLedger
 from code_provenance.evidence_quality import EvidenceQualityInput, evaluate_evidence_quality
 from code_provenance.repository import working_tree_samples
 from code_provenance.security import scan_code
@@ -20,6 +21,7 @@ from code_provenance.security import scan_code
 
 class TrustDimension(StrEnum):
     EVIDENCE_SUFFICIENCY = "evidence_sufficiency"
+    EVIDENCE_INTEGRITY = "evidence_integrity"
     PROVENANCE = "provenance"
     INTENT_ALIGNMENT = "intent_alignment"
     FUNCTIONAL_EVIDENCE = "functional_evidence"
@@ -122,6 +124,7 @@ class PatchHealthAssessment:
 
 _DEPENDENCY_ORDER = (
     TrustDimension.EVIDENCE_SUFFICIENCY,
+    TrustDimension.EVIDENCE_INTEGRITY,
     TrustDimension.PROVENANCE,
     TrustDimension.INTENT_ALIGNMENT,
     TrustDimension.FUNCTIONAL_EVIDENCE,
@@ -133,6 +136,7 @@ _DEPENDENCY_ORDER = (
 
 _ACTION_RELEVANT = frozenset({
     TrustDimension.EVIDENCE_SUFFICIENCY,
+    TrustDimension.EVIDENCE_INTEGRITY,
     TrustDimension.INTENT_ALIGNMENT,
     TrustDimension.FUNCTIONAL_EVIDENCE,
     TrustDimension.ARCHITECTURAL_COMPATIBILITY,
@@ -197,6 +201,7 @@ class PatchHealthAssessor:
         efficiency_baseline: EfficiencyMeasurement | None = None,
         efficiency_candidate: EfficiencyMeasurement | None = None,
         evidence_quality: EvidenceQualityInput | None = None,
+        evidence_ledger: EvidenceLedger | None = None,
     ) -> PatchHealthAssessment:
         """Assess a working tree without executing repository code or inferring authorship."""
         root = root.resolve()
@@ -251,6 +256,8 @@ class PatchHealthAssessor:
         )
         quality = evaluate_evidence_quality(evidence_quality) if evidence_quality is not None else None
         quality_status = EvidenceStatus(quality.status.value) if quality is not None else EvidenceStatus.UNKNOWN
+        integrity = evidence_ledger.audit_integrity() if evidence_ledger is not None else None
+        integrity_status = EvidenceStatus(integrity.status.value) if integrity is not None else EvidenceStatus.UNKNOWN
 
         intent_status = EvidenceStatus.PASS if intent and intent.strip() else EvidenceStatus.UNKNOWN
         test_status = (
@@ -267,6 +274,26 @@ class PatchHealthAssessor:
                 "Working-tree evidence lacks authoritative PR and specification context.",
                 (f"repository:{root}",),
                 frozenset({"REPOSITORY_CONTEXT_PARTIAL"}),
+            ),
+            EvidenceFinding(
+                TrustDimension.EVIDENCE_INTEGRITY,
+                integrity_status,
+                integrity.confidence if integrity is not None else 0.0,
+                "critical" if integrity_status is EvidenceStatus.FAIL
+                else "medium" if integrity_status is EvidenceStatus.UNKNOWN
+                else "info",
+                (
+                    f"Ledger integrity audit found {len(integrity.failed_artifacts)} failed artifact(s)."
+                    if integrity is not None
+                    else "No commit-bound evidence ledger was supplied."
+                ),
+                (
+                    tuple(f"artifact:{item}" for item in integrity.failed_artifacts)
+                    or (f"ledger:{evidence_ledger.target_commit}:verified",)
+                    if integrity is not None
+                    else ("ledger:missing",)
+                ),
+                integrity.tags if integrity is not None else frozenset({"EVIDENCE_INTEGRITY_UNKNOWN"}),
             ),
             EvidenceFinding(
                 TrustDimension.PROVENANCE,
@@ -370,6 +397,14 @@ class PatchHealthAssessor:
         missing: tuple[str, ...],
         tags: set[str],
     ) -> tuple[ReviewAction, str, tuple[TrustDimension, ...]]:
+        integrity = findings.get(TrustDimension.EVIDENCE_INTEGRITY)
+        if integrity and integrity.status is EvidenceStatus.FAIL:
+            return (
+                ReviewAction.BLOCK_PENDING_EVIDENCE,
+                "Evidence integrity failure prevents trustworthy automation.",
+                (TrustDimension.EVIDENCE_SUFFICIENCY, TrustDimension.EVIDENCE_INTEGRITY),
+            )
+
         ood = findings.get(TrustDimension.OOD_EVIDENCE_QUALITY)
         if "OOD_INPUT" in tags or (ood and ood.status is EvidenceStatus.FAIL):
             return (

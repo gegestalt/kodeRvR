@@ -1,9 +1,11 @@
 from __future__ import annotations
 
 from pathlib import Path
+from datetime import UTC, datetime
 
 from code_provenance.assessment import EvidenceStatus, PatchHealthAssessor, ReviewAction, TrustDimension
 from code_provenance.efficiency import EfficiencyMeasurement
+from code_provenance.evidence import EvidenceArtifact, EvidenceLedger
 from code_provenance.evidence_quality import (
     EvidenceQualityInput,
     EvidenceQualityStatus,
@@ -18,7 +20,6 @@ def quality(ood_score: float) -> EvidenceQualityInput:
         ood_score=ood_score,
         context_coverage=0.95,
         schema_supported=True,
-        integrity_verified=True,
     )
 
 
@@ -41,31 +42,45 @@ def test_ood_input_fails_and_carries_abstention_tag():
     assert report.tags == frozenset({"OOD_INPUT"})
 
 
-def test_unsupported_or_unverified_evidence_is_unknown():
+def test_unsupported_evidence_is_unknown():
     report = evaluate_evidence_quality(EvidenceQualityInput(
         detector_id="detector:v1",
         ood_score=0.1,
         context_coverage=0.9,
         schema_supported=False,
-        integrity_verified=False,
     ))
 
     assert report.status is EvidenceQualityStatus.UNKNOWN
     assert report.confidence == 0.0
-    assert report.tags >= {"EVIDENCE_INTEGRITY_UNVERIFIED", "SCHEMA_UNSUPPORTED"}
+    assert report.tags >= {"SCHEMA_UNSUPPORTED"}
 
 
 def test_quality_json_contract_is_reproducible(tmp_path: Path):
     path = tmp_path / "quality.json"
     path.write_text(
         '{"detector_id":"detector:v1","ood_score":0.2,"context_coverage":0.9,'
-        '"schema_supported":true,"integrity_verified":true}',
+        '"schema_supported":true}',
         encoding="utf-8",
     )
 
     loaded = load_evidence_quality(path)
 
-    assert loaded == EvidenceQualityInput("detector:v1", 0.2, 0.9, True, True)
+    assert loaded == EvidenceQualityInput("detector:v1", 0.2, 0.9, True)
+
+
+def verified_ledger() -> EvidenceLedger:
+    ledger = EvidenceLedger(target_commit="working-tree")
+    ledger.add_artifact(EvidenceArtifact(
+        artifact_id="ci:test",
+        kind="test_report",
+        producer="ci",
+        producer_version="1.0",
+        target_commit="working-tree",
+        content_hash="b" * 64,
+        integrity_verified=True,
+        created_at=datetime(2026, 8, 20, tzinfo=UTC),
+    ))
+    return ledger
 
 
 def test_assessor_blocks_ood_and_accepts_in_distribution_evidence():
@@ -76,6 +91,7 @@ def test_assessor_blocks_ood_and_accepts_in_distribution_evidence():
         tests_passed=True,
         efficiency_baseline=efficiency(),
         efficiency_candidate=efficiency(),
+        evidence_ledger=verified_ledger(),
     )
 
     accepted = PatchHealthAssessor().assess_repository(

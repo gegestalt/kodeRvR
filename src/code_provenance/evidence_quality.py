@@ -20,7 +20,6 @@ class EvidenceQualityInput:
     ood_score: float
     context_coverage: float
     schema_supported: bool
-    integrity_verified: bool
 
     def __post_init__(self) -> None:
         if not self.detector_id.strip():
@@ -50,8 +49,6 @@ def evaluate_evidence_quality(
     tags: set[str] = set()
     if not evidence.schema_supported:
         tags.add("SCHEMA_UNSUPPORTED")
-    if not evidence.integrity_verified:
-        tags.add("EVIDENCE_INTEGRITY_UNVERIFIED")
     if evidence.context_coverage < minimum_context_coverage:
         tags.add("REPOSITORY_CONTEXT_PARTIAL")
     if evidence.ood_score >= ood_threshold:
@@ -59,7 +56,6 @@ def evaluate_evidence_quality(
 
     unverifiable = tags & {
         "SCHEMA_UNSUPPORTED",
-        "EVIDENCE_INTEGRITY_UNVERIFIED",
         "REPOSITORY_CONTEXT_PARTIAL",
     }
     if unverifiable:
@@ -86,7 +82,6 @@ def load_evidence_quality(path: Path) -> EvidenceQualityInput:
         "ood_score",
         "context_coverage",
         "schema_supported",
-        "integrity_verified",
     }
     if not isinstance(payload, dict) or set(payload) != required:
         raise ValueError(f"evidence quality needs exactly: {sorted(required)}")

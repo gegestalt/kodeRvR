@@ -7,6 +7,7 @@ import json
 from pathlib import Path
 
 from code_provenance.efficiency import load_efficiency_evidence
+from code_provenance.evidence import load_evidence_ledger
 from code_provenance.evidence_quality import load_evidence_quality
 from code_provenance.report import descriptive_repository_report
 
@@ -30,6 +31,11 @@ def main() -> None:
         type=Path,
         help="JSON artifact from a named OOD detector with context and integrity evidence",
     )
+    scan.add_argument(
+        "--evidence-ledger",
+        type=Path,
+        help="versioned commit-bound artifact and claim ledger",
+    )
     args = parser.parse_args()
     if args.command == "scan":
         tests_passed = True if args.tests_passed else False if args.tests_failed else None
@@ -41,6 +47,10 @@ def main() -> None:
             load_evidence_quality(args.evidence_quality)
             if args.evidence_quality else None
         )
+        evidence_ledger = (
+            load_evidence_ledger(args.evidence_ledger)
+            if args.evidence_ledger else None
+        )
         print(json.dumps(
             descriptive_repository_report(
                 args.repository,
@@ -49,6 +59,7 @@ def main() -> None:
                 efficiency_baseline=efficiency[0],
                 efficiency_candidate=efficiency[1],
                 evidence_quality=evidence_quality,
+                evidence_ledger=evidence_ledger,
             ),
             indent=2,
             sort_keys=True,

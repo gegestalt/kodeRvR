@@ -41,9 +41,16 @@ repeats, missing comparable metrics, or invalid measurements produce `unknown`
 instead of false precision.
 
 OOD status is accepted only from a named detector artifact that also declares
-repository-context coverage, schema support, and evidence integrity. High OOD
-blocks automation. Unsupported, partial, or unverifiable evidence produces
-`unknown`; absence of an OOD artifact never implies in-distribution input.
+repository-context coverage and schema support. High OOD blocks automation.
+Unsupported or partial evidence produces `unknown`; absence of an OOD artifact
+never implies in-distribution input.
+
+Evidence integrity is a separate trust dimension. The versioned Evidence Ledger
+binds artifacts and claims to one target commit, records producer and analyzer
+versions, preserves supporting and counter-evidence references, and recomputes
+integrity instead of trusting serialized audit output. Missing or unverifiable
+integrity evidence cannot be treated as OOD, and an integrity failure blocks
+automation through the deterministic safety floor.
 
 ## Labels and admissible evidence
 

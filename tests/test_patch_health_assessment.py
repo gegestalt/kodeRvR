@@ -36,6 +36,7 @@ def healthy_request() -> AssessmentRequest:
         target_kind="pull_request",
         findings=(
             finding(TrustDimension.EVIDENCE_SUFFICIENCY, EvidenceStatus.PASS),
+            finding(TrustDimension.EVIDENCE_INTEGRITY, EvidenceStatus.PASS),
             finding(TrustDimension.INTENT_ALIGNMENT, EvidenceStatus.PASS),
             finding(TrustDimension.FUNCTIONAL_EVIDENCE, EvidenceStatus.PASS),
             finding(TrustDimension.ARCHITECTURAL_COMPATIBILITY, EvidenceStatus.PASS),
