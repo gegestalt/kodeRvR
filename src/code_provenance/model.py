@@ -163,3 +163,24 @@ class ProvenanceClassifier:
         )
         return ProvenanceEstimate(mapped, "unknown" if abstained else label, float(confidence),
                                   ood_score, abstained, public_reuse_fraction, organic, claim)
+
+    def explain_prediction(self, sample: CodeSample, *, top_k: int = 5) -> list[dict[str, float | str]]:
+        """Return ranked supporting signals; this is not a causal explanation."""
+        if self.model is None:
+            raise RuntimeError("fit the classifier before explanation")
+        if top_k < 1:
+            raise ValueError("top_k must be positive")
+        calibrated = getattr(self.model, "calibrated_classifiers_", ())
+        if not calibrated or not hasattr(calibrated[0], "estimator"):
+            raise RuntimeError("fitted model does not expose feature importance")
+        importance = np.asarray(calibrated[0].estimator.feature_importances_, dtype=float)
+        values = self.matrix([sample]).iloc[0].to_numpy(dtype=float)
+        ranked = sorted(
+            zip(FEATURE_NAMES, values, importance, strict=True),
+            key=lambda item: (-abs(item[2]), item[0]),
+        )[:top_k]
+        return [
+            {"name": name, "value": float(value), "importance": float(weight),
+             "direction": "supporting_signal"}
+            for name, value, weight in ranked
+        ]

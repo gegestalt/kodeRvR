@@ -74,6 +74,10 @@ def test_group_safe_model_returns_calibrated_or_abstained_estimate():
     assert abs(sum(estimate.probabilities.values()) - 1) < 1e-6
     assert estimate.organic_fraction is not None
     assert "proof" in estimate.claim
+    explanation = model.explain_prediction(query, top_k=5)
+    assert len(explanation) == 5
+    assert {item["name"] for item in explanation} <= set(FEATURE_NAMES)
+    assert all("value" in item and "importance" in item for item in explanation)
 
 
 def test_manifest_rejects_heuristic_training_labels(tmp_path: Path):

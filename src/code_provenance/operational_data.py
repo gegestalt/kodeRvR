@@ -67,6 +67,28 @@ class HumanOverride:
 
 
 @dataclass(frozen=True)
+class DecisionExplanation:
+    top_features: tuple[dict[str, object], ...]
+    evidence_used: tuple[str, ...]
+    public_reuse_considered: bool
+    ood_status: str
+    abstention_reason: str | None
+    missing_evidence: tuple[str, ...]
+    reviewer_action: str
+
+    def __post_init__(self) -> None:
+        if not self.evidence_used:
+            raise ValueError("explanations require evidence references")
+        if self.ood_status not in {"in_distribution", "ood", "unknown"}:
+            raise ValueError("unsupported OOD status")
+        if not self.reviewer_action.strip():
+            raise ValueError("reviewer_action is required")
+        for feature in self.top_features:
+            if not str(feature.get("name", "")).strip() or "value" not in feature:
+                raise ValueError("top features require name and value")
+
+
+@dataclass(frozen=True)
 class OperationalRun:
     run_id: str
     target: EvidenceTarget
@@ -79,6 +101,7 @@ class OperationalRun:
     reuse_matches: tuple[ReuseMatch, ...]
     decision: DecisionOutcome
     human_override: HumanOverride | None
+    explanation: DecisionExplanation | None = None
     observed_label: str = "unknown"
     label_source: str = "unlabelled"
 
@@ -120,6 +143,7 @@ class OperationalRun:
                 "decision": self.human_override.decision.value,
                 "created_at": self.human_override.created_at.isoformat(),
             },
+            "explanation": None if self.explanation is None else self.explanation.__dict__,
             "observed_label": self.observed_label,
             "label_source": self.label_source,
         }
@@ -144,6 +168,16 @@ def load_operational_run(path: Path) -> OperationalRun:
         reason=override_payload["reason"],
         created_at=datetime.fromisoformat(override_payload["created_at"]),
     )
+    explanation_payload = payload.get("explanation")
+    explanation = None if explanation_payload is None else DecisionExplanation(
+        top_features=tuple(explanation_payload["top_features"]),
+        evidence_used=tuple(explanation_payload["evidence_used"]),
+        public_reuse_considered=bool(explanation_payload["public_reuse_considered"]),
+        ood_status=explanation_payload["ood_status"],
+        abstention_reason=explanation_payload["abstention_reason"],
+        missing_evidence=tuple(explanation_payload["missing_evidence"]),
+        reviewer_action=explanation_payload["reviewer_action"],
+    )
     return OperationalRun(
         run_id=payload["run_id"], target=target,
         created_at=datetime.fromisoformat(payload["created_at"]),
@@ -152,6 +186,7 @@ def load_operational_run(path: Path) -> OperationalRun:
         model_run=ModelRun(**payload["model_run"]), estimate=estimate,
         reuse_matches=tuple(ReuseMatch(**item) for item in payload["reuse_matches"]),
         decision=DecisionOutcome(payload["decision"]), human_override=override,
+        explanation=explanation,
         observed_label=payload.get("observed_label", "unknown"),
         label_source=payload.get("label_source", "unlabelled"),
     )
