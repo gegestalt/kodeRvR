@@ -134,6 +134,7 @@ evidence.
 | `assessment.py` | Dependency-aware assessment and deterministic routing |
 | `change_context.py` | Snapshot-bound changed-file, hunk, intent, and repository context |
 | `symbol_index.py` | Deterministic Python symbol identity and syntactic change classification |
+| `dependency_context.py` | Conservative Python import/call graph and bounded dependent traversal |
 | `snapshot.py` | Deterministic clean/dirty Git code-state identity |
 | `pytest_reporter.py` | Hook-generated authoritative pytest outcome report |
 | `test_evidence.py` | Snapshot-bound structured pytest evidence and artifact producer |
@@ -220,6 +221,21 @@ than false symbol absence. File renames and symbol moves are not yet resolved as
 identity continuity across paths. This subsystem establishes only that symbols
 were syntactically affected. It does not claim they are buggy, insecure,
 breaking, or high-blast-radius.
+
+## Dependency context
+
+Repository reports include deterministic module, symbol, and unresolved nodes;
+typed import, call, decorator, and dynamic-import edges; reverse dependent
+queries; and bounded cycle-safe transitive traversal for changed symbols.
+Descriptive impact records expose direct dependencies, direct and transitive
+dependents, traversal depth, affected-module count, and unresolved references.
+
+Resolution supports Python relative/absolute imports, aliases, direct calls,
+module-qualified calls, and selected `self`/`cls` method calls. Star imports,
+runtime dispatch, monkey patching, reflection, ambiguous re-exports, dynamic
+imports, and unresolved external modules remain visible limitations. Graph
+degree is a fact—not a risk score. This layer does not establish bugs, security
+risk, breaking changes, test relevance, or production blast radius.
 
 ## Feature space and evaluation
 

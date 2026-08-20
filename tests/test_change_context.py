@@ -100,3 +100,6 @@ def test_repository_report_exposes_typed_change_context(tmp_path: Path):
     symbols = report["symbol_context"]
     assert symbols["target"] == context["target"]
     assert symbols["changes"] == ()
+    dependencies = report["dependency_context"]
+    assert dependencies["target"] == context["target"]
+    assert dependencies["max_depth"] == 4
