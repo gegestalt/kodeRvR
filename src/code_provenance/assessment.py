@@ -291,12 +291,12 @@ class PatchHealthAssessor:
         elif test_evidence is not None and not test_evidence.complete:
             test_status, test_confidence = EvidenceStatus.UNKNOWN, 0.0
             test_summary = "Observed pytest execution was incomplete."
-            test_refs = (f"tests:{test_evidence.output_hash}:incomplete",)
+            test_refs = (f"tests:{test_evidence.report_hash}:incomplete",)
             test_tags = frozenset({"TEST_RUN_INCOMPLETE"})
         elif test_evidence is not None and test_evidence.tests_collected == 0:
             test_status, test_confidence = EvidenceStatus.UNKNOWN, 0.0
             test_summary = "Observed pytest execution collected no tests."
-            test_refs = (f"tests:{test_evidence.output_hash}:empty",)
+            test_refs = (f"tests:{test_evidence.report_hash}:empty",)
             test_tags = frozenset({"TEST_SUITE_EMPTY"})
         elif test_evidence is not None and test_evidence.exit_code == 0 and test_evidence.failed == 0 and test_evidence.errors == 0:
             test_status, test_confidence = EvidenceStatus.PASS, 0.9
@@ -304,7 +304,7 @@ class PatchHealthAssessor:
                 f"Observed pytest {test_evidence.framework_version}: {test_evidence.passed} passed, "
                 f"{test_evidence.failed} failed in {test_evidence.duration_seconds:.3f}s."
             )
-            test_refs = (f"tests:{test_evidence.output_hash}:observed",)
+            test_refs = (f"tests:{test_evidence.report_hash}:observed",)
             test_tags = frozenset({"TEST_EVIDENCE_OBSERVED"})
         elif test_evidence is not None:
             test_status, test_confidence = EvidenceStatus.FAIL, 0.9
@@ -312,7 +312,7 @@ class PatchHealthAssessor:
                 f"Observed pytest failed: {test_evidence.failed} failed, "
                 f"{test_evidence.errors} errors, exit {test_evidence.exit_code}."
             )
-            test_refs = (f"tests:{test_evidence.output_hash}:failed",)
+            test_refs = (f"tests:{test_evidence.report_hash}:failed",)
             test_tags = frozenset({"TEST_EVIDENCE_OBSERVED"})
         elif tests_passed is not None:
             test_status, test_confidence = EvidenceStatus.WARN, 0.35

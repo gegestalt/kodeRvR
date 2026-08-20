@@ -103,10 +103,19 @@ performance, dependencies, repository context, OOD assessment, or provenance.
 
 Evidence integrity and substantive outcome are separate questions. A passing
 test report for the wrong code snapshot is rejected. `--run-tests` hashes HEAD,
-tracked changes, and untracked contents before running pytest, then records the
-command, framework version, counts, duration, exit code, output hash, snapshot
-identity, and `observed` attestation. An empty suite cannot pass the functional
-evidence gate.
+tracked changes, and untracked contents before running pytest. A pytest hook
+then emits structured discovery, selection, deselection, pass, failure, error,
+skip, xfail, and xpass outcomes; authoritative counts never depend on parsing
+human-readable console output. The report also records the command, framework
+version, duration, exit code, deterministic canonical report hash, snapshot
+identity, and `observed` attestation. Collection errors, interruption, timeout,
+repository mutation, and an empty selected suite cannot pass the functional
+evidence gate. Functional PASS applies only to the structured checks that were
+actually selected and completed.
+
+Observed local execution is not independently CI-verified evidence. It proves
+what this process recorded against a snapshot, not that a trusted remote system
+executed the same checks in a controlled environment.
 
 Ledger schema `2.0` uses an explicit `{repository_id, snapshot_id, head_sha}`
 target. Artifacts carry canonical payloads and claimed SHA-256 digests; the
@@ -124,7 +133,8 @@ evidence.
 |---|---|
 | `assessment.py` | Dependency-aware assessment and deterministic routing |
 | `snapshot.py` | Deterministic clean/dirty Git code-state identity |
-| `test_evidence.py` | Snapshot-bound observed pytest evidence |
+| `pytest_reporter.py` | Hook-generated authoritative pytest outcome report |
+| `test_evidence.py` | Snapshot-bound structured pytest evidence and artifact producer |
 | `evidence.py` | Artifacts, claims, lineage, integrity, and attestation |
 | `architecture.py` | Python dependency and parse-integrity analysis |
 | `efficiency.py` | Repeated runtime, RSS, and throughput comparison |

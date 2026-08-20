@@ -1,4 +1,4 @@
-"""Observed pytest execution evidence bound to an exact code snapshot."""
+"""Structured pytest evidence bound to an exact code snapshot."""
 
 from __future__ import annotations
 
@@ -7,19 +7,16 @@ from datetime import UTC, datetime
 import hashlib
 from importlib.metadata import version
 import json
+import os
 from pathlib import Path
-import re
 import subprocess
+import tempfile
 import time
 
 from code_provenance.evidence import (
-    AttestationLevel,
-    EvidenceArtifact,
-    EvidenceTarget,
-    artifact_content_hash,
+    AttestationLevel, EvidenceArtifact, EvidenceTarget, artifact_content_hash,
 )
-from code_provenance.snapshot import CodeSnapshot
-from code_provenance.snapshot import capture_code_snapshot
+from code_provenance.snapshot import CodeSnapshot, capture_code_snapshot
 
 
 @dataclass(frozen=True)
@@ -29,37 +26,57 @@ class TestEvidence:
     command: tuple[str, ...]
     framework: str
     framework_version: str
-    tests_collected: int
+    discovered: int
+    selected: int
+    deselected: int
     passed: int
     failed: int
-    skipped: int
     errors: int
+    skipped: int
+    xfailed: int
+    xpassed: int
+    collection_errors: int
+    interrupted: bool
     duration_seconds: float
     exit_code: int
-    output_hash: str
+    report_hash: str
     complete: bool
     repository_changed: bool
     attestation: AttestationLevel
 
+    @property
+    def tests_collected(self) -> int:
+        """Compatibility alias; selected tests are the checks that could run."""
+        return self.selected
 
-def test_evidence_artifact(
-    evidence: TestEvidence,
-    *,
-    repository_id: str,
-) -> EvidenceArtifact:
-    """Convert observed test output into the common independently hashed artifact."""
-    payload = json.dumps(
-        {
-            **evidence.__dict__,
-            "command": list(evidence.command),
-            "attestation": evidence.attestation.value,
-        },
-        sort_keys=True,
-        separators=(",", ":"),
-    )
+
+def _canonical_report(values: dict[str, object]) -> str:
+    return json.dumps(values, sort_keys=True, separators=(",", ":"))
+
+
+def test_evidence_artifact(evidence: TestEvidence, *, repository_id: str) -> EvidenceArtifact:
+    """Convert structured outcomes into an independently hashed ledger artifact."""
+    report = {
+        "schema_version": "1.0",
+        "discovered": evidence.discovered,
+        "selected": evidence.selected,
+        "deselected": evidence.deselected,
+        "passed": evidence.passed,
+        "failed": evidence.failed,
+        "errors": evidence.errors,
+        "skipped": evidence.skipped,
+        "xfailed": evidence.xfailed,
+        "xpassed": evidence.xpassed,
+        "collection_errors": evidence.collection_errors,
+        "interrupted": evidence.interrupted,
+        "exit_code": evidence.exit_code,
+        "complete": evidence.complete,
+        "repository_changed": evidence.repository_changed,
+    }
+    payload = _canonical_report(report)
     target = EvidenceTarget(repository_id, evidence.snapshot_id, evidence.target_sha)
     return EvidenceArtifact(
-        artifact_id=f"pytest:{evidence.output_hash[:16]}",
+        artifact_id=f"pytest:{evidence.report_hash[:16]}",
         kind="test_report",
         producer=evidence.framework,
         producer_version=evidence.framework_version,
@@ -67,15 +84,10 @@ def test_evidence_artifact(
         payload=payload,
         content_hash=artifact_content_hash(payload),
         attestation=evidence.attestation,
-        execution_id=f"local:{evidence.output_hash}",
+        execution_id=f"local:{evidence.report_hash}",
         complete=evidence.complete,
         created_at=datetime.now(UTC),
     )
-
-
-def _count(output: str, name: str) -> int:
-    matches = re.findall(rf"(?:^|\s)(\d+)\s+{name}\b", output)
-    return int(matches[-1]) if matches else 0
 
 
 def run_pytest_evidence(
@@ -85,52 +97,63 @@ def run_pytest_evidence(
     command: tuple[str, ...],
     timeout_seconds: int = 300,
 ) -> TestEvidence:
-    """Run pytest and record observed output; this is not CI-verified attestation."""
+    """Run pytest with a hook plugin; human-readable stdout is never parsed."""
     if not command:
         raise ValueError("test command is required")
+    root = root.resolve()
+    descriptor, report_name = tempfile.mkstemp(prefix="patch-health-pytest-", suffix=".json")
+    os.close(descriptor)
+    report_path = Path(report_name)
+    report_path.unlink()
+    env = os.environ.copy()
+    package_root = str(Path(__file__).resolve().parents[1])
+    env["PYTHONPATH"] = os.pathsep.join(filter(None, (package_root, env.get("PYTHONPATH", ""))))
+    env["CODE_PROVENANCE_PYTEST_REPORT"] = str(report_path)
+    actual_command = (*command, "-p", "code_provenance.pytest_reporter")
     started = time.perf_counter()
+    timed_out = False
     try:
         process = subprocess.run(
-            list(command),
-            cwd=root.resolve(),
-            capture_output=True,
-            text=True,
-            encoding="utf-8",
-            errors="replace",
-            timeout=timeout_seconds,
+            list(actual_command), cwd=root, capture_output=True, text=True,
+            encoding="utf-8", errors="replace", timeout=timeout_seconds, env=env,
         )
-        output = process.stdout + "\n" + process.stderr
-        complete = True
         exit_code = process.returncode
-    except subprocess.TimeoutExpired as error:
-        output = (error.stdout or "") + "\n" + (error.stderr or "")
-        complete = False
+    except subprocess.TimeoutExpired:
+        timed_out = True
         exit_code = 124
     duration = time.perf_counter() - started
+    try:
+        structured = json.loads(report_path.read_text(encoding="utf-8")) if report_path.exists() else {}
+    finally:
+        report_path.unlink(missing_ok=True)
     after = capture_code_snapshot(root)
     repository_changed = after.snapshot_id != snapshot.snapshot_id
-    if repository_changed:
-        complete = False
-    passed = _count(output, "passed")
-    failed = _count(output, "failed")
-    skipped = _count(output, "skipped")
-    errors = _count(output, "error") + _count(output, "errors")
-    collected = passed + failed + skipped + errors
+    complete = bool(structured.get("complete", False)) and not timed_out and not repository_changed
+    report = {
+        "schema_version": "1.0",
+        "discovered": int(structured.get("discovered", 0)),
+        "selected": int(structured.get("selected", 0)),
+        "deselected": int(structured.get("deselected", 0)),
+        "passed": int(structured.get("passed", 0)),
+        "failed": int(structured.get("failed", 0)),
+        "errors": int(structured.get("errors", 0)),
+        "skipped": int(structured.get("skipped", 0)),
+        "xfailed": int(structured.get("xfailed", 0)),
+        "xpassed": int(structured.get("xpassed", 0)),
+        "collection_errors": int(structured.get("collection_errors", 0)),
+        "interrupted": bool(structured.get("interrupted", False)) or timed_out,
+        "exit_code": exit_code,
+        "complete": complete,
+        "repository_changed": repository_changed,
+    }
     return TestEvidence(
         snapshot_id=snapshot.snapshot_id,
         target_sha=snapshot.head_sha,
-        command=command,
+        command=actual_command,
         framework="pytest",
         framework_version=version("pytest"),
-        tests_collected=collected,
-        passed=passed,
-        failed=failed,
-        skipped=skipped,
-        errors=errors,
         duration_seconds=float(duration),
-        exit_code=exit_code,
-        output_hash=hashlib.sha256(output.encode()).hexdigest(),
-        complete=complete,
-        repository_changed=repository_changed,
+        report_hash=hashlib.sha256(_canonical_report(report).encode()).hexdigest(),
         attestation=AttestationLevel.OBSERVED,
+        **{key: value for key, value in report.items() if key != "schema_version"},
     )
