@@ -103,3 +103,6 @@ def test_repository_report_exposes_typed_change_context(tmp_path: Path):
     dependencies = report["dependency_context"]
     assert dependencies["target"] == context["target"]
     assert dependencies["max_depth"] == 4
+    relevance = report["test_relevance"]
+    assert relevance["target"] == context["target"]
+    assert relevance["partial"] is True

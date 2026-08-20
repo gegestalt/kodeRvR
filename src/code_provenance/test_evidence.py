@@ -20,6 +20,12 @@ from code_provenance.snapshot import CodeSnapshot, capture_code_snapshot
 
 
 @dataclass(frozen=True)
+class ObservedTestCase:
+    node_id: str
+    outcome: str
+
+
+@dataclass(frozen=True)
 class TestEvidence:
     target: EvidenceTarget
     command: tuple[str, ...]
@@ -44,6 +50,7 @@ class TestEvidence:
     complete: bool
     repository_changed: bool
     attestation: AttestationLevel
+    test_cases: tuple[ObservedTestCase, ...] = ()
 
     @property
     def tests_collected(self) -> int:
@@ -87,6 +94,7 @@ def test_evidence_artifact(evidence: TestEvidence, *, repository_id: str) -> Evi
         "exit_code": evidence.exit_code,
         "complete": evidence.complete,
         "repository_changed": evidence.repository_changed,
+        "test_cases": [item.__dict__ for item in evidence.test_cases],
     }
     payload = _canonical_report(report)
     if repository_id != evidence.target.repository_id:
@@ -169,6 +177,12 @@ def run_pytest_evidence(
         "complete": complete,
         "repository_changed": repository_changed,
     }
+    test_cases = tuple(
+        ObservedTestCase(str(item["node_id"]), str(item["outcome"]))
+        for item in structured.get("test_cases", [])
+        if isinstance(item, dict) and "node_id" in item and "outcome" in item
+    )
+    report["test_cases"] = [item.__dict__ for item in test_cases]
     return TestEvidence(
         target=EvidenceTarget(snapshot.repository_id, snapshot.snapshot_id, snapshot.head_sha),
         command=actual_command,
@@ -178,5 +192,6 @@ def run_pytest_evidence(
         output_hash=hashlib.sha256(output.encode()).hexdigest(),
         report_hash=hashlib.sha256(_canonical_report(report).encode()).hexdigest(),
         attestation=AttestationLevel.OBSERVED,
-        **{key: value for key, value in report.items() if key != "schema_version"},
+        test_cases=test_cases,
+        **{key: value for key, value in report.items() if key not in {"schema_version", "test_cases"}},
     )

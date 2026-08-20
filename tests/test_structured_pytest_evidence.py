@@ -51,6 +51,12 @@ def test_structured_report_preserves_selection_and_outcome_states(tmp_path: Path
     assert evidence.xfailed == 1
     assert evidence.xpassed == 1
     assert evidence.complete is True
+    assert {item.node_id: item.outcome for item in evidence.test_cases} == {
+        "test_cases.py::test_selected": "passed",
+        "test_cases.py::test_skip": "skipped",
+        "test_cases.py::test_xfail": "xfailed",
+        "test_cases.py::test_xpass": "xpassed",
+    }
 
 
 def test_failure_is_complete_but_not_passing(tmp_path: Path):

@@ -135,6 +135,7 @@ evidence.
 | `change_context.py` | Snapshot-bound changed-file, hunk, intent, and repository context |
 | `symbol_index.py` | Deterministic Python symbol identity and syntactic change classification |
 | `dependency_context.py` | Conservative Python import/call graph and bounded dependent traversal |
+| `test_relevance.py` | Deterministic pytest inventory, structural relevance, and observed outcome correlation |
 | `snapshot.py` | Deterministic clean/dirty Git code-state identity |
 | `pytest_reporter.py` | Hook-generated authoritative pytest outcome report |
 | `test_evidence.py` | Snapshot-bound structured pytest evidence and artifact producer |
@@ -236,6 +237,22 @@ runtime dispatch, monkey patching, reflection, ambiguous re-exports, dynamic
 imports, and unresolved external modules remain visible limitations. Graph
 degree is a fact—not a risk score. This layer does not establish bugs, security
 risk, breaking changes, test relevance, or production blast radius.
+
+## Test relevance
+
+Python pytest functions and methods are inventoried with deterministic node IDs
+and joined to changed symbols through traceable static call paths. Direct,
+indirect, and name/path heuristic relations remain distinct; dependency distance
+and supporting symbol names are preserved. Traversal is bounded and inherits
+the dependency graph's unresolved facts.
+
+Structured pytest evidence now retains per-node outcomes, allowing relevant
+tests to be reported as passed, failed, skipped, xfailed, xpassed, mixed, or
+`not_observed`. Aggregate success never implies that every relevant test ran.
+Incomplete execution, unresolved dependencies, partial symbol parsing, or target
+mismatch cannot become false certainty. Relevance is review context—not proof of
+coverage, correctness, or behavioral impact—and is not added to the provenance
+model or the main patch-health score.
 
 ## Feature space and evaluation
 

@@ -7,11 +7,13 @@ import os
 from pathlib import Path
 
 _state: dict[str, int | bool] = {}
+_cases: dict[str, str] = {}
 
 
 def pytest_sessionstart(session) -> None:
     del session
     _state.clear()
+    _cases.clear()
     _state.update(
         discovered=0, selected=0, deselected=0, passed=0, failed=0,
         runtime_errors=0, skipped=0, xfailed=0, xpassed=0, interrupted=False,
@@ -45,10 +47,13 @@ def pytest_runtest_logreport(report) -> None:
         else:
             key = "failed"
         _state[key] = int(_state[key]) + 1
+        _cases[report.nodeid] = key
     elif report.skipped:
         _state["skipped"] = int(_state["skipped"]) + 1
+        _cases[report.nodeid] = "skipped"
     elif report.failed:
         _state["runtime_errors"] = int(_state["runtime_errors"]) + 1
+        _cases[report.nodeid] = "error"
 
 
 def pytest_keyboard_interrupt(excinfo) -> None:
@@ -66,6 +71,7 @@ def pytest_sessionfinish(session, exitstatus) -> None:
         **_state,
         "exit_code": int(exitstatus),
         "complete": not bool(_state["interrupted"]) and int(_state["collection_errors"]) == 0,
+        "test_cases": [{"node_id": key, "outcome": _cases[key]} for key in sorted(_cases)],
     }
     Path(destination).write_text(
         json.dumps(payload, sort_keys=True, separators=(",", ":")) + "\n",
