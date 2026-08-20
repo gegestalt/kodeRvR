@@ -139,6 +139,11 @@ def _symbols(path: str, code: str) -> tuple[PythonSymbol, ...]:
     return tuple(sorted(output, key=lambda item: (item.path, item.qualified_name, item.kind.value)))
 
 
+def index_python_symbols(path: str, code: str) -> tuple[PythonSymbol, ...]:
+    """Public deterministic symbol extraction contract for repository analyzers."""
+    return _symbols(path, code)
+
+
 def _git_show(root: Path, revision: str, path: str) -> str | None:
     process = subprocess.run(
         ["git", "show", f"{revision}:{path}"], cwd=root,
