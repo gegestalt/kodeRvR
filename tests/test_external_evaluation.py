@@ -21,6 +21,7 @@ from code_provenance.external_evaluation import (
     write_verified_cache,
 )
 from code_provenance.testdata import categorize_devgpt_row, categorize_swebench_row, canonical_hash
+from scripts.fetch_test_fixtures import DEVGPT_PATH, DEVGPT_REVISION, DEVGPT_URL
 
 
 def test_cached_fixture_tampering_is_rejected(tmp_path: Path):
@@ -90,6 +91,14 @@ def test_devgpt_association_never_becomes_authorship_ground_truth():
     row = {"URL": "https://chat.openai.com/share/x", "MentionedURL": "https://github.com/o/r/issues/1"}
     validate_devgpt_payload(row)
     assert categorize_devgpt_row(row).authorship_label is None
+
+
+def test_devgpt_raw_url_targets_a_file_at_the_pinned_revision():
+    assert DEVGPT_URL == (
+        "https://raw.githubusercontent.com/NAIST-SE/DevGPT/"
+        f"{DEVGPT_REVISION}/{DEVGPT_PATH}"
+    )
+    assert DEVGPT_PATH == "snapshot_20231012/ChatGPT_Link_Sharing.csv"
 
 
 def test_codeql_oracle_is_executed_against_security_analyzer():

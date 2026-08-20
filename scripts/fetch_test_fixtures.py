@@ -31,10 +31,8 @@ SWE_URL = (
     f"SWE-bench_Lite&config=default&split=test&revision={SWE_REVISION}"
 )
 DEVGPT_REVISION = "685efd2509dede9a6e996b839ae4e20d33430648"
-DEVGPT_URL = (
-    f"https://raw.githubusercontent.com/NAIST-SE/DevGPT/{DEVGPT_REVISION}/"
-    "snapshot_20231012/ChatGPT_Link_Sharing.csv"
-)
+DEVGPT_PATH = "snapshot_20231012/ChatGPT_Link_Sharing.csv"
+DEVGPT_URL = f"https://raw.githubusercontent.com/NAIST-SE/DevGPT/{DEVGPT_REVISION}/{DEVGPT_PATH}"
 CODEQL_REVISION = "87c77cc26ccd1d2d9791b8563be6d425ccdf0874"
 CODEQL_PATHS = (
     "python/ql/test/query-tests/Security/CWE-089-SqlInjection/app.py",
