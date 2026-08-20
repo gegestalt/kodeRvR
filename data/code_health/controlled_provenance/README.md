@@ -17,3 +17,9 @@ Use `train`, `validation`, or `test` only for verified labeled samples. Use
 `ood` or `structural_only` for unlabeled repositories and external structural
 data. The loader verifies the SHA-256 hash of each code payload and rejects
 heuristic labels, unlabeled training records, and labeled OOD records.
+
+Use `code_provenance.dataset.build_split_plan` before model fitting. It clusters
+near-duplicates first and keeps repository, author, dataset, generator, and
+language groups disjoint across train, validation, and test partitions. Its
+audit payload records the duplicate-shingle width, language assignment, and
+disjoint dimensions for reproducibility.

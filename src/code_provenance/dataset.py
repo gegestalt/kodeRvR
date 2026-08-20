@@ -2,13 +2,16 @@
 
 from __future__ import annotations
 
+from dataclasses import dataclass
 import hashlib
+from itertools import combinations
 from pathlib import Path
 import re
 
 import pandas as pd
 
 from code_provenance.schema import AuthorshipLabel, CodeSample, DatasetRole, EvidenceSource
+from code_provenance.reuse import token_shingles
 
 
 REQUIRED = {
@@ -17,6 +20,93 @@ REQUIRED = {
     "dataset_role", "provenance_source", "source_url", "source_revision", "content_hash",
     "license", "acquisition_date",
 }
+
+
+@dataclass(frozen=True)
+class SplitPlan:
+    train: tuple[CodeSample, ...]
+    validation: tuple[CodeSample, ...]
+    test: tuple[CodeSample, ...]
+    audit: dict[str, object]
+
+
+def _duplicate_clusters(samples: list[CodeSample], width: int) -> list[tuple[CodeSample, ...]]:
+    parents = list(range(len(samples)))
+
+    def find(index: int) -> int:
+        while parents[index] != index:
+            parents[index] = parents[parents[index]]
+            index = parents[index]
+        return index
+
+    def union(left: int, right: int) -> None:
+        left_root, right_root = find(left), find(right)
+        if left_root != right_root:
+            parents[right_root] = left_root
+
+    shingles = [token_shingles(item.code, width) for item in samples]
+    for left, right in combinations(range(len(samples)), 2):
+        union_size = len(shingles[left] | shingles[right])
+        similarity = len(shingles[left] & shingles[right]) / union_size if union_size else 1.0
+        if similarity >= 0.95:
+            union(left, right)
+    clusters: dict[int, list[CodeSample]] = {}
+    for index, sample in enumerate(samples):
+        clusters.setdefault(find(index), []).append(sample)
+    return [tuple(sorted(items, key=lambda item: item.sample_id)) for items in clusters.values()]
+
+
+def build_split_plan(
+    samples: list[CodeSample], *, seed: int = 42, duplicate_width: int = 7
+) -> SplitPlan:
+    """Build deterministic train/validation/test partitions without known leakage."""
+    if duplicate_width < 2:
+        raise ValueError("duplicate_width must be at least two")
+    if any(item.dataset_role in {DatasetRole.OOD, DatasetRole.STRUCTURAL_ONLY} for item in samples):
+        raise ValueError("OOD and structural_only records cannot enter training partitions")
+    if any(item.label is AuthorshipLabel.UNKNOWN for item in samples):
+        raise ValueError("split planning requires labelled samples")
+    languages = sorted({item.language for item in samples})
+    if len(languages) < 3:
+        raise ValueError("language holdout requires three language groups")
+    clusters = _duplicate_clusters(samples, duplicate_width)
+    dimensions = ("repository_id", "author_group_id", "dataset_id", "generator_family")
+    used: list[set[str]] = [set(), set(), set()]
+    partitions: list[list[CodeSample]] = [[], [], []]
+    language_owners: dict[str, int] = {}
+    for cluster in sorted(clusters, key=lambda items: (len(items), items[0].sample_id), reverse=True):
+        cluster_languages = {item.language for item in cluster}
+        cluster_keys = {
+            f"{dimension}:{getattr(item, dimension)}"
+            for item in cluster for dimension in dimensions
+            if getattr(item, dimension) != "unknown"
+        }
+        candidates = []
+        for partition_index in range(3):
+            if any(language_owners.get(language, partition_index) != partition_index for language in cluster_languages):
+                continue
+            if used[partition_index] & cluster_keys:
+                continue
+            candidates.append(partition_index)
+        if not candidates:
+            raise ValueError("repository, author, dataset, generator, or language groups conflict")
+        target = min(candidates, key=lambda index: (len(partitions[index]), index))
+        partitions[target].extend(cluster)
+        used[target].update(cluster_keys)
+        for language in cluster_languages:
+            language_owners[language] = target
+    return SplitPlan(
+        tuple(sorted(partitions[0], key=lambda item: item.sample_id)),
+        tuple(sorted(partitions[1], key=lambda item: item.sample_id)),
+        tuple(sorted(partitions[2], key=lambda item: item.sample_id)),
+        {
+            "duplicate_cluster_count": len(clusters),
+            "duplicate_width": duplicate_width,
+            "language_owners": {language: index for language, index in sorted(language_owners.items())},
+            "disjoint_dimensions": (*dimensions, "language", "near_duplicate_cluster"),
+            "seed": seed,
+        },
+    )
 
 
 def load_manifest(path: Path, *, code_root: Path | None = None) -> list[CodeSample]:
