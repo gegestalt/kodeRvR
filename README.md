@@ -1,7 +1,7 @@
 # AI Code Provenance & Security Intelligence
 
-A research-grade machine-learning pipeline for repository-level source-code
-provenance, public-code reuse, OOD-aware authorship estimation, and security
+A research-grade AI codebase health reviewer for dependency-aware patch trust,
+source-code provenance, public-code reuse, OOD-aware uncertainty, and security
 review intelligence.
 
 The system estimates whether code is statistically consistent with verified
@@ -47,6 +47,7 @@ near-duplicate clusters must remain disjoint across splits.
 
 | Component | Purpose |
 |---|---|
+| `assessment.py` | Deep patch-level health assessment and explainable review routing |
 | `repository.py` | Read-only tracked-file and commit extraction |
 | `features.py` | Interpretable lexical, AST and Git features |
 | `reuse.py` | Local token-shingle public-reuse index |
@@ -64,6 +65,9 @@ source .venv/bin/activate
 pip install -r requirements.txt
 
 python src/provenance_cli.py scan /path/to/repository
+python src/provenance_cli.py scan . \
+  --intent "Implement dependency-aware patch health review" \
+  --tests-passed
 pytest
 jupyter lab notebooks/07_ai_code_provenance_security_lab.ipynb
 ```
@@ -71,6 +75,25 @@ jupyter lab notebooks/07_ai_code_provenance_security_lab.ipynb
 The scan command intentionally returns
 `UNAVAILABLE_UNTIL_A_LABELLED_GROUP_DISJOINT_MODEL_IS_FITTED` instead of an AI
 percentage when no verified model exists.
+
+The `patch_health` result remains available without a fitted provenance model.
+It evaluates dependent evidence and returns an explainable review action.
+Unknown provenance does not escalate an otherwise healthy patch. Missing intent,
+tests, architecture, efficiency, repository context, or OOD evidence lowers
+confidence and remains visible in the decision path.
+
+## Engineering contract
+
+Implementation follows test-driven development:
+
+1. Add a failing behavioral or contract test.
+2. Implement the smallest change that passes it.
+3. Refactor while the focused test remains green.
+4. Run the complete regression suite.
+5. Update documentation with the behavior.
+
+Every defect fix requires a regression test. Randomness must be seeded, evidence
+fixtures must be reproducible, and no feature is complete while its tests fail.
 
 ## Data contract
 
@@ -95,7 +118,8 @@ not implement anything until shared understanding is explicitly confirmed.
 
 ## Current limitation
 
-The architecture and tested modelling contracts are implemented, but no
+The patch-health interface and tested modelling contracts are implemented, but no
 verified authorship corpus is bundled. Consequently, the repository can be
-described and statically reviewed today, but a scientifically defensible
-human/AI/hybrid percentage remains blocked until controlled data is acquired.
+assessed with deterministic evidence rules today, but a scientifically
+defensible provenance distribution remains blocked until controlled data is
+acquired.

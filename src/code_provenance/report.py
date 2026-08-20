@@ -7,14 +7,25 @@ from pathlib import Path
 
 import numpy as np
 
+from code_provenance.assessment import PatchHealthAssessor
 from code_provenance.features import extract_features
 from code_provenance.repository import recent_commit_metadata, working_tree_samples
 
 
-def descriptive_repository_report(root: Path) -> dict[str, object]:
+def descriptive_repository_report(
+    root: Path,
+    *,
+    intent: str | None = None,
+    tests_passed: bool | None = None,
+) -> dict[str, object]:
     samples = working_tree_samples(root)
     commits = recent_commit_metadata(root)
     features = [extract_features(sample) for sample in samples]
+    health = PatchHealthAssessor().assess_repository(
+        root,
+        intent=intent,
+        tests_passed=tests_passed,
+    )
     return {
         "repository": str(root.resolve()),
         "files_analyzed": len(samples),
@@ -24,6 +35,7 @@ def descriptive_repository_report(root: Path) -> dict[str, object]:
         "median_file_lines": float(np.median([item["lines"] for item in features])) if features else 0.0,
         "median_commit_additions": float(np.median([item["additions"] for item in commits])) if commits else 0.0,
         "median_commit_files": float(np.median([item["files_changed"] for item in commits])) if commits else 0.0,
+        "patch_health": health.to_dict(),
         "authorship_estimate": "UNAVAILABLE_UNTIL_A_LABELLED_GROUP_DISJOINT_MODEL_IS_FITTED",
         "claim_boundary": "Git metadata, style, or reuse alone cannot prove human or AI authorship",
     }

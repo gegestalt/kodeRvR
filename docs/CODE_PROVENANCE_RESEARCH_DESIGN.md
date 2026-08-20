@@ -7,6 +7,27 @@ how uncertain that estimate is, how much overlaps a declared public corpus, and
 whether the change warrants deeper security review. The system never translates
 a classifier probability into proof that a person or model authored code.
 
+## Patch health decision architecture
+
+The PR, or a standalone commit when no PR exists, is the primary decision unit.
+Repository, file, symbol, and hunk observations are dependent evidence. The
+initial decision engine is deterministic and evaluates:
+
+```text
+evidence sufficiency → provenance → intent alignment → functional evidence
+→ architectural compatibility → security risk → efficiency risk
+→ OOD/evidence quality → review action
+```
+
+Downstream confidence cannot exceed materially uncertain prerequisites. Severe
+findings remain individually traceable and cannot disappear inside an aggregate
+score. Provenance is supporting evidence and cannot independently determine
+whether a patch is safe.
+
+`PatchHealthAssessor` is the audited baseline for a later learned dependency
+engine. An adaptive model must improve risk-adjusted reviewer utility while
+respecting hard safety and abstention constraints.
+
 ## Labels and admissible evidence
 
 Primary labels are `human`, `ai`, `hybrid`, and `unknown`. Training labels must
@@ -60,10 +81,9 @@ package was hallucinated.
 5. Can OOD abstention prevent confident claims on unseen generators and domains?
 6. Can adaptive review reduce expensive scans and human review while preserving security findings?
 
-## Migration from the IPS track
+## Historical migration
 
 The IPS environment is no longer the active product surface. Its reusable ideas
-are calibration, uncertainty, OOD detection, constrained decisions and evidence
-provenance. Existing IPS files, datasets, results and notebook remain intact for
-reproducibility and can later be moved into `legacy/ips` in a dedicated migration
-commit after imports and historical links are rewritten.
+were calibration, uncertainty, OOD detection, constrained decisions, and
+evidence provenance. The former IPS implementation and bulk datasets are not
+part of the current working tree.
