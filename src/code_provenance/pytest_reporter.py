@@ -14,7 +14,7 @@ def pytest_sessionstart(session) -> None:
     _state.clear()
     _state.update(
         discovered=0, selected=0, deselected=0, passed=0, failed=0,
-        errors=0, skipped=0, xfailed=0, xpassed=0, interrupted=False,
+        runtime_errors=0, skipped=0, xfailed=0, xpassed=0, interrupted=False,
         collection_errors=0,
     )
 
@@ -48,7 +48,7 @@ def pytest_runtest_logreport(report) -> None:
     elif report.skipped:
         _state["skipped"] = int(_state["skipped"]) + 1
     elif report.failed:
-        _state["errors"] = int(_state["errors"]) + 1
+        _state["runtime_errors"] = int(_state["runtime_errors"]) + 1
 
 
 def pytest_keyboard_interrupt(excinfo) -> None:
