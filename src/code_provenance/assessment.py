@@ -267,7 +267,11 @@ class PatchHealthAssessor:
         integrity = evidence_ledger.audit_integrity() if evidence_ledger is not None else None
         ledger_snapshot_mismatch = (
             evidence_ledger is not None
-            and evidence_ledger.target_commit not in {snapshot.snapshot_id, snapshot.head_sha}
+            and (
+                evidence_ledger.target.repository_id != snapshot.repository_id
+                or evidence_ledger.target.snapshot_id != snapshot.snapshot_id
+                or evidence_ledger.target.head_sha != snapshot.head_sha
+            )
         )
         integrity_status = EvidenceStatus(integrity.status.value) if integrity is not None else EvidenceStatus.UNKNOWN
         if ledger_snapshot_mismatch:
@@ -349,10 +353,10 @@ class PatchHealthAssessor:
                     else "No commit-bound evidence ledger was supplied."
                 ),
                 (
-                    (f"ledger:snapshot-mismatch:{evidence_ledger.target_commit}",)
+                    (f"ledger:snapshot-mismatch:{evidence_ledger.target.snapshot_id}",)
                     if ledger_snapshot_mismatch
                     else tuple(f"artifact:{item}" for item in integrity.failed_artifacts)
-                    or (f"ledger:{evidence_ledger.target_commit}:verified",)
+                    or (f"ledger:{evidence_ledger.target.snapshot_id}:verified",)
                     if integrity is not None
                     else ("ledger:missing",)
                 ),

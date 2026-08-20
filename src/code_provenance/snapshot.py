@@ -5,6 +5,7 @@ from __future__ import annotations
 from dataclasses import dataclass
 import hashlib
 from pathlib import Path
+import stat
 import subprocess
 
 from code_provenance.repository import repository_id
@@ -48,7 +49,15 @@ def capture_code_snapshot(root: Path) -> CodeSnapshot:
             digest.update(b"\0UNTRACKED\0")
             digest.update(raw)
             digest.update(b"\0")
-            digest.update(hashlib.sha256(path.read_bytes()).digest())
+            mode = path.lstat().st_mode
+            if stat.S_ISLNK(mode):
+                digest.update(b"SYMLINK\0")
+                digest.update(path.readlink().as_posix().encode("utf-8", errors="surrogateescape"))
+            elif stat.S_ISREG(mode):
+                digest.update(b"FILE\0")
+                digest.update(hashlib.sha256(path.read_bytes()).digest())
+            else:
+                raise ValueError(f"unsupported untracked special file: {relative}")
         diff_hash = digest.hexdigest()
     identity = "\x1f".join((repo, head, tree, diff_hash or "clean"))
     snapshot_id = "snap_" + hashlib.sha256(identity.encode()).hexdigest()[:24]

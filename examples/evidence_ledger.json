@@ -1,24 +1,35 @@
 {
-  "schema_version": "1.0",
-  "target_commit": "working-tree",
+  "schema_version": "2.0",
+  "target": {
+    "repository_id": "demonstration:repository",
+    "snapshot_id": "snap_demonstration",
+    "head_sha": "0000000000000000000000000000000000000000"
+  },
   "artifacts": [
     {
       "artifact_id": "ci:test-report",
       "kind": "test_report",
       "producer": "example-ci",
       "producer_version": "1.0.0",
-      "target_commit": "working-tree",
-      "content_hash": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
-      "integrity_verified": true,
+      "target": {
+        "repository_id": "demonstration:repository",
+        "snapshot_id": "snap_demonstration",
+        "head_sha": "0000000000000000000000000000000000000000"
+      },
+      "payload": "{}",
+      "content_hash": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+      "attestation": "demonstration",
+      "execution_id": "demonstration:example",
+      "complete": true,
       "created_at": "2026-08-20T00:00:00+00:00",
       "source_uri": "artifact://example/test-report"
     }
   ],
   "claims": [],
   "integrity": {
-    "status": "pass",
-    "confidence": 1.0,
+    "status": "unknown",
+    "confidence": 0.0,
     "failed_artifacts": [],
-    "tags": []
+    "tags": ["EVIDENCE_ATTESTATION_INSUFFICIENT"]
   }
 }

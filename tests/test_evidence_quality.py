@@ -5,8 +5,13 @@ from datetime import UTC, datetime
 
 from code_provenance.assessment import EvidenceStatus, PatchHealthAssessor, ReviewAction, TrustDimension
 from code_provenance.efficiency import EfficiencyMeasurement
-from code_provenance.evidence import EvidenceArtifact, EvidenceLedger
-from code_provenance.evidence import AttestationLevel
+from code_provenance.evidence import (
+    AttestationLevel,
+    EvidenceArtifact,
+    EvidenceLedger,
+    EvidenceTarget,
+    artifact_content_hash,
+)
 from code_provenance.evidence_quality import (
     EvidenceQualityInput,
     EvidenceQualityStatus,
@@ -71,16 +76,21 @@ def test_quality_json_contract_is_reproducible(tmp_path: Path):
     assert loaded == EvidenceQualityInput("detector:v1", 0.2, 0.9, True)
 
 
-def verified_ledger(target_commit: str) -> EvidenceLedger:
-    ledger = EvidenceLedger(target_commit=target_commit)
+def verified_ledger(snapshot) -> EvidenceLedger:
+    target = EvidenceTarget(snapshot.repository_id, snapshot.snapshot_id, snapshot.head_sha)
+    payload = '{"status":"passed"}'
+    ledger = EvidenceLedger(target=target)
     ledger.add_artifact(EvidenceArtifact(
         artifact_id="ci:test",
         kind="test_report",
         producer="ci",
         producer_version="1.0",
-        target_commit=target_commit,
-        content_hash="b" * 64,
-        integrity_verified=True,
+        target=target,
+        payload=payload,
+        content_hash=artifact_content_hash(payload),
+        attestation=AttestationLevel.OBSERVED,
+        execution_id="fixture:1",
+        complete=True,
         created_at=datetime(2026, 8, 20, tzinfo=UTC),
     ))
     return ledger
@@ -102,6 +112,7 @@ def observed_tests(snapshot_id: str, target_sha: str) -> PytestEvidence:
         exit_code=0,
         output_hash="c" * 64,
         complete=True,
+        repository_changed=False,
         attestation=AttestationLevel.OBSERVED,
     )
 
@@ -115,7 +126,7 @@ def test_assessor_blocks_ood_and_accepts_in_distribution_evidence():
         test_evidence=observed_tests(snapshot.snapshot_id, snapshot.head_sha),
         efficiency_baseline=efficiency(),
         efficiency_candidate=efficiency(),
-        evidence_ledger=verified_ledger(snapshot.snapshot_id),
+        evidence_ledger=verified_ledger(snapshot),
     )
 
     accepted = PatchHealthAssessor().assess_repository(

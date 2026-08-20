@@ -26,7 +26,8 @@ def repository(tmp_path: Path) -> Path:
     git(tmp_path, "config", "user.name", "Fixture")
     git(tmp_path, "config", "user.email", "fixture@example.test")
     (tmp_path / "module.py").write_text("VALUE = 1\n", encoding="utf-8")
-    git(tmp_path, "add", "module.py")
+    (tmp_path / ".gitignore").write_text("__pycache__/\n.pytest_cache/\n", encoding="utf-8")
+    git(tmp_path, "add", "module.py", ".gitignore")
     git(tmp_path, "commit", "-qm", "initial")
     return tmp_path
 
@@ -58,6 +59,18 @@ def test_untracked_content_changes_snapshot_identity(tmp_path: Path):
     assert first.snapshot_id != second.snapshot_id
 
 
+def test_snapshot_hashes_untracked_symlink_text_without_following_it(tmp_path: Path):
+    root = repository(tmp_path)
+    outside = tmp_path.parent / "outside-secret"
+    outside.write_text("first", encoding="utf-8")
+    (root / "link").symlink_to(outside)
+    first = capture_code_snapshot(root)
+    outside.write_text("changed externally", encoding="utf-8")
+    second = capture_code_snapshot(root)
+
+    assert first == second
+
+
 def test_pytest_producer_records_observed_snapshot_bound_results(tmp_path: Path):
     root = repository(tmp_path)
     (root / "test_module.py").write_text(
@@ -79,6 +92,26 @@ def test_pytest_producer_records_observed_snapshot_bound_results(tmp_path: Path)
     assert evidence.failed == 0
     assert evidence.exit_code == 0
     assert len(evidence.output_hash) == 64
+    assert evidence.repository_changed is False
+
+
+def test_pytest_evidence_detects_repository_mutation_during_execution(tmp_path: Path):
+    root = repository(tmp_path)
+    (root / "test_mutation.py").write_text(
+        "from pathlib import Path\n\ndef test_mutates_repo():\n"
+        "    Path('module.py').write_text('VALUE = 9\\n')\n",
+        encoding="utf-8",
+    )
+    snapshot = capture_code_snapshot(root)
+
+    evidence = run_pytest_evidence(
+        root,
+        snapshot=snapshot,
+        command=(sys.executable, "-m", "pytest", "-q"),
+    )
+
+    assert evidence.repository_changed is True
+    assert evidence.complete is False
 
 
 def test_manual_test_assertion_is_warning_not_verified_pass():
@@ -102,7 +135,7 @@ def test_zero_collected_tests_cannot_pass_functional_gate():
     snapshot = capture_code_snapshot(root)
     evidence = PytestEvidence(
         snapshot.snapshot_id, snapshot.head_sha, ("pytest",), "pytest", "fixture",
-        0, 0, 0, 0, 0, 0.1, 0, "d" * 64, True, AttestationLevel.OBSERVED,
+        0, 0, 0, 0, 0, 0.1, 0, "d" * 64, True, False, AttestationLevel.OBSERVED,
     )
 
     result = PatchHealthAssessor().assess_repository(root, test_evidence=evidence)

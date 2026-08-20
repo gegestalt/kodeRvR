@@ -108,6 +108,12 @@ command, framework version, counts, duration, exit code, output hash, snapshot
 identity, and `observed` attestation. An empty suite cannot pass the functional
 evidence gate.
 
+Ledger schema `2.0` uses an explicit `{repository_id, snapshot_id, head_sha}`
+target. Artifacts carry canonical payloads and claimed SHA-256 digests; the
+ledger recomputes each digest instead of trusting a producer-supplied
+`integrity_verified` flag. Asserted, demonstration, incomplete, stale, or
+tampered evidence cannot produce a passing integrity result.
+
 The compatibility flags `--tests-passed` and `--tests-failed` are unverified
 caller assertions. They remain visible but cannot satisfy mandatory functional
 evidence.

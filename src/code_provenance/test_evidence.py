@@ -3,15 +3,23 @@
 from __future__ import annotations
 
 from dataclasses import dataclass
+from datetime import UTC, datetime
 import hashlib
 from importlib.metadata import version
+import json
 from pathlib import Path
 import re
 import subprocess
 import time
 
-from code_provenance.evidence import AttestationLevel
+from code_provenance.evidence import (
+    AttestationLevel,
+    EvidenceArtifact,
+    EvidenceTarget,
+    artifact_content_hash,
+)
 from code_provenance.snapshot import CodeSnapshot
+from code_provenance.snapshot import capture_code_snapshot
 
 
 @dataclass(frozen=True)
@@ -30,7 +38,39 @@ class TestEvidence:
     exit_code: int
     output_hash: str
     complete: bool
+    repository_changed: bool
     attestation: AttestationLevel
+
+
+def test_evidence_artifact(
+    evidence: TestEvidence,
+    *,
+    repository_id: str,
+) -> EvidenceArtifact:
+    """Convert observed test output into the common independently hashed artifact."""
+    payload = json.dumps(
+        {
+            **evidence.__dict__,
+            "command": list(evidence.command),
+            "attestation": evidence.attestation.value,
+        },
+        sort_keys=True,
+        separators=(",", ":"),
+    )
+    target = EvidenceTarget(repository_id, evidence.snapshot_id, evidence.target_sha)
+    return EvidenceArtifact(
+        artifact_id=f"pytest:{evidence.output_hash[:16]}",
+        kind="test_report",
+        producer=evidence.framework,
+        producer_version=evidence.framework_version,
+        target=target,
+        payload=payload,
+        content_hash=artifact_content_hash(payload),
+        attestation=evidence.attestation,
+        execution_id=f"local:{evidence.output_hash}",
+        complete=evidence.complete,
+        created_at=datetime.now(UTC),
+    )
 
 
 def _count(output: str, name: str) -> int:
@@ -67,6 +107,10 @@ def run_pytest_evidence(
         complete = False
         exit_code = 124
     duration = time.perf_counter() - started
+    after = capture_code_snapshot(root)
+    repository_changed = after.snapshot_id != snapshot.snapshot_id
+    if repository_changed:
+        complete = False
     passed = _count(output, "passed")
     failed = _count(output, "failed")
     skipped = _count(output, "skipped")
@@ -87,5 +131,6 @@ def run_pytest_evidence(
         exit_code=exit_code,
         output_hash=hashlib.sha256(output.encode()).hexdigest(),
         complete=complete,
+        repository_changed=repository_changed,
         attestation=AttestationLevel.OBSERVED,
     )
