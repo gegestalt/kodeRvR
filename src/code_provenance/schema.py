@@ -22,6 +22,14 @@ class EvidenceSource(StrEnum):
     UNLABELLED = "unlabelled"
 
 
+class DatasetRole(StrEnum):
+    TRAIN = "train"
+    VALIDATION = "validation"
+    TEST = "test"
+    OOD = "ood"
+    STRUCTURAL_ONLY = "structural_only"
+
+
 @dataclass(frozen=True)
 class CodeSample:
     sample_id: str
@@ -38,6 +46,16 @@ class CodeSample:
     label: AuthorshipLabel = AuthorshipLabel.UNKNOWN
     label_source: EvidenceSource = EvidenceSource.UNLABELLED
     generator_family: str = "unknown"
+    dataset_id: str = "unknown"
+    dataset_version: str = "unknown"
+    author_group_id: str = "unknown"
+    dataset_role: DatasetRole = DatasetRole.STRUCTURAL_ONLY
+    provenance_source: str = ""
+    source_url: str = ""
+    source_revision: str = ""
+    content_hash: str = ""
+    license: str = "unknown"
+    acquisition_date: str = ""
     parent_authorship: str = "unknown"
     metadata: dict[str, object] = field(default_factory=dict)
 

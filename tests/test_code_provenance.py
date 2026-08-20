@@ -81,9 +81,54 @@ def test_manifest_rejects_heuristic_training_labels(tmp_path: Path):
     pd.DataFrame([{
         "sample_id": "1", "repository_id": "r", "group_id": "g", "language": "python",
         "path": "a.py", "code": "pass", "label": "ai", "label_source": "heuristic",
-        "generator_family": "unknown",
+        "generator_family": "unknown", "dataset_id": "controlled", "dataset_version": "1",
+        "author_group_id": "author-1", "dataset_role": "train",
+        "provenance_source": "https://example.test/evidence/1",
+        "source_url": "https://github.com/example/repo", "source_revision": "a" * 40,
+        "content_hash": __import__("hashlib").sha256(b"pass").hexdigest(),
+        "license": "MIT", "acquisition_date": "2026-08-20",
     }]).to_csv(path, index=False)
     with pytest.raises(ValueError, match="heuristic"):
+        load_manifest(path)
+
+
+def test_controlled_manifest_preserves_verified_identity_and_role(tmp_path: Path):
+    code = "def answer():\n    return 42\n"
+    import hashlib
+    path = tmp_path / "manifest.csv"
+    pd.DataFrame([{
+        "sample_id": "sample-1", "repository_id": "repo-1", "group_id": "repo-group-1",
+        "author_group_id": "author-1", "language": "python", "path": "answer.py",
+        "code": code, "label": "ai", "label_source": "controlled_generation",
+        "generator_family": "test-generator", "dataset_id": "controlled-v1",
+        "dataset_version": "2026-08-20", "dataset_role": "train",
+        "provenance_source": "https://example.test/evidence/sample-1",
+        "source_url": "https://github.com/example/repo", "source_revision": "a" * 40,
+        "content_hash": hashlib.sha256(code.encode()).hexdigest(), "license": "MIT",
+        "acquisition_date": "2026-08-20",
+    }]).to_csv(path, index=False)
+
+    records = load_manifest(path)
+
+    assert records[0].dataset_id == "controlled-v1"
+    assert records[0].author_group_id == "author-1"
+    assert records[0].dataset_role.value == "train"
+    assert records[0].source_revision == "a" * 40
+
+
+def test_structural_github_record_cannot_become_training_label(tmp_path: Path):
+    path = tmp_path / "manifest.csv"
+    pd.DataFrame([{
+        "sample_id": "live-1", "repository_id": "repo-1", "group_id": "repo-1",
+        "author_group_id": "unknown", "language": "go", "path": "main.go", "code": "package main",
+        "label": "human", "label_source": "unlabelled", "generator_family": "unknown",
+        "dataset_id": "github-live", "dataset_version": "2026-08-20", "dataset_role": "structural_only",
+        "provenance_source": "https://github.com/example/repo", "source_url": "https://github.com/example/repo",
+        "source_revision": "a" * 40, "content_hash": __import__("hashlib").sha256(b"package main").hexdigest(),
+        "license": "MIT", "acquisition_date": "2026-08-20",
+    }]).to_csv(path, index=False)
+
+    with pytest.raises(ValueError, match="structural_only|unlabelled"):
         load_manifest(path)
 
 
