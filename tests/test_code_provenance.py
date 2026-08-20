@@ -58,6 +58,15 @@ def test_group_safe_model_returns_calibrated_or_abstained_estimate():
     query = CodeSample(**{**query.__dict__, "label": AuthorshipLabel.UNKNOWN})
     estimate = model.predict(query, public_reuse_fraction=.1)
     assert metrics["groups"] == 9
+    assert metrics["features"] >= 50
+    assert {
+        "group_oof_balanced_accuracy", "group_oof_mcc", "group_oof_log_loss",
+        "group_oof_multiclass_brier", "group_oof_ece_10bin",
+        "group_oof_roc_auc_ovr_macro", "group_oof_pr_auc_macro",
+        "class_human_precision", "class_ai_recall", "class_hybrid_f1",
+        "confusion_human_as_ai",
+    } <= set(metrics)
+    assert np.isfinite(list(metrics.values())).all()
     assert abs(sum(estimate.probabilities.values()) - 1) < 1e-6
     assert estimate.organic_fraction is not None
     assert "proof" in estimate.claim
