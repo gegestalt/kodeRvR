@@ -41,6 +41,7 @@ class TestFixtureRecord:
     local_path: str
     label_limitations: str
     authorship_label: str | None = None
+    fetched_at: str | None = None
 
     @classmethod
     def from_dict(cls, values: dict[str, object]) -> "TestFixtureRecord":

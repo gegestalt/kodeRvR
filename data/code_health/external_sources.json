@@ -1,0 +1,8 @@
+{
+  "sources": [
+    {"dataset_id": "swebench-lite", "ground_truth_scope": "patch_and_test_outcome", "license": "source-repository-specific", "revision": "6ec7bb89b9342f664a54a6e0a6ea6501d3437cc2", "source_url": "https://huggingface.co/datasets/princeton-nlp/SWE-bench_Lite"},
+    {"dataset_id": "devgpt", "ground_truth_scope": "ai_link_association", "license": "NOASSERTION; metadata-only pending review", "revision": "685efd2509dede9a6e996b839ae4e20d33430648", "source_url": "https://github.com/NAIST-SE/DevGPT"},
+    {"dataset_id": "codeql-python-tests", "ground_truth_scope": "analyzer_expectation", "license": "MIT", "revision": "87c77cc26ccd1d2d9791b8563be6d425ccdf0874", "source_url": "https://github.com/github/codeql"},
+    {"dataset_id": "kodervr-structural-fixture", "ground_truth_scope": "deterministic_static_structure", "license": "repository license", "base_revision": "31ecb56589f3ecd8faec8e9008b028b0cfcfa5f3", "head_revision": "41916ef952a9003a6bce96c0c29356c69f5a40af", "source_url": "https://github.com/gegestalt/kodeRvR"}
+  ]
+}

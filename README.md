@@ -302,19 +302,49 @@ fixtures reproducible, and no feature is complete while its tests fail.
 
 ## External test fixtures
 
-Fetch a small categorized slice without downloading complete corpora:
+The test system has three explicit tiers. The default is deterministic and
+offline; it never contacts an upstream service:
 
 ```bash
-PYTHONPATH=src .venv/bin/python scripts/fetch_test_fixtures.py --limit 3
 .venv/bin/python -m pytest
+
+# Verify/evaluate an existing pinned cache, with no network access.
+.venv/bin/python -m pytest -m evaluation
+
+# Explicitly enable bounded network-backed tests.
+.venv/bin/python -m pytest -m live_data --live-data-limit 3
+# Equivalent explicit gate:
+.venv/bin/python -m pytest --run-live-data -m live_data --live-data-limit 3
 ```
 
-The ignored cache contains SWE-bench Lite issue/patch cases, DevGPT
-AI-association records, and official GitHub CodeQL query tests. The fetcher,
-immutable revisions, hashes, category contract, and
+Fetch and independently verify a small categorized slice without downloading
+complete corpora:
+
+```bash
+PYTHONPATH=src .venv/bin/python scripts/fetch_test_fixtures.py --dataset codeql --limit 3
+PYTHONPATH=src .venv/bin/python scripts/fetch_test_fixtures.py --verify-only
+PYTHONPATH=src .venv/bin/python scripts/evaluate_external_fixtures.py
+```
+
+The ignored `.cache/code_health/` directory contains SWE-bench Lite issue/patch
+cases, DevGPT AI-association records, and official GitHub CodeQL query tests.
+`--dataset` is repeatable; `--refresh` is explicit. Existing verified entries
+are not overwritten, and altered cache entries fail SHA-256 verification. The
+fetcher, immutable revisions, reviewed regression baseline, category contract, and
 [scientific-use table](data/code_health/test_fixtures/SOURCE.md) are versioned.
 These categories are not interchangeable and none supplies defensible human/AI
 authorship ground truth.
+
+SWE-bench is patch/test-outcome evidence; this layer validates ingestion but does
+not claim upstream repositories were executed. DevGPT establishes an associated
+AI-development trace and never creates `HUMAN`, `AI`, or `HYBRID` labels. CodeQL
+fixtures are query-specific oracles: current misses stay measured as misses. A
+network timeout, rate limit, schema change, invalid revision, or hash mismatch is
+an acquisition failure—not an analyzer result.
+
+Fetched repositories and payloads are untrusted. The live structural check uses
+only a manifest-pinned public repository and performs static snapshot/change/
+symbol/dependency analysis. Downloaded code is not executed.
 
 ## Provenance research boundary
 
