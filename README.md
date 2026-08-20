@@ -133,6 +133,7 @@ evidence.
 |---|---|
 | `assessment.py` | Dependency-aware assessment and deterministic routing |
 | `change_context.py` | Snapshot-bound changed-file, hunk, intent, and repository context |
+| `symbol_index.py` | Deterministic Python symbol identity and syntactic change classification |
 | `snapshot.py` | Deterministic clean/dirty Git code-state identity |
 | `pytest_reporter.py` | Hook-generated authoritative pytest outcome report |
 | `test_evidence.py` | Snapshot-bound structured pytest evidence and artifact producer |
@@ -205,6 +206,20 @@ missing fields. Working-tree scans intentionally report a missing `base_sha`;
 commit-range contexts validate both revisions and require the requested head to
 match the checked-out snapshot. Symbol, ownership, dependency, and relevant-test
 context are deliberately reserved for separate reviewable increments.
+
+## Changed-symbol context
+
+Python changes are indexed by deterministic identities derived from file path,
+qualified name, and symbol kind—not line number. Base/head AST comparison marks
+functions, async functions, methods, nested functions, and classes as added,
+modified, or deleted; records source ranges, decorators, potential public
+visibility, signature/body hashes, and maps changed hunks to containing symbols.
+
+Syntax failures and unsupported rename/copy cases produce partial context rather
+than false symbol absence. File renames and symbol moves are not yet resolved as
+identity continuity across paths. This subsystem establishes only that symbols
+were syntactically affected. It does not claim they are buggy, insecure,
+breaking, or high-blast-radius.
 
 ## Feature space and evaluation
 

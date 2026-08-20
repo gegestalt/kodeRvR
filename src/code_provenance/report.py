@@ -21,6 +21,7 @@ from code_provenance.feature_space import (
 )
 from code_provenance.repository import recent_commit_metadata, working_tree_samples
 from code_provenance.test_evidence import TestEvidence
+from code_provenance.symbol_index import build_changed_symbol_index
 
 
 def descriptive_repository_report(
@@ -42,6 +43,7 @@ def descriptive_repository_report(
     )
     repository_features = extract_repository_features(root, change_context.target)
     change_features = extract_change_features(change_context)
+    symbol_index = build_changed_symbol_index(root, change_context)
     features = [extract_features(sample) for sample in samples]
     health = PatchHealthAssessor().assess_repository(
         root,
@@ -66,6 +68,7 @@ def descriptive_repository_report(
             "change": change_features.as_dict(),
             "claim_boundary": "descriptive and statistical signals; never authorship proof",
         },
+        "symbol_context": asdict(symbol_index),
         "files_analyzed": len(samples),
         "commits_analyzed": len(commits),
         "languages": dict(Counter(sample.language for sample in samples)),
