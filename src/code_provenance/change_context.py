@@ -65,7 +65,7 @@ class ChangeContext:
 
 def _git(root: Path, *args: str, check: bool = True) -> str:
     process = subprocess.run(
-        ["git", *args], cwd=root, capture_output=True, text=True,
+        ["git", "-c", "core.quotepath=false", *args], cwd=root, capture_output=True, text=True,
         encoding="utf-8", errors="replace",
     )
     if check and process.returncode:
