@@ -8,6 +8,7 @@ from pathlib import Path
 import numpy as np
 
 from code_provenance.assessment import PatchHealthAssessor
+from code_provenance.efficiency import EfficiencyMeasurement
 from code_provenance.features import extract_features
 from code_provenance.repository import recent_commit_metadata, working_tree_samples
 
@@ -17,6 +18,8 @@ def descriptive_repository_report(
     *,
     intent: str | None = None,
     tests_passed: bool | None = None,
+    efficiency_baseline: EfficiencyMeasurement | None = None,
+    efficiency_candidate: EfficiencyMeasurement | None = None,
 ) -> dict[str, object]:
     samples = working_tree_samples(root)
     commits = recent_commit_metadata(root)
@@ -25,6 +28,8 @@ def descriptive_repository_report(
         root,
         intent=intent,
         tests_passed=tests_passed,
+        efficiency_baseline=efficiency_baseline,
+        efficiency_candidate=efficiency_candidate,
     )
     return {
         "repository": str(root.resolve()),

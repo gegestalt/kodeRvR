@@ -12,6 +12,7 @@ from dataclasses import dataclass, field
 from enum import StrEnum
 from pathlib import Path
 from code_provenance.architecture import analyze_python_architecture
+from code_provenance.efficiency import EfficiencyMeasurement, compare_efficiency
 from code_provenance.repository import working_tree_samples
 from code_provenance.security import scan_code
 
@@ -192,6 +193,8 @@ class PatchHealthAssessor:
         *,
         intent: str | None = None,
         tests_passed: bool | None = None,
+        efficiency_baseline: EfficiencyMeasurement | None = None,
+        efficiency_candidate: EfficiencyMeasurement | None = None,
     ) -> PatchHealthAssessment:
         """Assess a working tree without executing repository code or inferring authorship."""
         root = root.resolve()
@@ -227,6 +230,22 @@ class PatchHealthAssessor:
         ) or (
             f"architecture:{architecture.modules_analyzed}-modules:"
             f"{architecture.dependency_edges}-edges:no-cycles",
+        )
+        efficiency = (
+            compare_efficiency(efficiency_baseline, efficiency_candidate)
+            if efficiency_baseline is not None and efficiency_candidate is not None
+            else None
+        )
+        efficiency_status = (
+            EvidenceStatus(efficiency.status.value)
+            if efficiency is not None else EvidenceStatus.UNKNOWN
+        )
+        efficiency_refs = (
+            tuple(
+                f"efficiency:{name}:{delta:+.4f}"
+                for name, delta in sorted(efficiency.deltas.items())
+            ) or ("efficiency:no-comparable-metrics",)
+            if efficiency is not None else ("efficiency:missing",)
         )
 
         intent_status = EvidenceStatus.PASS if intent and intent.strip() else EvidenceStatus.UNKNOWN
@@ -300,11 +319,19 @@ class PatchHealthAssessor:
             ),
             EvidenceFinding(
                 TrustDimension.EFFICIENCY_RISK,
-                EvidenceStatus.UNKNOWN,
-                0.0,
-                "medium",
-                "No benchmark or resource-regression evidence was supplied.",
-                ("efficiency:missing",),
+                efficiency_status,
+                efficiency.confidence if efficiency is not None else 0.0,
+                "high" if efficiency_status is EvidenceStatus.FAIL
+                else "medium" if efficiency_status is EvidenceStatus.UNKNOWN
+                else "info",
+                (
+                    f"Measured efficiency comparison exceeded: {', '.join(efficiency.exceeded)}."
+                    if efficiency is not None and efficiency.exceeded
+                    else "Measured efficiency comparison remained within configured budgets."
+                    if efficiency is not None and efficiency_status is EvidenceStatus.PASS
+                    else "Efficiency measurements were missing or statistically insufficient."
+                ),
+                efficiency_refs,
             ),
         )
         return self.assess(AssessmentRequest(

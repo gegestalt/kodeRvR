@@ -34,6 +34,12 @@ good design. Test-only source is excluded from the production dependency graph,
 and both absolute and relative imports are resolved without importing or
 executing repository code.
 
+Efficiency evidence compares repeated baseline and candidate measurements for
+runtime, peak process RSS, and throughput. The read-only reviewer consumes a
+versionable JSON artifact rather than executing untrusted code. Fewer than three
+repeats, missing comparable metrics, or invalid measurements produce `unknown`
+instead of false precision.
+
 ## Labels and admissible evidence
 
 Primary labels are `human`, `ai`, `hybrid`, and `unknown`. Training labels must
