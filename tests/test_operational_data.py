@@ -15,6 +15,7 @@ from code_provenance.operational_data import (
     ReuseMatch,
     load_operational_run,
     write_operational_run,
+    render_review_comment,
 )
 from code_provenance.schema import ProvenanceEstimate
 
@@ -73,3 +74,14 @@ def test_human_override_requires_reviewer_and_reason():
 def test_operational_run_rejects_invalid_evidence_reference():
     with pytest.raises(ValueError, match="evidence artifact"):
         OperationalRun(**{**run().__dict__, "evidence_artifact_ids": ()})
+
+
+def test_review_comment_contains_uncertainty_evidence_and_next_action():
+    comment = render_review_comment(run())
+
+    assert "hybrid" in comment
+    assert "50%" in comment
+    assert "OOD: in_distribution" in comment
+    assert "pytest:abc" in comment
+    assert "inspect_changed_symbols_and_ci" in comment
+    assert "not authorship proof" in comment

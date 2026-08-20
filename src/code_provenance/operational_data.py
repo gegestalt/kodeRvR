@@ -190,3 +190,39 @@ def load_operational_run(path: Path) -> OperationalRun:
         observed_label=payload.get("observed_label", "unknown"),
         label_source=payload.get("label_source", "unlabelled"),
     )
+
+
+def render_review_comment(run: OperationalRun) -> str:
+    """Render a deterministic, evidence-linked review summary for PRs or commits."""
+    estimate = run.estimate
+    if estimate is None:
+        prediction = "Unavailable"
+        confidence = "Unavailable"
+        uncertainty = "No model estimate supplied"
+    else:
+        prediction = estimate.predicted_label
+        confidence = f"{estimate.confidence:.0%}"
+        uncertainty = f"OOD: {run.explanation.ood_status if run.explanation else 'unknown'}; " \
+            f"abstained: {'yes' if estimate.abstained else 'no'}"
+    lines = [
+        "## Provenance review signal",
+        "",
+        f"- **Estimate:** `{prediction}`",
+        f"- **Confidence:** `{confidence}`",
+        f"- **Uncertainty:** {uncertainty}",
+        f"- **Decision:** `{run.decision.value}`",
+        f"- **Evidence:** {', '.join(f'`{item}`' for item in run.evidence_artifact_ids)}",
+        f"- **Public reuse considered:** `{'yes' if run.reuse_matches else 'no'}`",
+    ]
+    if run.explanation is not None:
+        lines.extend([
+            "",
+            "### Review guidance",
+            *[f"- `{item['name']}`: {item.get('direction', 'supporting signal')}" for item in run.explanation.top_features],
+            f"- **Next action:** `{run.explanation.reviewer_action}`",
+            f"- **Missing evidence:** {', '.join(run.explanation.missing_evidence) or 'none recorded'}",
+        ])
+    if run.human_override is not None:
+        lines.extend(["", f"**Human override:** `{run.human_override.decision.value}` by `{run.human_override.reviewer_id}`."])
+    lines.extend(["", "> These signals are not authorship proof and should not replace human review."])
+    return "\n".join(lines) + "\n"
