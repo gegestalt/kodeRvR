@@ -6,16 +6,19 @@ import subprocess
 import numpy as np
 
 from code_provenance.change_context import ChangeIntent, build_change_context
+from code_provenance.dependency_context import build_dependency_context
 from code_provenance.feature_space import (
     FEATURE_DEFINITIONS,
     FeatureFamily,
     FeatureScope,
     extract_change_features,
+    extract_dependency_features,
     extract_repository_features,
     sample_feature_vector,
 )
 from code_provenance.features import FEATURE_NAMES
 from code_provenance.schema import AuthorshipLabel
+from code_provenance.symbol_index import build_changed_symbol_index
 from test_code_provenance import sample
 
 
@@ -61,3 +64,54 @@ def test_repository_and_change_extractors_have_distinct_scopes(tmp_path: Path):
     assert change.scope is FeatureScope.CHANGE
     assert change.as_dict()["change_files"] == 1
     assert change.as_dict()["change_churn"] >= 3
+
+
+def test_dependency_features_expose_graph_quality_and_changed_symbol_impact(tmp_path: Path):
+    git(tmp_path, "init", "-q")
+    git(tmp_path, "config", "user.name", "Fixture")
+    git(tmp_path, "config", "user.email", "fixture@example.test")
+    (tmp_path / "app.py").write_text(
+        "def helper():\n    return 1\n\ndef run():\n    return helper()\n",
+        encoding="utf-8",
+    )
+    (tmp_path / "consumer.py").write_text(
+        "from app import helper\n\ndef use():\n    return helper()\n",
+        encoding="utf-8",
+    )
+    git(tmp_path, "add", "app.py", "consumer.py")
+    git(tmp_path, "commit", "-qm", "base")
+    (tmp_path / "app.py").write_text(
+        "def helper():\n    return 2\n\ndef run():\n    return helper()\n",
+        encoding="utf-8",
+    )
+    context = build_change_context(tmp_path, intent=ChangeIntent("Change helper", "test"))
+    symbols = build_changed_symbol_index(tmp_path, context)
+    dependencies = build_dependency_context(tmp_path, context, symbols)
+
+    vector = extract_dependency_features(dependencies)
+    values = vector.as_dict()
+
+    assert vector.scope is FeatureScope.SYMBOL
+    assert values["dependency_nodes"] >= 4
+    assert values["dependency_resolved_edges"] >= 2
+    assert values["dependency_unresolved_ratio"] < 1.0
+    assert values["dependency_changed_symbol_count"] == 1
+    assert values["dependency_max_transitive_dependents"] >= 1
+    assert np.isfinite(list(values.values())).all()
+
+
+def test_dependency_features_are_finite_for_an_empty_repository(tmp_path: Path):
+    git(tmp_path, "init", "-q")
+    git(tmp_path, "config", "user.name", "Fixture")
+    git(tmp_path, "config", "user.email", "fixture@example.test")
+    git(tmp_path, "commit", "--allow-empty", "-qm", "empty")
+    context = build_change_context(tmp_path)
+    symbols = build_changed_symbol_index(tmp_path, context)
+    dependencies = build_dependency_context(tmp_path, context, symbols)
+
+    values = extract_dependency_features(dependencies).as_dict()
+
+    assert values["dependency_nodes"] == 0
+    assert values["dependency_edges"] == 0
+    assert values["dependency_changed_symbol_count"] == 0
+    assert np.isfinite(list(values.values())).all()

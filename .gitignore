@@ -10,6 +10,7 @@ data/**/*.parquet
 data/code_provenance/corpus/
 data/code_health/test_fixtures/raw/
 .cache/code_health/
+results/random_repository_demo*.json
 
 # --- virtualenv ---
 .venv/

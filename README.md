@@ -192,6 +192,46 @@ The example JSON files are **demonstration-only**. They do not prove that the
 current snapshot was benchmarked, evaluated by a production OOD detector, or
 validated by CI. Snapshot or commit mismatches are integrity failures.
 
+### Random public-repository demonstration
+
+Fetch one randomly selected repository from the curated, immutable demo
+manifest and generate a complete static feature report:
+
+```bash
+PYTHONPATH=src .venv/bin/python scripts/demo_random_repository.py
+```
+
+Make selection reproducible, choose a known fixture, or limit verbose per-file
+vectors:
+
+```bash
+PYTHONPATH=src .venv/bin/python scripts/demo_random_repository.py \
+  --seed 42 --max-file-vectors 5
+
+PYTHONPATH=src .venv/bin/python scripts/demo_random_repository.py \
+  --repository-id itsdangerous \
+  --output results/itsdangerous_demo.json
+```
+
+The command prints a compact terminal summary and writes detailed JSON. Useful
+views include:
+
+```bash
+jq '.summary' results/random_repository_demo.json
+jq '.repository_features, .change_features' results/random_repository_demo.json
+jq '.changed_symbols' results/random_repository_demo.json
+jq '.file_feature_vectors[0]' results/random_repository_demo.json
+jq '.feature_metadata.cyclomatic_complexity' results/random_repository_demo.json
+```
+
+The report explains the pipeline and calculations, records all 60 feature
+definitions, preserves unresolved dependencies, and separates repository,
+change, symbol, dependency, and file evidence. Randomness selects only among
+the versioned entries in
+[`data/code_health/demo_repositories.json`](data/code_health/demo_repositories.json).
+Arbitrary repositories are rejected. Cloned code is treated as untrusted and
+is never imported, installed, tested, or executed.
+
 ## Interpreting results
 
 `request_targeted_evidence` means the available evidence is insufficient and

@@ -19,7 +19,11 @@ from code_provenance.feature_space import (
     extract_change_features,
     extract_repository_features,
 )
-from code_provenance.repository import recent_commit_metadata, working_tree_samples
+from code_provenance.repository import (
+    build_provenance_observations,
+    recent_commit_metadata,
+    working_tree_samples,
+)
 from code_provenance.test_evidence import TestEvidence
 from code_provenance.symbol_index import build_changed_symbol_index
 from code_provenance.dependency_context import build_dependency_context
@@ -85,6 +89,7 @@ def descriptive_repository_report(
         "files_analyzed": len(samples),
         "commits_analyzed": len(commits),
         "languages": dict(Counter(sample.language for sample in samples)),
+        "provenance_observations": build_provenance_observations(commits),
         "total_nonblank_lines": int(sum(item["nonblank_lines"] for item in features)),
         "median_file_lines": float(np.median([item["lines"] for item in features])) if features else 0.0,
         "median_commit_additions": float(np.median([item["additions"] for item in commits])) if commits else 0.0,

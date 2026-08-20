@@ -10,6 +10,7 @@ from pathlib import Path
 import subprocess
 
 from code_provenance.change_context import ChangeContext
+from code_provenance.dependency_context import DependencyContext
 from code_provenance.evidence import EvidenceTarget
 from code_provenance.features import FEATURE_NAMES, extract_features
 from code_provenance.schema import CodeSample
@@ -193,3 +194,34 @@ def extract_change_features(context: ChangeContext) -> FeatureVector:
         "change_binary_files": sum(item.binary for item in context.changed_files),
     }
     return _vector(context.target.snapshot_id, FeatureScope.CHANGE, FeatureFamily.CHANGE, values)
+
+
+def extract_dependency_features(context: DependencyContext) -> FeatureVector:
+    """Summarize static dependency coverage and changed-symbol impact."""
+    resolved_edges = sum(edge.resolved for edge in context.edges)
+    symbol_nodes = sum(node.kind.value == "symbol" for node in context.nodes)
+    module_nodes = sum(node.kind.value == "module" for node in context.nodes)
+    impacts = context.impacts
+    values = {
+        "dependency_nodes": len(context.nodes),
+        "dependency_modules": module_nodes,
+        "dependency_symbols": symbol_nodes,
+        "dependency_edges": len(context.edges),
+        "dependency_resolved_edges": resolved_edges,
+        "dependency_unresolved_edges": len(context.edges) - resolved_edges,
+        "dependency_unresolved_ratio": len(context.unresolved) / max(len(context.edges), 1),
+        "dependency_graph_density": len(context.edges) / max(len(context.nodes) * (len(context.nodes) - 1), 1),
+        "dependency_changed_symbol_count": len(impacts),
+        "dependency_direct_dependents": sum(item.direct_dependent_count for item in impacts),
+        "dependency_max_transitive_dependents": max(
+            (item.transitive_dependent_count for item in impacts), default=0
+        ),
+        "dependency_max_impact_depth": max((item.dependency_depth for item in impacts), default=0),
+        "dependency_affected_modules": max((item.affected_module_count for item in impacts), default=0),
+    }
+    return _vector(
+        context.target.snapshot_id,
+        FeatureScope.SYMBOL,
+        FeatureFamily.DEPENDENCY,
+        values,
+    )

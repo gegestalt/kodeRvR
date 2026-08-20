@@ -9,7 +9,11 @@ import pytest
 from code_provenance.dataset import load_manifest
 from code_provenance.features import FEATURE_NAMES, extract_features
 from code_provenance.model import ModelConfig, ProvenanceClassifier
-from code_provenance.repository import recent_commit_metadata, working_tree_samples
+from code_provenance.repository import (
+    build_provenance_observations,
+    recent_commit_metadata,
+    working_tree_samples,
+)
 from code_provenance.reuse import PublicReuseIndex
 from code_provenance.schema import AuthorshipLabel, CodeSample, EvidenceSource
 from code_provenance.security import package_risk, python_dependencies, scan_code
@@ -97,3 +101,13 @@ def test_repository_extraction_is_read_only_and_supported():
     commits = recent_commit_metadata(root, limit=3)
     assert any(item.path.endswith(".py") for item in samples)
     assert 1 <= len(commits) <= 3
+
+
+def test_explicit_provenance_markers_remain_observations_not_labels():
+    result = build_provenance_observations([{
+        "commit_sha": "abc",
+        "commit_message": "Add feature\n\nCo-authored-by: Copilot <bot@example.test>",
+    }])
+    assert result["explicit_ai_marker_count"] == 1
+    assert result["commits"][0]["explicit_ai_marker"] is True
+    assert result["claim"] == "observations are not authorship ground truth"

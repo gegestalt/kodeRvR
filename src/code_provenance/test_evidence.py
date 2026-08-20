@@ -19,6 +19,10 @@ from code_provenance.evidence import (
 from code_provenance.snapshot import CodeSnapshot, capture_code_snapshot
 
 
+# This module contains production evidence helpers, not pytest test cases.
+__test__ = False
+
+
 @dataclass(frozen=True)
 class ObservedTestCase:
     node_id: str

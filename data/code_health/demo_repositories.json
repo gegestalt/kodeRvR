@@ -1,0 +1,32 @@
+{
+  "repositories": [
+    {
+      "fixture_id": "itsdangerous",
+      "source_url": "https://github.com/pallets/itsdangerous.git",
+      "base_revision": "b0410878b9e46bd4c008eeac8cf4ed3d345e69b4",
+      "head_revision": "672971d66a2ef9f85151e53283113f33d642dabd",
+      "license": "BSD-3-Clause"
+    },
+    {
+  "fixture_id": "modular",
+  "source_url": "https://github.com/modular/modular.git",
+  "base_revision": "3e335a350d5392695562253599dd5e009bfdd213",
+  "head_revision": "90418f55104a8ea16ac64a3165aef5ed4d476b63",
+  "license": "Apache-2.0 WITH LLVM-exception"
+},
+    {
+      "fixture_id": "httpx",
+      "source_url": "https://github.com/encode/httpx.git",
+      "base_revision": "ae1b9f66238f75ced3ced5e4485408435de10768",
+      "head_revision": "b5addb64f0161ff6bfe94c124ef76f6a1fba5254",
+      "license": "BSD-3-Clause"
+    },
+    {
+      "fixture_id": "hello-world",
+      "source_url": "https://github.com/octocat/Hello-World.git",
+      "base_revision": "762941318ee16e59dabbacb1b4049eec22f0d303",
+      "head_revision": "7fd1a60b01f91b314f59955a4e4d4e80d8edf11d",
+      "license": "repository-specific"
+    }
+  ]
+}

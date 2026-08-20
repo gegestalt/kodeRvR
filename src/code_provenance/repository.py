@@ -5,6 +5,7 @@ from __future__ import annotations
 from dataclasses import dataclass
 import hashlib
 from pathlib import Path
+import re
 import subprocess
 
 from code_provenance.schema import CodeSample
@@ -16,6 +17,13 @@ LANGUAGES = {
     ".c": "c", ".h": "c", ".cc": "cpp", ".cpp": "cpp", ".rs": "rust",
     ".go": "go", ".rb": "ruby", ".php": "php", ".swift": "swift",
 }
+
+_EXPLICIT_AI_MARKERS = re.compile(
+    r"(?:co-authored-by:.*(?:copilot|chatgpt|openai|claude|gemini)|"
+    r"(?:generated|written|assisted)\s+by\s+(?:copilot|chatgpt|openai|claude|gemini)|"
+    r"(?:copilot|chatgpt|openai|claude|gemini)\s+(?:generated|assisted))",
+    re.IGNORECASE,
+)
 
 
 def _git(root: Path, *args: str) -> str:
@@ -82,3 +90,21 @@ def recent_commit_metadata(root: Path, *, limit: int = 500) -> list[dict[str, ob
             "files_changed": files, "additions": additions, "deletions": deletions,
         })
     return commits
+
+
+def build_provenance_observations(commits: list[dict[str, object]]) -> dict[str, object]:
+    """Summarize explicit provenance clues without converting them to labels."""
+    observed = [
+        {
+            "commit_sha": commit["commit_sha"],
+            "commit_message": commit["commit_message"],
+            "explicit_ai_marker": bool(_EXPLICIT_AI_MARKERS.search(str(commit["commit_message"]))),
+        }
+        for commit in commits
+    ]
+    return {
+        "commit_count": len(observed),
+        "explicit_ai_marker_count": sum(item["explicit_ai_marker"] for item in observed),
+        "commits": observed,
+        "claim": "observations are not authorship ground truth",
+    }
