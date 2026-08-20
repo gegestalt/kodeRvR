@@ -1,65 +1,140 @@
-# AI Code Provenance & Security Intelligence
+# Adaptive Code Review & Patch Health Intelligence
 
-A research-grade AI codebase health reviewer for dependency-aware patch trust,
-source-code provenance, public-code reuse, OOD-aware uncertainty, and security
-review intelligence.
+A research-grade system for evidence-driven patch assessment, repository-aware
+risk analysis, security review, architecture analysis, uncertainty handling,
+and adaptive AI-assisted review. Code provenance is an optional evidence source,
+not the product's decision target.
 
-The system estimates whether code is statistically consistent with verified
-`human`, `ai`, or `hybrid` training distributions. It reports `unknown` when
-confidence is insufficient or the sample is out of distribution. It never
-claims that coding style proves who—or which model—wrote code.
+The system evaluates a code change using independent, traceable evidence and
+routes it toward standard review, additional evidence collection, or specialist
+human review.
 
-## What it analyzes
+> AI may propose and investigate findings, but review decisions must remain
+> grounded in attributable evidence and deterministic safety constraints.
 
-```text
-Git repository
-├── code DNA: lexical style, tokens, comments and identifiers
-├── structure: Python AST and conservative cross-language syntax features
-├── Git DNA: commit message and change-shape evidence
-├── reuse: token-shingle overlap with an audited public corpus
-└── security: unsafe API, secret and dependency review signals
-                         ↓
-       calibrated human / AI / hybrid probabilities
-                         ↓
-             uncertainty + OOD abstention
-                         ↓
-       explained provenance and security-review report
-```
+An AI model's opinion is not proof that a patch is correct, secure, efficient,
+human-authored, or safe to merge.
 
-## Scientific claim boundary
-
-The proposed organic-code index is:
+## Patch-review pipeline
 
 ```text
-(P(human) + 0.5 × P(hybrid)) × (1 − public_reuse_fraction)
+                            Code change
+                                 │
+                                 ▼
+                        Repository context
+                                 │
+          ┌──────────────────────┼──────────────────────┐
+          ▼                      ▼                      ▼
+       Security              Architecture           Functional
+       evidence                evidence               evidence
+          │                      │                      │
+          ├──────────────────────┼──────────────────────┤
+          ▼                      ▼                      ▼
+      Efficiency             Provenance          OOD / context
+       evidence                signals               quality
+          └──────────────────────┼──────────────────────┘
+                                 ▼
+                         Evidence artifacts
+                                 │
+                                 ▼
+                     Integrity + snapshot binding
+                                 │
+                                 ▼
+                    Dependency-aware assessment
+                                 │
+                                 ▼
+                      Explainable review action
 ```
 
-It is suppressed when the model abstains. This is a transparent model-derived
-index, not a literal measurement of human keystrokes. Public reuse is kept
-separate from authorship because both humans and models reuse public code.
+Current actions are:
 
-Training labels must come from declared authorship, controlled generation,
-verified coding-agent accounts, or human-reviewed provenance. Heuristic labels
-are rejected as training ground truth. Repository/author groups and
-near-duplicate clusters must remain disjoint across splits.
+- `allow_standard_review`
+- `request_targeted_evidence`
+- `require_security_review`
+- `require_architecture_review`
+- `require_human_rewrite_or_validation`
+- `block_pending_evidence`
+
+`allow_standard_review` means no available evidence triggered a mandatory
+escalation. It does **not** mean safe to merge and is never an automatic merge
+authorization.
+
+## Safety kernel
+
+The reviewer operates over dependent evidence instead of collapsing unrelated
+signals into one opaque trust score:
+
+```text
+Evidence integrity
+        ↓
+Evidence sufficiency
+        ↓
+Intent alignment
+        ↓
+Functional evidence
+        ↓
+Architectural compatibility
+        ↓
+Security risk
+        ↓
+Efficiency risk
+        ↓
+OOD / evidence quality
+```
+
+Provenance can contribute supporting evidence, but uncertain or AI-associated
+provenance is not itself a correctness or security failure. Deterministic routing
+is the safety kernel: future learned policies may prioritize investigation, but
+must not override integrity failures, mandatory security escalation, compliance
+rules, or abstention boundaries.
+
+## Evidence and attestation
+
+Review conclusions reference explicit artifacts rather than unstructured model
+claims. Artifacts may represent tests, CI, static analysis, architecture,
+performance, dependencies, repository context, OOD assessment, or provenance.
+
+| Level | Meaning |
+|---|---|
+| `asserted` | A caller supplied a claim; the system did not observe it. |
+| `observed` | The local process produced and recorded the result. |
+| `verified` | An independent trusted producer verified it; planned for CI. |
+| `demonstration` | Fixture data exercises a contract, not the scanned patch. |
+
+Evidence integrity and substantive outcome are separate questions. A passing
+test report for the wrong code snapshot is rejected. `--run-tests` hashes HEAD,
+tracked changes, and untracked contents before running pytest, then records the
+command, framework version, counts, duration, exit code, output hash, snapshot
+identity, and `observed` attestation. An empty suite cannot pass the functional
+evidence gate.
+
+The compatibility flags `--tests-passed` and `--tests-failed` are unverified
+caller assertions. They remain visible but cannot satisfy mandatory functional
+evidence.
 
 ## Current implementation
 
 | Component | Purpose |
 |---|---|
-| `assessment.py` | Deep patch-level health assessment and explainable review routing |
-| `architecture.py` | Conservative Python dependency-cycle and parse-integrity evidence |
-| `efficiency.py` | Repeated baseline-versus-candidate runtime, RSS, and throughput evidence |
-| `evidence_quality.py` | Named OOD detector, context coverage, and schema-support gate |
-| `evidence.py` | Versioned commit-bound evidence artifacts, claims, lineage, and integrity |
-| `repository.py` | Read-only tracked-file and commit extraction |
-| `features.py` | Interpretable lexical, AST and Git features |
-| `reuse.py` | Local token-shingle public-reuse index |
-| `dataset.py` | Verified-label corpus contract |
-| `model.py` | Group-safe classification, calibration and OOD abstention |
-| `security.py` | Static review and supply-chain signals |
-| `report.py` | Repository-level descriptive report |
-| `provenance_cli.py` | Command-line entry point |
+| `assessment.py` | Dependency-aware assessment and deterministic routing |
+| `snapshot.py` | Deterministic clean/dirty Git code-state identity |
+| `test_evidence.py` | Snapshot-bound observed pytest evidence |
+| `evidence.py` | Artifacts, claims, lineage, integrity, and attestation |
+| `architecture.py` | Python dependency and parse-integrity analysis |
+| `efficiency.py` | Repeated runtime, RSS, and throughput comparison |
+| `evidence_quality.py` | OOD metadata, context coverage, and schema checks |
+| `security.py` | Lightweight static security and supply-chain signals |
+| `repository.py` | Read-only repository and commit extraction |
+| `features.py` | Lexical, AST, and Git-derived features |
+| `reuse.py` | Public-code token-shingle reuse analysis |
+| `dataset.py` | Verified provenance-corpus contracts |
+| `model.py` | Group-safe provenance classification and abstention |
+| `report.py` | Repository and patch-health reporting |
+| `provenance_cli.py` | Command-line interface |
+
+Patch health works without a provenance model. In that case, the system reports
+`UNAVAILABLE_UNTIL_A_LABELLED_GROUP_DISJOINT_MODEL_IS_FITTED` instead of
+inventing an authorship percentage.
 
 ## Run
 
@@ -68,33 +143,48 @@ python3 -m venv .venv
 source .venv/bin/activate
 pip install -r requirements.txt
 
-python src/provenance_cli.py scan /path/to/repository
-python src/provenance_cli.py scan . \
-  --intent "Implement dependency-aware patch health review" \
+.venv/bin/python -m pytest
+.venv/bin/python src/provenance_cli.py scan /path/to/repository
+```
+
+Run snapshot-bound local tests during assessment:
+
+```bash
+.venv/bin/python src/provenance_cli.py scan . \
+  --intent "Implement snapshot-bound functional evidence" \
+  --run-tests
+```
+
+Optional example inputs exercise additional contracts:
+
+```bash
+.venv/bin/python src/provenance_cli.py scan . \
+  --intent "Exercise the complete assessment contract" \
   --run-tests \
   --efficiency-evidence examples/efficiency_evidence.json \
   --evidence-quality examples/evidence_quality.json \
   --evidence-ledger examples/evidence_ledger.json
-pytest
-jupyter lab notebooks/07_ai_code_provenance_security_lab.ipynb
 ```
 
-The scan command intentionally returns
-`UNAVAILABLE_UNTIL_A_LABELLED_GROUP_DISJOINT_MODEL_IS_FITTED` instead of an AI
-percentage when no verified model exists.
+The example JSON files are **demonstration-only**. They do not prove that the
+current snapshot was benchmarked, evaluated by a production OOD detector, or
+validated by CI. Snapshot or commit mismatches are integrity failures.
 
-The `patch_health` result remains available without a fitted provenance model.
-It evaluates dependent evidence and returns an explainable review action.
-Unknown provenance does not escalate an otherwise healthy patch. Missing intent,
-tests, architecture, efficiency, repository context, or OOD evidence lowers
-confidence and remains visible in the decision path.
+## Interpreting results
 
-`--run-tests` captures a deterministic identity for the current Git commit and
-working-tree content before invoking pytest. The report records the command,
-pytest version, counts, duration, exit code, output hash, snapshot identity, and
-an `observed` attestation. The compatibility flags `--tests-passed` and
-`--tests-failed` are only caller assertions: they are reported as unverified and
-cannot satisfy the mandatory functional-evidence gate.
+`request_targeted_evidence` means the available evidence is insufficient and
+the report identifies what is missing. A low-confidence
+`allow_standard_review` means no mandatory escalation was found in incomplete
+context; it does not mean bug-free, secure, efficient, or human-authored.
+Confidence represents evidence quality and context completeness.
+
+## Security scope
+
+The bundled analyzer is intentionally lightweight. It surfaces selected unsafe
+APIs, credential-like literals, and supply-chain signals, but does not replace
+CodeQL, Semgrep, secret scanners, dependency vulnerability scanners, or
+language-specific analyzers. Future integrations should preserve their findings
+as distinct evidence artifacts rather than hiding them in one score.
 
 ## Engineering contract
 
@@ -102,62 +192,65 @@ Implementation follows test-driven development:
 
 1. Add a failing behavioral or contract test.
 2. Implement the smallest change that passes it.
-3. Refactor while the focused test remains green.
+3. Refactor while focused tests remain green.
 4. Run the complete regression suite.
-5. Update documentation with the behavior.
+5. Document observable behavior.
 
 Every defect fix requires a regression test. Randomness must be seeded, evidence
-fixtures must be reproducible, and no feature is complete while its tests fail.
+fixtures reproducible, and no feature is complete while its tests fail.
 
 ## External test fixtures
 
-Fetch a small, categorized test slice without downloading complete corpora:
+Fetch a small categorized slice without downloading complete corpora:
 
 ```bash
 PYTHONPATH=src .venv/bin/python scripts/fetch_test_fixtures.py --limit 3
 .venv/bin/python -m pytest
 ```
 
-The local cache contains three SWE-bench Lite issue/patch cases, three DevGPT
-AI-association records, and three official GitHub CodeQL security query-test
-files. The cache is ignored; the fetcher, immutable revisions, hashes, category
-contract, and [scientific-use table](data/code_health/test_fixtures/SOURCE.md)
-are versioned.
+The ignored cache contains SWE-bench Lite issue/patch cases, DevGPT
+AI-association records, and official GitHub CodeQL query tests. The fetcher,
+immutable revisions, hashes, category contract, and
+[scientific-use table](data/code_health/test_fixtures/SOURCE.md) are versioned.
+These categories are not interchangeable and none supplies defensible human/AI
+authorship ground truth.
 
-These categories are intentionally not interchangeable. SWE-bench supports
-correctness evaluation, DevGPT supports AI-link association analysis, and
-CodeQL fixtures support analyzer regression. None of them supplies defensible
-human/AI authorship ground truth.
+## Provenance research boundary
 
-The current lightweight security regexes do not detect the fetched CodeQL SQL
-injection oracle. This is recorded as analyzer coverage evidence, not hidden by
-changing fixture labels.
+The optional organic-code index is:
 
-## Data contract
+```text
+(P(human) + 0.5 × P(hybrid)) × (1 − public_reuse_fraction)
+```
 
-Place corpus metadata at `data/code_provenance/manifest.csv`; see
-[`data/code_provenance/README.md`](data/code_provenance/README.md). Bulk code is
-ignored. Every public source needs its URL, immutable revision, license,
-acquisition date and content hash.
+It is suppressed when the model abstains. It is a model-derived index, not a
+measurement of human keystrokes. Public reuse remains separate because humans
+and models both reuse public code. Labels must come from declared authorship,
+controlled generation, verified coding-agent accounts, or human review.
+Repository/author groups and near-duplicate clusters must remain split-disjoint.
 
-## Research protocol
+Corpus metadata belongs in `data/code_provenance/manifest.csv`; see the
+[data contract](data/code_provenance/README.md). The leakage-controlled protocol
+is in the [research design](docs/CODE_PROVENANCE_RESEARCH_DESIGN.md), with an
+interactive [notebook](notebooks/07_ai_code_provenance_security_lab.ipynb).
 
-The complete design and leakage controls are documented in
-[`docs/CODE_PROVENANCE_RESEARCH_DESIGN.md`](docs/CODE_PROVENANCE_RESEARCH_DESIGN.md).
-The interactive walkthrough is
-[`notebooks/07_ai_code_provenance_security_lab.ipynb`](notebooks/07_ai_code_provenance_security_lab.ipynb).
+## Roadmap
+
+1. Produce independently verified CI attestations bound to immutable commits
+   and artifact hashes.
+2. Add adapters for CodeQL, Semgrep, secret scanning, dependency audits, and
+   language-native test and coverage reports.
+3. Compare base and candidate snapshots at PR, commit, file, function, and hunk
+   levels while retaining PR/commit as the primary decision unit.
+4. Add an AI investigator that explains evidence, retrieves context, and
+   proposes checks without controlling the safety kernel.
+5. Learn an adaptive policy for analyzer selection, context retrieval,
+   prioritization, and escalation cost—not merge authority.
+6. Evaluate calibration, abstention, false-negative risk, latency, resources,
+   and policy behavior on group-disjoint repositories and realistic patches.
 
 ## Project skill
 
-Invoke `$grill-me` (or ask to be grilled) before a major architecture or research
-decision. The project-scoped skill inspects the repository first, maps the design
-tree, and asks one decision question at a time with a recommended answer. It does
-not implement anything until shared understanding is explicitly confirmed.
-
-## Current limitation
-
-The patch-health interface and tested modelling contracts are implemented, but no
-verified authorship corpus is bundled. Consequently, the repository can be
-assessed with deterministic evidence rules today, but a scientifically
-defensible provenance distribution remains blocked until controlled data is
-acquired.
+Invoke `$grill-me` before a major architecture or research decision. The
+project-scoped skill inspects the repository, maps dependent decisions, and asks
+one focused question at a time before implementation.
