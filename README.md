@@ -143,6 +143,7 @@ evidence.
 | `security.py` | Lightweight static security and supply-chain signals |
 | `repository.py` | Read-only repository and commit extraction |
 | `features.py` | Lexical, AST, and Git-derived features |
+| `feature_space.py` | Typed feature metadata plus repository/change aggregate vectors |
 | `reuse.py` | Public-code token-shingle reuse analysis |
 | `dataset.py` | Verified provenance-corpus contracts |
 | `model.py` | Group-safe provenance classification and abstention |
@@ -204,6 +205,31 @@ missing fields. Working-tree scans intentionally report a missing `base_sha`;
 commit-range contexts validate both revisions and require the requested head to
 match the checked-out snapshot. Symbol, ownership, dependency, and relevant-test
 context are deliberately reserved for separate reviewable increments.
+
+## Feature space and evaluation
+
+The provenance research vector currently contains 60 finite lexical, layout,
+identifier, documentation, AST, complexity, annotation, commit-message, and
+change-shape features. Every feature has explicit scope, family, producer,
+language support, missingness, normalization, leakage risk, reliability, and
+scientific-role metadata. Repository and patch aggregates are separate vectors;
+they are not flattened into the authorship model.
+
+Repository reports include tracked-file composition, text size, file-size
+distribution, test-file ratio, extension diversity, and language entropy.
+Change reports include file and hunk counts, additions, deletions, churn,
+subsystem dispersion, test-file ratio, and binary-file count.
+
+Group-disjoint model evaluation reports macro and weighted F1, balanced
+accuracy, MCC, per-class precision/recall/F1/support, confusion counts, log
+loss, multiclass Brier score, ten-bin expected calibration error, ROC-AUC,
+PR-AUC, and a deterministic group-bootstrap confidence interval. These are
+research diagnostics, not evidence that style proves authorship.
+
+Symbol graph, dependency centrality, duplication, changed-code coverage,
+ownership history, learning curves, seed stability, permutation importance,
+selective-risk curves, OOD benchmark metrics, and resource profiling remain
+explicit follow-up experiments rather than fabricated placeholders.
 
 ## Security scope
 

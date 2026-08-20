@@ -94,3 +94,6 @@ def test_repository_report_exposes_typed_change_context(tmp_path: Path):
     assert context["intent"] == {"text": "Change VALUE", "source": "cli"}
     assert context["changed_files"][0]["path"] == "app.py"
     assert context["missing_context"] == ["base_sha"]
+    assert report["feature_space"]["model_feature_count"] >= 50
+    assert report["feature_space"]["change"]["change_files"] == 1
+    assert report["feature_space"]["repository"]["repository_files"] == 1

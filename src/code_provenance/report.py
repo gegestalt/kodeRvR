@@ -14,6 +14,11 @@ from code_provenance.efficiency import EfficiencyMeasurement
 from code_provenance.evidence import EvidenceLedger
 from code_provenance.evidence_quality import EvidenceQualityInput
 from code_provenance.features import extract_features
+from code_provenance.feature_space import (
+    FEATURE_DEFINITIONS,
+    extract_change_features,
+    extract_repository_features,
+)
 from code_provenance.repository import recent_commit_metadata, working_tree_samples
 from code_provenance.test_evidence import TestEvidence
 
@@ -35,6 +40,8 @@ def descriptive_repository_report(
         root,
         intent=ChangeIntent(intent, "cli") if intent and intent.strip() else None,
     )
+    repository_features = extract_repository_features(root, change_context.target)
+    change_features = extract_change_features(change_context)
     features = [extract_features(sample) for sample in samples]
     health = PatchHealthAssessor().assess_repository(
         root,
@@ -51,6 +58,13 @@ def descriptive_repository_report(
         "change_context": {
             **asdict(change_context),
             "missing_context": sorted(change_context.missing_context),
+        },
+        "feature_space": {
+            "model_feature_count": len(FEATURE_DEFINITIONS),
+            "families": sorted({item.family.value for item in FEATURE_DEFINITIONS.values()}),
+            "repository": repository_features.as_dict(),
+            "change": change_features.as_dict(),
+            "claim_boundary": "descriptive and statistical signals; never authorship proof",
         },
         "files_analyzed": len(samples),
         "commits_analyzed": len(commits),
