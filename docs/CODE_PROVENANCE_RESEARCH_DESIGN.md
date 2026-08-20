@@ -81,6 +81,20 @@ selective risk, coverage, OOD AUROC, and performance under formatting,
 identifier-renaming, comment-removal and human-edit perturbations. Bootstrap
 confidence intervals use repository or commit—not line—as the sampling unit.
 
+## Categorized external test data
+
+External records are assigned a narrow ground-truth scope before evaluation:
+
+- SWE-bench Lite: accepted issue/patch/test outcomes for correctness.
+- DevGPT: shared-ChatGPT-link association with development artifacts.
+- GitHub CodeQL query tests: rule-specific static-analyzer expectations.
+
+No category above is authorship ground truth. Dataset, repository, revision,
+license status, payload SHA-256, local path, and label limitations are recorded
+for every fixture. Cached payloads are rehashed after acquisition. Dataset and
+repository groups must remain disjoint when a fixture later enters a frozen
+benchmark.
+
 ## Public reuse
 
 Public reuse and AI authorship are not opposites: both humans and models reuse

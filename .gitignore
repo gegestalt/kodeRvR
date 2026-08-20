@@ -8,6 +8,7 @@ data/**/*.csv
 data/**/*.parquet
 !data/**/SOURCE.md
 data/code_provenance/corpus/
+data/code_health/test_fixtures/raw/
 
 # --- virtualenv ---
 .venv/

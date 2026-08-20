@@ -102,6 +102,30 @@ Implementation follows test-driven development:
 Every defect fix requires a regression test. Randomness must be seeded, evidence
 fixtures must be reproducible, and no feature is complete while its tests fail.
 
+## External test fixtures
+
+Fetch a small, categorized test slice without downloading complete corpora:
+
+```bash
+PYTHONPATH=src .venv/bin/python scripts/fetch_test_fixtures.py --limit 3
+.venv/bin/python -m pytest
+```
+
+The local cache contains three SWE-bench Lite issue/patch cases, three DevGPT
+AI-association records, and three official GitHub CodeQL security query-test
+files. The cache is ignored; the fetcher, immutable revisions, hashes, category
+contract, and [scientific-use table](data/code_health/test_fixtures/SOURCE.md)
+are versioned.
+
+These categories are intentionally not interchangeable. SWE-bench supports
+correctness evaluation, DevGPT supports AI-link association analysis, and
+CodeQL fixtures support analyzer regression. None of them supplies defensible
+human/AI authorship ground truth.
+
+The current lightweight security regexes do not detect the fetched CodeQL SQL
+injection oracle. This is recorded as analyzer coverage evidence, not hidden by
+changing fixture labels.
+
 ## Data contract
 
 Place corpus metadata at `data/code_provenance/manifest.csv`; see
