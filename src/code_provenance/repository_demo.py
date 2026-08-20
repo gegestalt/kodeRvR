@@ -9,6 +9,9 @@ from pathlib import Path
 import random
 import re
 import subprocess
+from typing import Any, Callable
+
+import requests
 
 from code_provenance.change_context import build_change_context
 from code_provenance.dependency_context import build_dependency_context
@@ -67,6 +70,66 @@ def select_demo_repository(
     return random.Random(seed).choice(fixtures)
 
 
+def discover_random_repository(
+    *,
+    seed: int | None = None,
+    language: str | None = None,
+    max_size_kb: int = 500_000,
+    candidates: int = 10,
+    request_get: Callable[..., Any] = requests.get,
+) -> tuple[DemoRepository, dict[str, object]]:
+    """Discover one bounded public GitHub repository and pin head to its parent."""
+    if max_size_kb < 1 or candidates < 1:
+        raise ValueError("repository size and candidate limits must be positive")
+    language_filter = f"language:{language} " if language else ""
+    query = f"{language_filter}size:<={max_size_kb}"
+    response = request_get(
+        "https://api.github.com/search/repositories",
+        params={"q": query, "sort": "updated", "order": "desc", "per_page": candidates},
+        headers={"Accept": "application/vnd.github+json"},
+        timeout=30,
+    )
+    response.raise_for_status()
+    items = [
+        item for item in response.json().get("items", [])
+        if not item.get("archived", False) and not item.get("fork", False)
+        and int(item.get("size", max_size_kb + 1)) <= max_size_kb
+    ]
+    if not items:
+        raise ValueError("GitHub returned no eligible repositories")
+    selected = random.Random(seed).choice(items)
+    full_name = str(selected.get("full_name", ""))
+    if not re.fullmatch(r"[^/\s]+/[^/\s]+", full_name):
+        raise ValueError("GitHub returned an invalid repository name")
+    commits_response = request_get(
+        f"https://api.github.com/repos/{full_name}/commits",
+        params={"per_page": 1},
+        headers={"Accept": "application/vnd.github+json"},
+        timeout=30,
+    )
+    commits_response.raise_for_status()
+    commits = commits_response.json()
+    if not isinstance(commits, list) or not commits or not commits[0].get("parents"):
+        raise ValueError("GitHub repository has no commit parent suitable for analysis")
+    head = str(commits[0].get("sha", ""))
+    base = str(commits[0]["parents"][0].get("sha", ""))
+    if not all(re.fullmatch(r"[0-9a-f]{40}", revision) for revision in (base, head)):
+        raise ValueError("GitHub returned invalid commit SHAs")
+    license_data = selected.get("license") or {}
+    license_name = license_data.get("spdx_id", "unknown") if isinstance(license_data, dict) else "unknown"
+    return DemoRepository(
+        full_name.replace("/", "--"), f"https://github.com/{full_name}.git",
+        base, head, str(license_name),
+    ), {
+        "source": "github_api",
+        "query": query,
+        "language": language,
+        "max_size_kb": max_size_kb,
+        "candidate_limit": candidates,
+        "seed": seed,
+    }
+
+
 def _git(root: Path, *arguments: str) -> str:
     return subprocess.run(
         ["git", *arguments], cwd=root, check=True, capture_output=True,
@@ -80,7 +143,7 @@ def checkout_demo_repository(fixture: DemoRepository, cache_root: Path) -> Path:
     if not destination.exists():
         destination.parent.mkdir(parents=True, exist_ok=True)
         subprocess.run(
-            ["git", "clone", "--filter=blob:none", "--no-checkout", fixture.source_url, str(destination)],
+            ["git", "clone", "--no-checkout", fixture.source_url, str(destination)],
             check=True, capture_output=True, text=True,
         )
         _git(destination, "checkout", "--detach", fixture.head_revision)
@@ -95,7 +158,8 @@ def checkout_demo_repository(fixture: DemoRepository, cache_root: Path) -> Path:
 
 
 def analyze_demo_repository(
-    root: Path, fixture: DemoRepository, *, max_file_vectors: int = 20
+    root: Path, fixture: DemoRepository, *, max_file_vectors: int = 20,
+    selection_scope: str = "curated_manifest_only",
 ) -> dict[str, object]:
     if max_file_vectors < 1:
         raise ValueError("max_file_vectors must be positive")
@@ -131,7 +195,7 @@ def analyze_demo_repository(
         "safety": {
             "code_executed": False,
             "analysis_mode": "static_read_only",
-            "selection_scope": "curated_manifest_only",
+            "selection_scope": selection_scope,
         },
         "snapshot": asdict(snapshot),
         "pipeline": [

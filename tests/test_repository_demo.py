@@ -9,6 +9,7 @@ import pytest
 from code_provenance.repository_demo import (
     DemoRepository,
     analyze_demo_repository,
+    discover_random_repository,
     load_demo_repositories,
     select_demo_repository,
 )
@@ -51,6 +52,61 @@ def test_seeded_random_repository_selection_is_deterministic():
         for index in range(3)
     )
     assert select_demo_repository(fixtures, seed=42) == select_demo_repository(fixtures, seed=42)
+
+
+def test_github_discovery_resolves_an_immutable_parent_and_records_query():
+    responses = {
+        "search": {"items": [{"full_name": "owner/project", "size": 12, "archived": False, "fork": False, "license": None}]},
+        "commits": [{"sha": "b" * 40, "parents": [{"sha": "a" * 40}]}],
+    }
+
+    class Response:
+        def __init__(self, payload):
+            self.payload = payload
+
+        def raise_for_status(self):
+            return None
+
+        def json(self):
+            return self.payload
+
+    def fake_get(url, *, params=None, headers=None, timeout=None):
+        del headers, timeout
+        return Response(responses["search" if "/search/" in url else "commits"])
+
+    fixture, query = discover_random_repository(
+        seed=7, language="python", max_size_kb=100, request_get=fake_get
+    )
+
+    assert fixture.fixture_id == "owner--project"
+    assert fixture.base_revision == "a" * 40
+    assert fixture.head_revision == "b" * 40
+    assert query["source"] == "github_api"
+    assert query["language"] == "python"
+
+
+def test_github_discovery_can_search_all_supported_languages():
+    class Response:
+        def raise_for_status(self):
+            return None
+
+        def json(self):
+            return {"items": [{
+                "full_name": "owner/project", "size": 12,
+                "archived": False, "fork": False,
+            }]}
+
+    def fake_get(url, *, params=None, headers=None, timeout=None):
+        del headers, timeout
+        if "/search/" in url:
+            assert "language:" not in params["q"]
+            return Response()
+        response = Response()
+        response.json = lambda: [{"sha": "b" * 40, "parents": [{"sha": "a" * 40}]}]
+        return response
+
+    _, query = discover_random_repository(language=None, request_get=fake_get)
+    assert query["language"] is None
 
 
 def test_unknown_repository_id_is_rejected():
