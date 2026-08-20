@@ -136,6 +136,7 @@ evidence.
 | `symbol_index.py` | Deterministic Python symbol identity and syntactic change classification |
 | `dependency_context.py` | Conservative Python import/call graph and bounded dependent traversal |
 | `test_relevance.py` | Deterministic pytest inventory, structural relevance, and observed outcome correlation |
+| `ownership_context.py` | Local CODEOWNERS discovery, parsing, precedence, and changed-path ownership |
 | `snapshot.py` | Deterministic clean/dirty Git code-state identity |
 | `pytest_reporter.py` | Hook-generated authoritative pytest outcome report |
 | `test_evidence.py` | Snapshot-bound structured pytest evidence and artifact producer |
@@ -253,6 +254,21 @@ Incomplete execution, unresolved dependencies, partial symbol parsing, or target
 mismatch cannot become false certainty. Relevance is review context—not proof of
 coverage, correctness, or behavioral impact—and is not added to the provenance
 model or the main patch-health score.
+
+## Ownership context
+
+Local analysis discovers one CODEOWNERS file using GitHub-compatible location
+precedence: `.github/CODEOWNERS`, repository-root `CODEOWNERS`, then
+`docs/CODEOWNERS`. Typed rules support comments, escaped spaces, users, teams,
+emails, exact paths, root/directory patterns, `*`, `**`, `?`, and last matching
+rule precedence. Changed symbols inherit only their containing path's declared
+owners; dependency edges never propagate ownership.
+
+Unowned changed paths and repositories with no CODEOWNERS declaration remain
+explicit factual results, not failures or risk findings. Malformed rules,
+unsupported negation/ranges, invalid owners, and read failures remain typed
+issues. This context establishes only what the repository declares; it does not
+prove expertise, approval requirements, safety, or reviewer availability.
 
 ## Feature space and evaluation
 

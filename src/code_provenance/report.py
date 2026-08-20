@@ -24,6 +24,7 @@ from code_provenance.test_evidence import TestEvidence
 from code_provenance.symbol_index import build_changed_symbol_index
 from code_provenance.dependency_context import build_dependency_context
 from code_provenance.test_relevance import build_test_relevance_context
+from code_provenance.ownership_context import build_ownership_context
 
 
 def descriptive_repository_report(
@@ -49,6 +50,9 @@ def descriptive_repository_report(
     dependency_context = build_dependency_context(root, change_context, symbol_index)
     test_relevance = build_test_relevance_context(
         change_context, symbol_index, dependency_context, test_evidence
+    )
+    ownership_context = build_ownership_context(
+        root, change_context, symbol_index, dependency_context, test_relevance
     )
     features = [extract_features(sample) for sample in samples]
     health = PatchHealthAssessor().assess_repository(
@@ -77,6 +81,7 @@ def descriptive_repository_report(
         "symbol_context": asdict(symbol_index),
         "dependency_context": asdict(dependency_context),
         "test_relevance": asdict(test_relevance),
+        "ownership_context": asdict(ownership_context),
         "files_analyzed": len(samples),
         "commits_analyzed": len(commits),
         "languages": dict(Counter(sample.language for sample in samples)),

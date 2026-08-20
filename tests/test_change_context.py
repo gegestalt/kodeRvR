@@ -106,3 +106,7 @@ def test_repository_report_exposes_typed_change_context(tmp_path: Path):
     relevance = report["test_relevance"]
     assert relevance["target"] == context["target"]
     assert relevance["partial"] is True
+    ownership = report["ownership_context"]
+    assert ownership["target"] == context["target"]
+    assert ownership["source_path"] is None
+    assert ownership["complete"] is True
