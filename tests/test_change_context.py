@@ -110,3 +110,7 @@ def test_repository_report_exposes_typed_change_context(tmp_path: Path):
     assert ownership["target"] == context["target"]
     assert ownership["source_path"] is None
     assert ownership["complete"] is True
+    assert report["operational_run"] == {
+        "status": "UNAVAILABLE",
+        "reason": "no model-bound operational run supplied",
+    }

@@ -29,6 +29,7 @@ from code_provenance.symbol_index import build_changed_symbol_index
 from code_provenance.dependency_context import build_dependency_context
 from code_provenance.test_relevance import build_test_relevance_context
 from code_provenance.ownership_context import build_ownership_context
+from code_provenance.operational_data import OperationalRun
 
 
 def descriptive_repository_report(
@@ -41,6 +42,7 @@ def descriptive_repository_report(
     evidence_quality: EvidenceQualityInput | None = None,
     evidence_ledger: EvidenceLedger | None = None,
     test_evidence: TestEvidence | None = None,
+    operational_run: OperationalRun | None = None,
 ) -> dict[str, object]:
     samples = working_tree_samples(root)
     commits = recent_commit_metadata(root)
@@ -107,6 +109,11 @@ def descriptive_repository_report(
                 "attestation": test_evidence.attestation.value,
             }
             if test_evidence is not None else None
+        ),
+        "operational_run": (
+            operational_run.to_dict()
+            if operational_run is not None
+            else {"status": "UNAVAILABLE", "reason": "no model-bound operational run supplied"}
         ),
         "authorship_estimate": "UNAVAILABLE_UNTIL_A_LABELLED_GROUP_DISJOINT_MODEL_IS_FITTED",
         "claim_boundary": "Git metadata, style, or reuse alone cannot prove human or AI authorship",
